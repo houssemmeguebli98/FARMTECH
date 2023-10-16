@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import javafx.util.converter.FloatStringConverter;
 import tn.edu.esprit.entities.Parc;
 import tn.edu.esprit.services.ServiceParc;
 
@@ -36,7 +39,7 @@ public class GetAllFXMLController implements Initializable {
     @FXML
     private TableColumn<Parc, String> fxAdresse;
     @FXML
-    private TableColumn<Parc, String> fxSuperficie;
+    private TableColumn<Parc, Float> fxSuperficie;
 
     private List<Parc> data;
     @FXML
@@ -47,6 +50,8 @@ public class GetAllFXMLController implements Initializable {
     @FXML
     private Button fxTransferButton;
     private Parc selectedParc;
+    @FXML
+    private Button fxAjouterduMat;
     
 
     
@@ -55,13 +60,18 @@ public void initialize(URL url, ResourceBundle rb) {
     fxAfficher(new ActionEvent());
     fxChercher(new ActionEvent()); 
     fxnotfound.setVisible(false);
-    editData();
 
     fxTableParc.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if (newSelection != null) {
             // Un élément a été sélectionné
             fxTransferButton.setVisible(true);
         } else fxTransferButton.setVisible(false);
+              });
+        fxTableParc.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Un élément a été sélectionné
+            fxAjouterduMat.setVisible(true);
+        } else fxAjouterduMat.setVisible(false);
 
         // Set the selectedParc here
         selectedParc = newSelection;
@@ -80,7 +90,7 @@ public void initialize(URL url, ResourceBundle rb) {
         
         fxNom.setCellValueFactory(new PropertyValueFactory<Parc , String>("nomParc"));
         fxAdresse.setCellValueFactory(new PropertyValueFactory<Parc , String>("adresseParc"));
-        fxSuperficie.setCellValueFactory(new PropertyValueFactory<Parc , String>("SuperficieParc"));
+        fxSuperficie.setCellValueFactory(new PropertyValueFactory<Parc , Float>("SuperficieParc"));
 
     }
 
@@ -120,12 +130,15 @@ public void initialize(URL url, ResourceBundle rb) {
     });
 
     // Éditer la superficie du parc
-    fxSuperficie.setCellFactory(TextFieldTableCell.<Parc>forTableColumn());
-    fxSuperficie.setOnEditCommit(event -> {
-        Parc parc = event.getTableView().getItems().get(event.getTablePosition().getRow());
-        parc.setSuperficieParc(event.getNewValue());
-        System.out.println("La superficie de " + parc.getSuperficieParc() + " a été mise à jour à " + event.getNewValue() + " à la ligne " + (event.getTablePosition().getRow() + 1));
-    sp.modifier(parc);
+    fxSuperficie.setCellFactory(TextFieldTableCell.<Parc, Float>forTableColumn(new FloatStringConverter()));
+fxSuperficie.setOnEditCommit(event -> {
+       Parc parc = event.getTableView().getItems().get(event.getTablePosition().getRow());
+        float newValue = event.getNewValue();
+        parc.setSuperficieParc(newValue);
+
+        System.out.println("La superficie de " + parc.getSuperficieParc() + " a été mise à jour à " + newValue + " à la ligne " + (event.getTablePosition().getRow() + 1));
+
+        sp.modifier(parc);
     });
 
     // Appeler la fonction modifier(Parc t)
@@ -170,14 +183,60 @@ private void fxTranfserpage(ActionEvent event) {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
-        stage.setTitle("Ajouter materiel ");
+        stage.setTitle("Liste de materiels");
         stage.show();
     } catch (IOException ex) {
         System.out.println(ex.getMessage());
     }
 }
 
+   @FXML
+private void fxAjouterduMat(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterMaterielFXML.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        Parc selectedParc = fxTableParc.getSelectionModel().getSelectedItem();
+        Parc selectedParcc = fxTableParc.getSelectionModel().getSelectedItem();
+        SelectedParcManager.setSelectedParc(selectedParc);
+        if (selectedParc != null) {
+            AjouterMaterielFXMLController controller = loader.getController();
+            controller.initData(selectedParc);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Ajouter materiel ");
+            stage.show();
+        } else {
+            System.out.println("Aucun parc sélectionné.");
+        }
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+    }
+}
+
+    @FXML
+    private void fxMenuGetALL(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GetAllFXML.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Liste de materiels");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(GetAllFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
 }
+
+
+
+
 
 

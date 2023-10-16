@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.TableAllMaterielController">
+   <children>
+      <ImageView fitHeight="710.0" fitWidth="1107.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@back.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="fxSuppMat" layoutX="512.0" layoutY="464.0" mnemonicParsing="false" onAction="#fxSupp" text="Supprimer" visible="false" />
+      <TextField fx:id="fxChercheField" layoutX="243.0" layoutY="165.0" />
+      <Button layoutX="447.0" layoutY="165.0" mnemonicParsing="false" onAction="#fxChercher" text="Chercher" />
+      <Button layoutX="557.0" layoutY="118.0" mnemonicParsing="false" onAction="#fxAfficherAll" text="Aficher" />
+      <Label fx:id="fxNotFound" layoutX="557.0" layoutY="170.0" text="Aucun materiel avec ce nom" textFill="#e10a23" visible="false" />
+      <TableView fx:id="fxAllMateriel" editable="true" layoutX="243.0" layoutY="236.0" prefHeight="200.0" prefWidth="655.0">
+        <columns>
+          <TableColumn fx:id="fxNomParc" prefWidth="131.0" text="Nom Parc" />
+            <TableColumn fx:id="fxNomMat" prefWidth="131.0" text="Nom Materiel" />
+            <TableColumn fx:id="fxQuantMat" prefWidth="131.0" text="Quantité" />
+            <TableColumn fx:id="fxEtatMat" prefWidth="131.0" text="Etat" />
+            <TableColumn fx:id="fxDateMat" prefWidth="131.0" text="Date d'ajout" />
+        </columns>
+      </TableView>
+      <Button layoutX="651.0" layoutY="464.0" mnemonicParsing="false" onAction="#Fxgotoupdtae" text="Modifier" />
+   </children>
+</AnchorPane>

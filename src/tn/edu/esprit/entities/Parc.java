@@ -16,31 +16,29 @@ public class Parc {
     private int idParc ;
     private String nomParc ;
     private String adresseParc ;
-    private String  superficieParc ;
+    private float  superficieParc ;
     private List<Materiel> materiels; 
-
-    
-   
 
     public Parc() {
     }
-    
 
-    public Parc(String nomParc, String adresseParc, String superficieParc) {
+    
+    public Parc(String nomParc, String adresseParc, float superficieParc, List<Materiel> materiels) {
+        this.nomParc = nomParc;
+        this.adresseParc = adresseParc;
+        this.superficieParc = superficieParc;
+        this.materiels = materiels;
+    }
+
+    public Parc(String nomParc, String adresseParc, float superficieParc) {
         this.nomParc = nomParc;
         this.adresseParc = adresseParc;
         this.superficieParc = superficieParc;
     }
 
-  
-  
-
- 
-
     public int getIdParc() {
         return idParc;
     }
-    
 
     public String getNomParc() {
         return nomParc;
@@ -50,12 +48,12 @@ public class Parc {
         return adresseParc;
     }
 
-    public void setAdresseParc(String adresseParc) {
-        this.adresseParc = adresseParc;
+    public float getSuperficieParc() {
+        return superficieParc;
     }
 
-    public  String getSuperficieParc() {
-        return superficieParc;
+    public List<Materiel> getMateriels() {
+        return materiels;
     }
 
     public void setIdParc(int idParc) {
@@ -66,25 +64,26 @@ public class Parc {
         this.nomParc = nomParc;
     }
 
-    public void setSuperficieParc( String superficieParc) {
+    public void setAdresseParc(String adresseParc) {
+        this.adresseParc = adresseParc;
+    }
+
+    public void setSuperficieParc(float superficieParc) {
         this.superficieParc = superficieParc;
     }
-     public void setMateriels(List<Materiel> materiels) {
+
+    public void setMateriels(List<Materiel> materiels) {
         this.materiels = materiels;
     }
 
-    public List<Materiel> getMateriels() {
-        return materiels;
-    }
- 
-
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + this.idParc;
-        hash = 97 * hash + Objects.hashCode(this.nomParc);
-        hash = 97 * hash + Objects.hashCode(this.adresseParc);
-        hash = 97 * hash + Objects.hashCode(this.superficieParc);
+        int hash = 3;
+        hash = 89 * hash + this.idParc;
+        hash = 89 * hash + Objects.hashCode(this.nomParc);
+        hash = 89 * hash + Objects.hashCode(this.adresseParc);
+        hash = 89 * hash + Float.floatToIntBits(this.superficieParc);
+        hash = 89 * hash + Objects.hashCode(this.materiels);
         return hash;
     }
 
@@ -103,30 +102,27 @@ public class Parc {
         if (this.idParc != other.idParc) {
             return false;
         }
+        if (Float.floatToIntBits(this.superficieParc) != Float.floatToIntBits(other.superficieParc)) {
+            return false;
+        }
         if (!Objects.equals(this.nomParc, other.nomParc)) {
             return false;
         }
         if (!Objects.equals(this.adresseParc, other.adresseParc)) {
             return false;
         }
-        if (!Objects.equals(this.superficieParc, other.superficieParc)) {
+        if (!Objects.equals(this.materiels, other.materiels)) {
             return false;
         }
         return true;
     }
 
-   
-
-  
-
     @Override
     public String toString() {
-        return "Parc{" + "idParc=" + idParc + ", nomParc=" + nomParc + ", adresseParc=" + adresseParc + ", superficieParc=" + superficieParc + '}';
+        return "Parc{" + "nomParc=" + nomParc + ", adresseParc=" + adresseParc + ", superficieParc=" + superficieParc + ", materiels=" + materiels + '}';
     }
 
-
-   
-    }
-
- 
+    
+    
+}
 

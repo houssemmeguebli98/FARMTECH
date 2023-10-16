@@ -14,7 +14,7 @@
             <Image url="@back.png" />
          </image>
       </ImageView>
-      <TableView fx:id="fxTableMateriel" layoutX="240.0" layoutY="221.0" prefHeight="200.0" prefWidth="639.0">
+      <TableView fx:id="fxTableMateriel" editable="true" layoutX="240.0" layoutY="221.0" prefHeight="200.0" prefWidth="639.0">
          <columns>
             <TableColumn fx:id="fxNom" prefWidth="128.0" text="Nom parc" />
             <TableColumn fx:id="fxNomMateriel" prefWidth="128.0" text="Nom materiel" />
@@ -23,6 +23,7 @@
             <TableColumn fx:id="fxDate" prefWidth="128.0" text="Date d'ajout" />
          </columns>
       </TableView>
-      <Button fx:id="fxSuppMat" layoutX="509.0" layoutY="463.0" mnemonicParsing="false" onAction="#fxSupprimerMat" text="Supprimer" />
+      <Button layoutX="509.0" layoutY="455.0" mnemonicParsing="false" onAction="#fxSupprimer" text="Supprimer" />
+      <Button layoutX="247.0" layoutY="121.0" mnemonicParsing="false" onAction="#fxbacktoTableViewParc" text="&lt;" />
    </children>
 </AnchorPane>

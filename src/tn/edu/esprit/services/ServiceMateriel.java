@@ -29,7 +29,7 @@ public class ServiceMateriel {
     }
  public void ajouterMateriel(Materiel materiel) {
         try {
-            String req = "INSERT INTO `materiel`(`nomParc`, `nomMat`, `etatMat`, `QuantiteMat`, `dateAjout`) VALUES (?, ?, ?, ?, ?)";
+            String req = "INSERT INTO `materiel`(`nomParc`, `nomMat`, `etatMat`, `QuantiteMat`, `dateAjout` ,`idParc`) VALUES (?, ?, ?, ?, ?, ?)";
 
             try (PreparedStatement ps = cnx.prepareStatement(req)) {
                 ps.setString(1, materiel.getNomParc());
@@ -37,6 +37,9 @@ public class ServiceMateriel {
                 ps.setBoolean(3, materiel.getEtatMat());
                 ps.setFloat(4, materiel.getQuantiteMat());
                 ps.setDate(5, Date.valueOf(materiel.getDateAjout()));
+                ps.setInt(6, materiel.getIdParc());
+
+
                 ps.executeUpdate();
             }
         } catch (SQLException ex) {
@@ -59,31 +62,53 @@ public class ServiceMateriel {
 
 
 
-  public Materiel getOneMateriel(int id) {
-    Materiel materiel = null;
+ public List<Materiel> getAllMaterielsForParc(int idParc) {
+    List<Materiel> materiels = new ArrayList<>();
     String req = "SELECT `nomMat`, `etatMat`, `QuantiteMat`,`dateAjout`, `nomParc` FROM `materiel` WHERE idParc = ?";
 
     try (PreparedStatement ps = cnx.prepareStatement(req)) {
-        ps.setInt(1, id);
+        ps.setInt(1, idParc);
 
         try (ResultSet rs = ps.executeQuery()) {
-            if (rs.next()) {
-                materiel = new Materiel();
+            while (rs.next()) {
+                Materiel materiel = new Materiel();
                 materiel.setNomParc(rs.getString("nomParc"));
                 materiel.setNomMat(rs.getString("nomMat"));
                 materiel.setEtatMat(rs.getBoolean("etatMat"));
                 materiel.setQuantiteMat(rs.getFloat("QuantiteMat"));
                 materiel.setDateAjout(rs.getDate("dateAjout").toLocalDate());
+                materiels.add(materiel);
             }
         }
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }
+     return materiels;
+    
+ }
+    public List<Materiel> getMaterielByNom(String nomMat) {
+    List<Materiel> materiels = new ArrayList<>();
+    String req = "SELECT `nomMat`, `etatMat`, `QuantiteMat`,`dateAjout`, `nomParc` FROM `materiel` WHERE nomMat= ?";
 
-    return materiel;
+    try (PreparedStatement ps = cnx.prepareStatement(req)) {
+        ps.setString(1, nomMat);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Materiel materiel = new Materiel();
+                materiel.setNomParc(rs.getString("nomParc"));
+                materiel.setNomMat(rs.getString("nomMat"));
+                materiel.setEtatMat(rs.getBoolean("etatMat"));
+                materiel.setQuantiteMat(rs.getFloat("QuantiteMat"));
+                materiel.setDateAjout(rs.getDate("dateAjout").toLocalDate());
+                materiels.add(materiel);
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return materiels;
 }
-
- 
 
   public List<Materiel> getAllMateriels() {
         List<Materiel> materiels = new ArrayList<>();
@@ -114,22 +139,20 @@ public class ServiceMateriel {
     }
  
    public void modifierMateriel(Materiel materiel) {
-        try {
-            String req = "UPDATE `materiel` SET `nomParc`=?, `nomMat`=?, `etatMat`=?, `QuantiteMat`=?, `dateAjout`=? WHERE idMat=?";
-
-            try (PreparedStatement ps = cnx.prepareStatement(req)) {
-                ps.setString(1, materiel.getNomParc());
-                ps.setString(2, materiel.getNomMat());
-                ps.setBoolean(3, materiel.getEtatMat());
-                ps.setFloat(4, materiel.getQuantiteMat());
-                ps.setDate(5, Date.valueOf(materiel.getDateAjout()));               
-                ps.executeUpdate();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+       try {
+        String req = "UPDATE `materiel` SET `nomMat`=?, `etatMat`=?, `QuantiteMat`=? WHERE idMat=?";
+        try (PreparedStatement ps = cnx.prepareStatement(req)) {
+            ps.setString(1, materiel.getNomMat());
+            ps.setBoolean(2, materiel.getEtatMat());
+            ps.setFloat(3, materiel.getQuantiteMat());
+            ps.setInt(4, materiel.getIdMat()); // Assurez-vous d'avoir getIdMat() dans votre classe Materiel
+            ps.executeUpdate();
         }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
 
+}
 }
 
 

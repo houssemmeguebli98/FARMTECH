@@ -37,6 +37,8 @@
       <TextField fx:id="fxtextchercher" layoutX="243.0" layoutY="179.0" />
       <Button layoutX="449.0" layoutY="179.0" mnemonicParsing="false" onAction="#fxChercher" text="Chercher" />
       <Label fx:id="fxnotfound" layoutX="548.0" layoutY="184.0" text="Aucun parc trouvé avec ce nom" textFill="#ff2f2f" visible="false" />
-      <Button fx:id="fxTransferButton" layoutX="481.0" layoutY="531.0" mnemonicParsing="false" onAction="#fxTranfserpage" text="Afficher materiel du parc" visible="false" />
+      <Button fx:id="fxTransferButton" layoutX="619.0" layoutY="531.0" mnemonicParsing="false" onAction="#fxTranfserpage" text="Afficher materiel du parc" visible="false" />
+      <Button fx:id="fxAjouterduMat" layoutX="324.0" layoutY="531.0" mnemonicParsing="false" onAction="#fxAjouterduMat" prefHeight="31.0" prefWidth="187.0" text="Ajouter materiel" visible="false" />
+      <Button layoutX="214.0" layoutY="87.0" mnemonicParsing="false" onAction="#fxMenuGetALL" text="Menu" />
    </children>
 </AnchorPane>

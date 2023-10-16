@@ -43,7 +43,7 @@ public class ServiceParc implements IService<Parc> {
            try (PreparedStatement ps = (PreparedStatement) cnx.prepareStatement(req)) {
                ps.setString(1, t.getNomParc());
                ps.setString(2, t.getAdresseParc());               
-               ps.setString(3, t.getSuperficieParc());
+                ps.setFloat(3, t.getSuperficieParc()); 
                ps.executeUpdate();
            }
     } catch (SQLException ex) {
@@ -78,8 +78,8 @@ public Parc getOne(String nomParc) {
                 parc = new Parc();
                 parc.setNomParc(nomParc);
                 parc.setAdresseParc(rs.getString("adresseParc"));
-                parc.setSuperficieParc(rs.getString("superficieParc"));
-            }
+                float superficie = Float.parseFloat(rs.getString("superficieParc"));
+                parc.setSuperficieParc(superficie);            }
         }
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
@@ -100,7 +100,8 @@ public Parc getOne(String nomParc) {
                 parc.setIdParc(rs.getInt("idParc"));
                 parc.setNomParc(rs.getString("nomParc"));
                 parc.setAdresseParc(rs.getString("adresseParc"));
-                parc.setSuperficieParc(rs.getString("superficieParc"));
+                float superficie = Float.parseFloat(rs.getString("superficieParc"));
+                parc.setSuperficieParc(superficie); 
                 parcs.add(parc);
             }
             
@@ -113,21 +114,21 @@ public Parc getOne(String nomParc) {
 }
 
     @Override
-    public void modifier(Parc t) {
-   try {
+public void modifier(Parc t) {
+    try {
         String req = "UPDATE `parc` SET `nomParc`=?, `adresseParc`=?, `superficieParc`=? WHERE idParc=?";
         
         try (PreparedStatement ps = (PreparedStatement) cnx.prepareStatement(req)) {
             ps.setString(1, t.getNomParc());
             ps.setString(2, t.getAdresseParc());
-            ps.setString(3, t.getSuperficieParc());
+            ps.setFloat(3, t.getSuperficieParc()); // Assurez-vous d'avoir une méthode getSuperficieParc() dans la classe Parc
             ps.setInt(4, t.getIdParc()); // Assurez-vous d'avoir une méthode getIdParc() dans la classe Parc
             ps.executeUpdate();
         }
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }
-    }
+}
 
     @Override
     public List<Parc> getAll(Parc t) {
