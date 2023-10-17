@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -20,7 +19,6 @@
       <TextField fx:id="fxChercheField" layoutX="243.0" layoutY="165.0" />
       <Button layoutX="447.0" layoutY="165.0" mnemonicParsing="false" onAction="#fxChercher" text="Chercher" />
       <Button layoutX="557.0" layoutY="118.0" mnemonicParsing="false" onAction="#fxAfficherAll" text="Aficher" />
-      <Label fx:id="fxNotFound" layoutX="557.0" layoutY="170.0" text="Aucun materiel avec ce nom" textFill="#e10a23" visible="false" />
       <TableView fx:id="fxAllMateriel" editable="true" layoutX="243.0" layoutY="236.0" prefHeight="200.0" prefWidth="655.0">
         <columns>
           <TableColumn fx:id="fxNomParc" prefWidth="131.0" text="Nom Parc" />
@@ -31,5 +29,6 @@
         </columns>
       </TableView>
       <Button layoutX="651.0" layoutY="464.0" mnemonicParsing="false" onAction="#Fxgotoupdtae" text="Modifier" />
+      <Button layoutX="237.0" layoutY="87.0" mnemonicParsing="false" onAction="#GoToListeParc" text="&lt;" textFill="#1da85b" />
    </children>
 </AnchorPane>

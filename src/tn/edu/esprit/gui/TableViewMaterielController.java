@@ -78,6 +78,7 @@ GetAllFXMLController tableparc;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        editData();
         /*
     fxTableMateriel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
     if (newSelection != null) {
@@ -99,6 +100,8 @@ GetAllFXMLController tableparc;
     
     // Mettez à jour la TableView
     fxTableMateriel.setItems(FXCollections.observableArrayList(materiels));
+    
+
    
     // Set cell value factories
     fxNom.setCellValueFactory(new PropertyValueFactory<>("nomParc"));
@@ -107,43 +110,42 @@ GetAllFXMLController tableparc;
     fxEtat.setCellValueFactory(new PropertyValueFactory<>("etatMat"));
     fxDate.setCellValueFactory(new PropertyValueFactory<>("dateAjout"));
 }
- /*    
+ 
+   
+   
 private void editData() {
-    // ...
-    // (Votre code existant)
-
-    // Pour fxQunMat
-    fxQunatite.textProperty().addListener((observable, oldValue, newValue) -> {
-        // Mettez à jour la quantité de ressource ici avec la nouvelle valeur (newValue)
-        System.out.println("La quantité de ressource a été mise à jour à : " + newValue);
-        // Vous pouvez appeler le service pour mettre à jour la quantité ici si nécessaire
-    });
-
-        // Pour fxEtat
-       
-    fxQunatite.setCellFactory(TextFieldTableCell.<Materiel, Float>forTableColumn(new FloatStringConverter()));
-    fxEtat.setOnEditCommit(event -> {
-    Materiel materiel = event.getTableView().getItems().get(event.getTablePosition().getRow());
-    String newValue = event.getNewValue();
-    Boolean etat = Boolean.parseBoolean(newValue);
-    materiel.setEtatMat(etat);
-    smateriel.modifierMateriel(materiel);
-    System.out.println("L'état de ressource a été mis à jour à " + etat + " à la ligne " + (event.getTablePosition().getRow() + 1));
-});
-
-
-
-    
-
-    // Pour fxNomMateriel
+    // Éditer le nom du parc
     fxNomMateriel.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
     fxNomMateriel.setOnEditCommit(event -> {
-        Materiel materiel = event.getTableView().getItems().get(event.getTablePosition().getRow());
+        Materiel materiel= event.getRowValue(); 
         materiel.setNomMat(event.getNewValue());
+        System.out.println("Le nom de " +  materiel.getNomMat() + " a été mis à jour à " + event.getNewValue());
+        ServiceMateriel smateriel = new ServiceMateriel();
         smateriel.modifierMateriel(materiel);
     });
+
+      // Éditer l'adresse du parc
+    fxEtat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
+    fxEtat.setOnEditCommit(event -> {
+        Materiel materiel = event.getRowValue();
+        materiel.setEtatMat(event.getNewValue());
+        ServiceMateriel smateriel = new ServiceMateriel();
+        smateriel.modifierMateriel(materiel);
+    });
+
+    // Éditer la superficie du parc
+        fxQunatite.setCellFactory(TextFieldTableCell.<Materiel, Float>forTableColumn(new FloatStringConverter()));
+        fxQunatite.setOnEditCommit(event -> {
+        Materiel materiel = event.getRowValue();
+        float newValue = event.getNewValue();
+        materiel.setQuantiteMat(newValue);
+        ServiceMateriel smateriel = new ServiceMateriel();
+        smateriel.modifierMateriel(materiel);
+    });
+  
 }
-*/
+
+
 @FXML
 private void fxSupprimer(ActionEvent event) {
     ServiceMateriel sm = new ServiceMateriel();

@@ -92,11 +92,16 @@ private void fxSaveMateriel(ActionEvent event) {
 
             Materiel nouveauMateriel = new Materiel();
             nouveauMateriel.setNomMat(nomMat);
-            nouveauMateriel.setEtatMat(etatMat);
             nouveauMateriel.setQuantiteMat(quantiteMat);
             nouveauMateriel.setIdParc(parcSelectionne.getIdParc());
             nouveauMateriel.setDateAjout(LocalDate.now());
             nouveauMateriel.setNomParc(parcSelectionne.getNomParc());
+            String etatmateriel = "";
+            if(fxON.isSelected()){etatmateriel= "On marche" ;
+            }else{etatmateriel= "On panne ";  } 
+              nouveauMateriel.setEtatMat(etatmateriel);
+
+            
             serviceMateriel.ajouterMateriel(nouveauMateriel);
 
             // Si l'ajout réussit, afficher une alerte de confirmation

@@ -34,7 +34,7 @@ public class ServiceMateriel {
             try (PreparedStatement ps = cnx.prepareStatement(req)) {
                 ps.setString(1, materiel.getNomParc());
                 ps.setString(2, materiel.getNomMat());
-                ps.setBoolean(3, materiel.getEtatMat());
+                ps.setString(3, materiel.getEtatMat());
                 ps.setFloat(4, materiel.getQuantiteMat());
                 ps.setDate(5, Date.valueOf(materiel.getDateAjout()));
                 ps.setInt(6, materiel.getIdParc());
@@ -75,7 +75,7 @@ public List<Materiel> getAllMaterielsForParc(int idParc) {
                 materiel.setNomParc(getNomParcForId(idParc));
                 materiel.setIdMat(rs.getInt("idMAt"));// Appel de la méthode pour récupérer le nomParc
                 materiel.setNomMat(rs.getString("nomMat"));
-                materiel.setEtatMat(rs.getBoolean("etatMat"));
+                materiel.setEtatMat(rs.getString("etatMat"));
                 materiel.setQuantiteMat(rs.getFloat("QuantiteMat"));
                 materiel.setDateAjout(rs.getDate("dateAjout").toLocalDate());
                 materiels.add(materiel);
@@ -118,7 +118,7 @@ private String getNomParcForId(int idParc) {
                 materiel.setIdMat(rs.getInt("idMAt"));// Appel de la méthode pour récupérer le nomParc
                 materiel.setNomParc(rs.getString("nomParc"));
                 materiel.setNomMat(rs.getString("nomMat"));
-                materiel.setEtatMat(rs.getBoolean("etatMat"));
+                materiel.setEtatMat(rs.getString("etatMat"));
                 materiel.setQuantiteMat(rs.getFloat("QuantiteMat"));
                 materiel.setDateAjout(rs.getDate("dateAjout").toLocalDate());
                 materiels.add(materiel);
@@ -143,7 +143,7 @@ private String getNomParcForId(int idParc) {
                     materiel.setIdMat(rs.getInt("idMAt"));// Appel de la méthode pour récupérer le nomParc
                     materiel.setNomParc(rs.getString("nomParc"));
                     materiel.setNomMat(rs.getString("nomMat"));
-                    materiel.setEtatMat(rs.getBoolean("etatMat"));
+                    materiel.setEtatMat(rs.getString("etatMat"));
                     materiel.setQuantiteMat(rs.getFloat("QuantiteMat"));
                     materiel.setDateAjout(rs.getDate("dateAjout").toLocalDate());
                   
@@ -164,7 +164,7 @@ private String getNomParcForId(int idParc) {
         String req = "UPDATE `materiel` SET `nomMat`=?, `etatMat`=?, `QuantiteMat`=? WHERE idMat=?";
         try (PreparedStatement ps = cnx.prepareStatement(req)) {
             ps.setString(1, materiel.getNomMat());
-            ps.setBoolean(2, materiel.getEtatMat());
+            ps.setString(2, materiel.getEtatMat());
             ps.setFloat(3, materiel.getQuantiteMat());
             ps.setInt(4, materiel.getIdMat()); // Assurez-vous d'avoir getIdMat() dans votre classe Materiel
             ps.executeUpdate();

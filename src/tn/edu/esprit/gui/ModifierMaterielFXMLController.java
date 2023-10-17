@@ -52,12 +52,14 @@ private void fxModifier(ActionEvent event) {
 
         String nomMat = fxNomMat.getText();
         Float quantite = Float.parseFloat(fxQunMat.getText());
-        boolean etat = fxON.isSelected();
+        String etatmateriel = "";
+        if(fxON.isSelected()){etatmateriel= "On marche" ;
+        }else{etatmateriel= "On panne ";  }
 
         // Mettez à jour les propriétés du matériel avec les nouvelles valeurs
         selectedMateriel.setNomMat(nomMat);
         selectedMateriel.setQuantiteMat(quantite);
-        selectedMateriel.setEtatMat(etat);
+        selectedMateriel.setEtatMat(etatmateriel);
 
         ServiceMateriel serviceMateriel = new ServiceMateriel();
         serviceMateriel.modifierMateriel(selectedMateriel);

@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -31,9 +32,6 @@ import tn.edu.esprit.services.ServiceParc;
 
 public class GetAllFXMLController implements Initializable {
 
-   
-
-    
     @FXML
     private TableView<Parc> fxTableParc;
     @FXML
@@ -48,8 +46,6 @@ public class GetAllFXMLController implements Initializable {
     private TextField fxtextchercher;
         ServiceParc sp = new ServiceParc();
     @FXML
-    private Label fxnotfound;
-    @FXML
     private Button fxTransferButton;
     private Parc selectedParc;
     @FXML
@@ -60,8 +56,7 @@ public class GetAllFXMLController implements Initializable {
    @Override
 public void initialize(URL url, ResourceBundle rb) {
     fxAfficher(new ActionEvent());
-    fxChercher(new ActionEvent()); 
-    fxnotfound.setVisible(false);
+    //fxChercher(new ActionEvent()); 
     editData();
     
 
@@ -148,24 +143,29 @@ private void editData() {
     
 
 
-    @FXML
-    private void fxChercher(ActionEvent event) {
-       String nomCherche = fxtextchercher.getText(); // Récupérer le texte du champ de recherche
 
-    // Appeler la méthode getOne avec le nom cherché
-    
-    Parc parc = sp.getOne(nomCherche);
+@FXML
+private void fxChercher(ActionEvent event) {
+   String nomCherche = fxtextchercher.getText(); // Récupérer le texte du champ de recherche
 
-    if (parc != null) {
-        // Mettre à jour la TableView avec les détails du parc trouvé
-           fxnotfound.setVisible(false);
+   // Appeler la méthode getOne avec le nom cherché
+   Parc parc = sp.getOne(nomCherche);
 
-        fxTableParc.getItems().setAll(parc);
-    } else {
-                fxnotfound.setVisible(true);
+   if (parc != null) {
+       // Mettre à jour la TableView avec les détails du parc trouvé
+       fxTableParc.getItems().setAll(parc);
+   } else {
+       showAlert(AlertType.ERROR, "Aucun Résultat", "Aucun parc trouvé avec ce nom.");
+   }
+}
 
-    }
-    }
+private void showAlert(AlertType alertType, String title, String content) {
+    Alert alert = new Alert(alertType);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(content);
+    alert.showAndWait();
+}
 
      
 
@@ -252,6 +252,23 @@ private void fxAjouterduMat(ActionEvent event) {
     private void fxGoToAddParc(ActionEvent event) {
          try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterParcFXML.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Liste de materiels");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterMaterielFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void fxGoToAllMateriel(ActionEvent event) {
+             
+    try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/TableAllMateriel.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             

@@ -16,7 +16,7 @@ public class Materiel {
  private int idMat ;
  private String nomParc;
  private String nomMat;
- private boolean etatMat ;
+ private String etatMat ;
  private float QuantiteMat ;
  private LocalDate dateAjout ;
  private int idParc;
@@ -24,13 +24,13 @@ public class Materiel {
     public Materiel() {
     }
 
- 
-    public Materiel(String nomParc, String nomMat, boolean etatMat, float QuantiteMat, LocalDate dateAjout) {
+    public Materiel(String nomParc, String nomMat, String etatMat, float QuantiteMat, LocalDate dateAjout, int idParc) {
         this.nomParc = nomParc;
         this.nomMat = nomMat;
         this.etatMat = etatMat;
         this.QuantiteMat = QuantiteMat;
         this.dateAjout = dateAjout;
+        this.idParc = idParc;
     }
 
     public int getIdMat() {
@@ -45,7 +45,7 @@ public class Materiel {
         return nomMat;
     }
 
-    public boolean getEtatMat() {
+    public String getEtatMat() {
         return etatMat;
     }
 
@@ -73,7 +73,7 @@ public class Materiel {
         this.nomMat = nomMat;
     }
 
-    public void setEtatMat(boolean etatMat) {
+    public void setEtatMat(String etatMat) {
         this.etatMat = etatMat;
     }
 
@@ -91,14 +91,14 @@ public class Materiel {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + this.idMat;
-        hash = 61 * hash + Objects.hashCode(this.nomParc);
-        hash = 61 * hash + Objects.hashCode(this.nomMat);
-        hash = 61 * hash + (this.etatMat ? 1 : 0);
-        hash = 61 * hash + Float.floatToIntBits(this.QuantiteMat);
-        hash = 61 * hash + Objects.hashCode(this.dateAjout);
-        hash = 61 * hash + this.idParc;
+        int hash = 5;
+        hash = 53 * hash + this.idMat;
+        hash = 53 * hash + Objects.hashCode(this.nomParc);
+        hash = 53 * hash + Objects.hashCode(this.nomMat);
+        hash = 53 * hash + Objects.hashCode(this.etatMat);
+        hash = 53 * hash + Float.floatToIntBits(this.QuantiteMat);
+        hash = 53 * hash + Objects.hashCode(this.dateAjout);
+        hash = 53 * hash + this.idParc;
         return hash;
     }
 
@@ -117,9 +117,6 @@ public class Materiel {
         if (this.idMat != other.idMat) {
             return false;
         }
-        if (this.etatMat != other.etatMat) {
-            return false;
-        }
         if (Float.floatToIntBits(this.QuantiteMat) != Float.floatToIntBits(other.QuantiteMat)) {
             return false;
         }
@@ -132,6 +129,9 @@ public class Materiel {
         if (!Objects.equals(this.nomMat, other.nomMat)) {
             return false;
         }
+        if (!Objects.equals(this.etatMat, other.etatMat)) {
+            return false;
+        }
         if (!Objects.equals(this.dateAjout, other.dateAjout)) {
             return false;
         }
@@ -142,7 +142,10 @@ public class Materiel {
     public String toString() {
         return "Materiel{" + "nomParc=" + nomParc + ", nomMat=" + nomMat + ", etatMat=" + etatMat + ", QuantiteMat=" + QuantiteMat + ", dateAjout=" + dateAjout + '}';
     }
+
+    public void setEtatMat(boolean etatMat) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
  
 }
-
-    

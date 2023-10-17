@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +22,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -55,14 +59,12 @@ public class TableAllMaterielController implements Initializable {
     @FXML
     private TableColumn<Materiel, Float> fxQuantMat;
     @FXML
-    private TableColumn<Materiel, Boolean> fxEtatMat;
+    private TableColumn<Materiel, String> fxEtatMat;
     @FXML
     private TableColumn<Materiel, LocalDate> fxDateMat;
 
     @FXML
     private TextField fxChercheField;
-    @FXML
-    private Label fxNotFound;
     
 
     /**
@@ -71,7 +73,7 @@ public class TableAllMaterielController implements Initializable {
    @Override
     public void initialize(URL url, ResourceBundle rb) {
      fxAfficherAll(new ActionEvent());
-     
+     editData();
 
     fxAllMateriel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if (newSelection != null) {
@@ -101,8 +103,9 @@ public class TableAllMaterielController implements Initializable {
     }
 }
 
-   @FXML
-private void fxChercher(ActionEvent event) {
+
+    @FXML
+    private void fxChercher(ActionEvent event) {
     String nomCherche = fxChercheField.getText(); // Récupérer le texte du champ de recherche
 
     // Appeler la méthode getMaterielByNom avec le nom cherché
@@ -111,13 +114,17 @@ private void fxChercher(ActionEvent event) {
 
     if (!materiels.isEmpty()) {
         // Mettre à jour la TableView avec les détails des matériels trouvés
-        fxNotFound.setVisible(false);
         fxAllMateriel.getItems().setAll(materiels);
     } else {
-        System.out.println("Aucun matériel trouvé avec ce nom.");
-        fxNotFound.setVisible(true);
+        // Afficher une alerte si aucun matériel n'est trouvé
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Aucun matériel trouvé");
+        alert.setHeaderText(null);
+        alert.setContentText("Aucun matériel trouvé avec ce nom.");
+        alert.showAndWait();
     }
 }
+
 
     
 @FXML
@@ -135,7 +142,7 @@ private void fxAfficherAll(ActionEvent event) {
     TableColumn<Materiel, String> fxNomParcCol = (TableColumn<Materiel, String>) fxNomParc;
     TableColumn<Materiel, String> nomMatCol = (TableColumn<Materiel, String>) fxNomMat;
     TableColumn<Materiel, Float> quantMatCol = (TableColumn<Materiel, Float>) fxQuantMat;
-    TableColumn<Materiel, Boolean> etatMatCol = (TableColumn<Materiel, Boolean>) fxEtatMat;
+    TableColumn<Materiel, String> etatMatCol = (TableColumn<Materiel, String>) fxEtatMat;
     TableColumn<Materiel, LocalDate> dateMatCol = (TableColumn<Materiel, LocalDate>) fxDateMat;
 
     // Assurez-vous que les CellValueFactory sont corrects
@@ -145,69 +152,40 @@ private void fxAfficherAll(ActionEvent event) {
     etatMatCol.setCellValueFactory(new PropertyValueFactory<>("etatMat"));
     dateMatCol.setCellValueFactory(new PropertyValueFactory<>("dateAjout"));
 }
-/*
-private void editData(){
 
-    // Éditer le nom du matériel
+    
+private void editData() {
+    // Éditer le nom du parc
     fxNomMat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
     fxNomMat.setOnEditCommit(event -> {
-        Materiel materiel = event.getTableView().getItems().get(event.getTablePosition().getRow());
+        Materiel materiel= event.getRowValue(); 
         materiel.setNomMat(event.getNewValue());
+        System.out.println("Le nom de " +  materiel.getNomMat() + " a été mis à jour à " + event.getNewValue());
         ServiceMateriel smateriel = new ServiceMateriel();
-       smateriel.modifierMateriel(materiel);
+        smateriel.modifierMateriel(materiel);
     });
 
-    // Éditer la quantité du matériel
+    // Éditer la superficie du parc
     fxQuantMat.setCellFactory(TextFieldTableCell.<Materiel, Float>forTableColumn(new FloatStringConverter()));
     fxQuantMat.setOnEditCommit(event -> {
-        Materiel materiel = event.getTableView().getItems().get(event.getTablePosition().getRow());
-        Float newValue = event.getNewValue();
-        if (newValue != null && !newValue.isNaN()) {
-            try {
-                Float quantite = newValue;
-                materiel.setQuantiteMat(quantite);
+        Materiel materiel = event.getRowValue();
+        float newValue = event.getNewValue();
+        materiel.setQuantiteMat(newValue);
         ServiceMateriel smateriel = new ServiceMateriel();
-        smateriel.modifierMateriel(materiel);            } catch (NumberFormatException e) {
-                System.out.println("La valeur entrée n'est pas un nombre valide.");
-            }
-        } else {
-            System.out.println("La valeur entrée n'est pas valide.");
-        }
+        smateriel.modifierMateriel(materiel);
     });
-   fxEtatMat.setCellFactory(col -> new TableCell<Materiel, Boolean>() {
-    private final RadioButton btnON = new RadioButton("ON");
-    private final RadioButton btnOff = new RadioButton("OFF");
-    private final ToggleGroup group = new ToggleGroup();
+    
+    // Éditer l'adresse du parc
+    fxEtatMat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
+    fxEtatMat.setOnEditCommit(event -> {
+        Materiel materiel = event.getRowValue();
+        materiel.setEtatMat(event.getNewValue());
+        ServiceMateriel smateriel = new ServiceMateriel();
+        smateriel.modifierMateriel(materiel);
+    });
 
-    {
-        btnON.setToggleGroup(group);
-        btnOff.setToggleGroup(group);
+}
 
-        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                boolean etat = newValue == btnON;
-                Materiel materiel = getTableView().getItems().get(getIndex());
-                materiel.setEtatMat(etat);
-                ServiceMateriel smateriel = new ServiceMateriel();
-                smateriel.modifierMateriel(materiel);
-            }
-        });
-    }
-
-    public void updateItem(Boolean item, boolean empty) {
-        super.updateItem(item, empty);
-        if (!empty) {
-            boolean etat = item;
-            btnON.setSelected(etat);
-            btnOff.setSelected(!etat);
-            setGraphic(btnON);
-        }
-    }
-});
-
-  
-
-}*/
     @FXML
     private void Fxgotoupdtae(ActionEvent event) {
          try {
@@ -231,6 +209,23 @@ private void editData(){
         System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
     }
 }
+
+    @FXML
+    private void GoToListeParc(ActionEvent event) {
+             
+    try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GetAllFXML.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Liste de materiels");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(AjouterMaterielFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
 
