@@ -11,10 +11,17 @@ import java.util.List;
  *
  * @author abdelazizmezri
  */
-public interface IService <T> {
-    public void ajouter(T t);
-    public void modifier(T t);
-    public void supprimer(int id);
-    public T getOne(T t);
-    public List<T> getAll(T t);
+import java.util.List;
+
+public interface IService<T> {
+    public T create(T t);
+
+    public T getById(int id);
+
+    public List<T> getAll();
+
+    public void update(T t);
+
+    public void delete(int id);
 }
+

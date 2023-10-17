@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.GUI.SignupController">
+    <stylesheets>
+        <URL value="@signup.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="407.0" fitWidth="718.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../images/background_image1.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="Nom" layoutX="187.0" layoutY="93.0" prefHeight="27.0" prefWidth="110.0" promptText="Nom" />
+      <TextField fx:id="Prenom" layoutX="156.0" layoutY="159.0" promptText="Prenom" />
+      <TextField fx:id="Email" layoutX="156.0" layoutY="230.0" promptText="Email" />
+      <TextField fx:id="Telephome" layoutX="156.0" layoutY="312.0" promptText="Tèlèphone" />
+      <Button fx:id="registerButton" layoutX="414.0" layoutY="291.0" mnemonicParsing="false" onAction="#register" prefHeight="34.0" prefWidth="102.0" style="-fx-background-color: #5C4033;" text="S'inscrire" />
+      <FontAwesomeIcon fill="#5c4033" glyphName="USER" layoutX="156.0" layoutY="113.0" size="20" text="" />
+      <FontAwesomeIcon fill="#5c4033" glyphName="KEY" layoutX="374.0" layoutY="250.0" size="20" text="" />
+      <RadioButton fx:id="agriculteurbutton" layoutX="156.0" layoutY="51.0" mnemonicParsing="false" onAction="#roleAgriculteur" prefHeight="30.0" prefWidth="110.0" text="Agriculteur" textFill="#5c4033" />
+      <RadioButton fx:id="ouvrierbutton" layoutX="298.0" layoutY="52.0" mnemonicParsing="false" onAction="#roleOuvrier" prefHeight="30.0" prefWidth="91.0" text="Ouvrier" textFill="#5c4033" />
+      <RadioButton fx:id="veterinairebutton" layoutX="427.0" layoutY="51.0" mnemonicParsing="false" onAction="#roleVeterinaire" text="Veterinaire" textFill="#5c4033" />
+      <TextField fx:id="Sexe" layoutX="404.0" layoutY="159.0" promptText="Sexe" />
+      <TextField fx:id="Ville" layoutX="404.0" layoutY="91.0" promptText="Ville" />
+      <PasswordField fx:id="MotDePasse" layoutX="401.0" layoutY="231.0" promptText="Mot De Passe" />
+   </children>
+</AnchorPane>
