@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AfficherRessourceFXMLController">
+   <children>
+      <ImageView fitHeight="480.0" fitWidth="817.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../image/Capture%20d'écran%202023-10-13%20111510.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="548.0" layoutY="105.0" mnemonicParsing="false" onAction="#SupprimerRessource" prefHeight="41.0" prefWidth="98.0" text="Supprimer" />
+      <Button layoutX="423.0" layoutY="105.0" mnemonicParsing="false" onAction="#AfficheRessource" prefHeight="41.0" prefWidth="98.0" text="Afficher" />
+      <TableView fx:id="viewRessource" editable="true" layoutX="199.0" layoutY="167.0" prefHeight="230.0" prefWidth="447.0">
+         <columns>
+            <TableColumn fx:id="typeRes" prefWidth="131.0" text="Type" />
+            <TableColumn fx:id="speciesRes" prefWidth="158.0" text="Specie" />
+            <TableColumn fx:id="quantiteRes" prefWidth="144.0" text="Quantité" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

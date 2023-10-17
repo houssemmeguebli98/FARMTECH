@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AfficherActiviteFXMLController">
+   <children>
+      <ImageView fitHeight="542.0" fitWidth="785.0">
+         <image>
+            <Image url="@../../../../image/Capture%20d'écran%202023-10-13%20111510.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="346.0" layoutY="108.0" mnemonicParsing="false" onAction="#AfficheActivite" prefHeight="51.0" prefWidth="121.0" text="Afficher" />
+      <Button layoutX="485.0" layoutY="108.0" mnemonicParsing="false" onAction="#SupprimerActivite" prefHeight="51.0" prefWidth="121.0" text="Supprimer" />
+      <TableView fx:id="viewActivite" layoutX="161.0" layoutY="181.0" prefHeight="303.0" prefWidth="488.0">
+        <columns>
+          <TableColumn fx:id="objetA" prefWidth="95.0" text="Objet" />
+          <TableColumn fx:id="descriptionA" prefWidth="132.0" text="Description" />
+            <TableColumn fx:id="distinataireA" prefWidth="148.0" text="Distinataire" />
+            <TableColumn fx:id="EmailDisA" prefWidth="109.0" text="Email" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

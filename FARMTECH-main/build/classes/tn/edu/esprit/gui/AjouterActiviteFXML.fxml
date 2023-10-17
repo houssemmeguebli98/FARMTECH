@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="495.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterActiviteFXMLController">
+   <children>
+      <ImageView fitHeight="495.0" fitWidth="745.0">
+         <image>
+            <Image url="@../../../../image/Capture%20d'écran%202023-10-13%20111510.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="208.0" layoutY="163.0" text="Objet : " />
+      <Label layoutX="206.0" layoutY="217.0" text="Description : " />
+      <Label layoutX="206.0" layoutY="266.0" text="Distinataire : " />
+      <Label layoutX="322.0" layoutY="75.0" text="Ajouter un Activité" />
+      <TextField fx:id="txtObjetA" layoutX="405.0" layoutY="158.0" prefHeight="31.0" prefWidth="167.0" />
+      <TextField fx:id="txtDistA" layoutX="405.0" layoutY="261.0" prefHeight="31.0" prefWidth="167.0" />
+      <TextField fx:id="txtDescriptionA" layoutX="405.0" layoutY="212.0" prefHeight="31.0" prefWidth="167.0" />
+      <Button layoutX="364.0" layoutY="409.0" mnemonicParsing="false" onAction="#AjouterActivite" text="Ajouter" />
+      <Button layoutX="164.0" layoutY="70.0" mnemonicParsing="false" onAction="#RetourAjoutAct" prefHeight="24.0" prefWidth="44.0" text="&lt; " />
+      <Label layoutX="208.0" layoutY="315.0" text="Email de distinataire : " />
+      <TextField fx:id="txtEmaildistA" layoutX="405.0" layoutY="310.0" prefHeight="31.0" prefWidth="167.0" />
+      <CheckBox fx:id="checkActivite" layoutX="208.0" layoutY="370.0" mnemonicParsing="false" text="envoyer un mail d'urgence " />
+   </children>
+</AnchorPane>
