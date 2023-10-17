@@ -25,5 +25,6 @@
       </TableView>
       <Button layoutX="509.0" layoutY="455.0" mnemonicParsing="false" onAction="#fxSupprimer" text="Supprimer" />
       <Button layoutX="247.0" layoutY="121.0" mnemonicParsing="false" onAction="#fxbacktoTableViewParc" text="&lt;" />
+      <Button layoutX="286.0" layoutY="121.0" mnemonicParsing="false" onAction="#fxRefrech" text="↻" visible="false" />
    </children>
 </AnchorPane>

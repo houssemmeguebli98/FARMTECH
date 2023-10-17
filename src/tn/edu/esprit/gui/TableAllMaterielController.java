@@ -89,9 +89,9 @@ public class TableAllMaterielController implements Initializable {
     Materiel materielSelectionne = fxAllMateriel.getSelectionModel().getSelectedItem();
 
     if (materielSelectionne != null) {
-        String nomMateriel = materielSelectionne.getNomMat();
+       
         ServiceMateriel sm = new ServiceMateriel();
-        sm.supprimerMateriel(nomMateriel);
+        sm.supprimerMateriel(materielSelectionne.getIdMat());
 
         // Mettez à jour la TableView après la suppression
         List<Materiel> materiels = sm.getAllMateriels(); // Mettez à jour la liste des matériels
@@ -233,6 +233,7 @@ private void editData(){
 }
     
 }
+
 
     
     

@@ -26,7 +26,7 @@ public class NewFXMain extends Application {
   
    @Override
     public void start(Stage primaryStage) {
-       
+                  /*
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../gui/AjouterParcFXML.fxml"));
             Scene scene = new Scene(root);
@@ -37,7 +37,7 @@ public class NewFXMain extends Application {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-           /*
+            */
           try {
             Parent root = FXMLLoader.load(getClass().getResource("../gui/GetAllFXML.fxml"));
             Scene scene = new Scene(root);

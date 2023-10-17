@@ -65,7 +65,7 @@ GetAllFXMLController tableparc;
     @FXML
     private TableColumn<Materiel, Float> fxQunatite;
     @FXML
-    private TableColumn<Materiel, Boolean> fxEtat;
+    private TableColumn<Materiel, String> fxEtat;
     @FXML
     private TableColumn<Materiel, Date> fxDate;
         private List<Materiel>  listeMateriel;
@@ -78,7 +78,8 @@ GetAllFXMLController tableparc;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-fxTableMateriel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        /*
+    fxTableMateriel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
     if (newSelection != null) {
         // Un élément a été sélectionné
        fxSuppMat.setDisable(false); // Activer le bouton de suppression
@@ -87,7 +88,7 @@ fxTableMateriel.getSelectionModel().selectedItemProperty().addListener((obs, old
     }
 
 });
-
+*/
     }
       
 
@@ -106,52 +107,66 @@ fxTableMateriel.getSelectionModel().selectedItemProperty().addListener((obs, old
     fxEtat.setCellValueFactory(new PropertyValueFactory<>("etatMat"));
     fxDate.setCellValueFactory(new PropertyValueFactory<>("dateAjout"));
 }
+ /*    
+private void editData() {
+    // ...
+    // (Votre code existant)
 
-/*
-private void editData(){
+    // Pour fxQunMat
+    fxQunatite.textProperty().addListener((observable, oldValue, newValue) -> {
+        // Mettez à jour la quantité de ressource ici avec la nouvelle valeur (newValue)
+        System.out.println("La quantité de ressource a été mise à jour à : " + newValue);
+        // Vous pouvez appeler le service pour mettre à jour la quantité ici si nécessaire
+    });
 
+        // Pour fxEtat
+       
+    fxQunatite.setCellFactory(TextFieldTableCell.<Materiel, Float>forTableColumn(new FloatStringConverter()));
+    fxEtat.setOnEditCommit(event -> {
+    Materiel materiel = event.getTableView().getItems().get(event.getTablePosition().getRow());
+    String newValue = event.getNewValue();
+    Boolean etat = Boolean.parseBoolean(newValue);
+    materiel.setEtatMat(etat);
+    smateriel.modifierMateriel(materiel);
+    System.out.println("L'état de ressource a été mis à jour à " + etat + " à la ligne " + (event.getTablePosition().getRow() + 1));
+});
+
+
+
+    
+
+    // Pour fxNomMateriel
     fxNomMateriel.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
     fxNomMateriel.setOnEditCommit(event -> {
         Materiel materiel = event.getTableView().getItems().get(event.getTablePosition().getRow());
         materiel.setNomMat(event.getNewValue());
         smateriel.modifierMateriel(materiel);
     });
-
-    fxQunatite.setCellFactory(TextFieldTableCell.<Materiel, Float>forTableColumn(new FloatStringConverter()));
-    fxQunatite.setOnEditCommit(event -> {
-        Materiel materiel = event.getTableView().getItems().get(event.getTablePosition().getRow());
-        Float newValue = event.getNewValue();
-        if (newValue != null && !newValue.isNaN()) {
-            try {
-                Float quantite = newValue;
-                materiel.setQuantiteMat(quantite);
-                 ServiceMateriel smateriel = new ServiceMateriel();
-                    smateriel.modifierMateriel(materiel);            
-            } catch (NumberFormatException e) {
-                System.out.println("La valeur entrée n'est pas un nombre valide.");
-            }
-        } else {
-            System.out.println("valeur est invalide");
-        }
-    });
-
 }
 */
-    @FXML
-    private void fxSupprimer(ActionEvent event) {
-         ServiceMateriel sm = new ServiceMateriel();
+@FXML
+private void fxSupprimer(ActionEvent event) {
+    ServiceMateriel sm = new ServiceMateriel();
     Materiel MaterielSelectionne = fxTableMateriel.getSelectionModel().getSelectedItem();
 
-    if (fxTableMateriel != null && sm != null &&  listeMateriel != null && MaterielSelectionne != null) {
-        sm.supprimerMateriel(MaterielSelectionne.getNomMat()); // Supprimez l'élément de la base de données
+    if (MaterielSelectionne != null) {
+        sm.supprimerMateriel(MaterielSelectionne.getIdMat()); // Supprimez l'élément de la base de données
 
-        // Mettez à jour la TableView
-         listeMateriel.remove(MaterielSelectionne);
-        fxTableMateriel.setItems(FXCollections.observableArrayList( listeMateriel));
+        // Rafraîchir la TableView
+        // 1. Récupérer les nouvelles données depuis la base de données
+        List<Materiel> nouvellesDonnees = sm.getAllMaterielsForParc(MaterielSelectionne.getIdParc());/*méthode pour récupérer les données*/;
+
+        // 2. Mettre à jour la TableView avec les nouvelles données
+        fxTableMateriel.setItems(FXCollections.observableArrayList(nouvellesDonnees));
     } else {
-        System.out.println("Une des variables est null.");
+        System.out.println("Vous devez sélectionner un élément avant de le supprimer.");
     }
-    }
+
+    fxRefrech(new ActionEvent());
+}
+
+
+
 
     @FXML
     private void fxbacktoTableViewParc(ActionEvent event) throws IOException {
@@ -168,6 +183,19 @@ private void editData(){
         } catch (IOException ex) {
             Logger.getLogger(AjouterMaterielFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @FXML
+    private void fxRefrech(ActionEvent event) {
+        
+     // Récupérez les nouvelles données depuis la base de données ou le modèle
+            selectedParc = SelectedParcManager.getSelectedParc();
+
+     ServiceMateriel sm = new ServiceMateriel();
+    List<Materiel> nouvellesDonnees = sm.getAllMaterielsForParc(selectedParc.getIdParc()); // Par exemple, récupérez les nouveaux matériels
+
+    // Mettez à jour la TableView avec les nouvelles données
+    fxTableMateriel.setItems(FXCollections.observableArrayList(nouvellesDonnees));
     }
 
 

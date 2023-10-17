@@ -47,12 +47,12 @@ public class ServiceMateriel {
         }
     }
 
- public void supprimerMateriel(String nomMateriel) {
+ public void supprimerMateriel(int idMat) {
     try {
-        String req = "DELETE FROM `materiel` WHERE nomMat = ?";
+        String req = "DELETE FROM `materiel` WHERE idMat = ?";
 
         try (PreparedStatement ps = cnx.prepareStatement(req)) {
-            ps.setString(1, nomMateriel);
+            ps.setInt(1, idMat);
             ps.executeUpdate();
         }
     } catch (SQLException ex) {
@@ -62,9 +62,9 @@ public class ServiceMateriel {
 
 
 
- public List<Materiel> getAllMaterielsForParc(int idParc) {
+public List<Materiel> getAllMaterielsForParc(int idParc) {
     List<Materiel> materiels = new ArrayList<>();
-    String req = "SELECT `nomMat`, `etatMat`, `QuantiteMat`,`dateAjout`, `nomParc` FROM `materiel` WHERE idParc = ?";
+    String req = "SELECT `idMat`, `nomMat`, `etatMat`, `QuantiteMat`,`dateAjout` FROM `materiel` WHERE idParc = ?";
 
     try (PreparedStatement ps = cnx.prepareStatement(req)) {
         ps.setInt(1, idParc);
@@ -72,7 +72,8 @@ public class ServiceMateriel {
         try (ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Materiel materiel = new Materiel();
-                materiel.setNomParc(rs.getString("nomParc"));
+                materiel.setNomParc(getNomParcForId(idParc));
+                materiel.setIdMat(rs.getInt("idMAt"));// Appel de la méthode pour récupérer le nomParc
                 materiel.setNomMat(rs.getString("nomMat"));
                 materiel.setEtatMat(rs.getBoolean("etatMat"));
                 materiel.setQuantiteMat(rs.getFloat("QuantiteMat"));
@@ -83,12 +84,30 @@ public class ServiceMateriel {
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }
-     return materiels;
-    
- }
+    return materiels;
+}
+
+// Méthode pour récupérer le nomParc
+private String getNomParcForId(int idParc) {
+    String req = "SELECT `nomParc` FROM `parc` WHERE idParc = ?";
+
+    try (PreparedStatement ps = cnx.prepareStatement(req)) {
+        ps.setInt(1, idParc);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getString("nomParc");
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return null;
+}
+
     public List<Materiel> getMaterielByNom(String nomMat) {
     List<Materiel> materiels = new ArrayList<>();
-    String req = "SELECT `nomMat`, `etatMat`, `QuantiteMat`,`dateAjout`, `nomParc` FROM `materiel` WHERE nomMat= ?";
+    String req = "SELECT `idMat`, `nomMat`, `etatMat`, `QuantiteMat`,`dateAjout`, `nomParc` FROM `materiel` WHERE nomMat= ?";
 
     try (PreparedStatement ps = cnx.prepareStatement(req)) {
         ps.setString(1, nomMat);
@@ -96,6 +115,7 @@ public class ServiceMateriel {
         try (ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Materiel materiel = new Materiel();
+                materiel.setIdMat(rs.getInt("idMAt"));// Appel de la méthode pour récupérer le nomParc
                 materiel.setNomParc(rs.getString("nomParc"));
                 materiel.setNomMat(rs.getString("nomMat"));
                 materiel.setEtatMat(rs.getBoolean("etatMat"));
@@ -120,6 +140,7 @@ public class ServiceMateriel {
 
                 while (rs.next()) {
                     Materiel materiel = new Materiel();
+                    materiel.setIdMat(rs.getInt("idMAt"));// Appel de la méthode pour récupérer le nomParc
                     materiel.setNomParc(rs.getString("nomParc"));
                     materiel.setNomMat(rs.getString("nomMat"));
                     materiel.setEtatMat(rs.getBoolean("etatMat"));
