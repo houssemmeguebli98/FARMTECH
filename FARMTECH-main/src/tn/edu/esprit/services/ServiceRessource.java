@@ -32,7 +32,7 @@ public class ServiceRessource implements IService<Ressource> {
      @Override
     public void ajouter(Ressource t) {
         try {
-            String req = "INSERT INTO `ressource`(`typeRes`, `speciesRes`, `quantiteRes`) VALUES ('" + t.getTypeRes() + "','" + t.getSpeciesRes() + "','" + t.getQuantiteRes() + "')";
+            String req = "INSERT INTO `ressource`(`typeRes`, `speciesRes`, `quantiteRes`, `idterrain`) VALUES ('" + t.getTypeRes() + "','" + t.getSpeciesRes() + "','" + t.getQuantiteRes() + "','" + t.getIdterrain() + "')";
             Statement stm = cnx.createStatement();
             stm.executeUpdate(req);
         } catch (SQLException ex) {
@@ -117,6 +117,55 @@ public class ServiceRessource implements IService<Ressource> {
         String req = "SELECT * FROM `ressource` WHERE `idRes` = ?";
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setInt(1, id);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            ressource = new Ressource();
+            ressource.setIdRes(rs.getInt("idRes"));
+            ressource.setTypeRes(rs.getString("typeRes"));
+            ressource.setSpeciesRes(rs.getString("speciesRes"));
+            ressource.setQuantiteRes(rs.getInt("quantiteRes"));
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return ressource;
+}
+
+    public List<Ressource> getAllres(int idTerrain) {
+        List<Ressource> ressource = new ArrayList<>();
+    String req = "SELECT `idRes`, `typeRes`, `speciesRes`, `quantiteRes` FROM `ressource` WHERE idterrain = ?;";
+
+    try (PreparedStatement ps = cnx.prepareStatement(req)) {
+        ps.setInt(1, idTerrain);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Ressource ressources = new Ressource();
+                ressources.setIdRes(rs.getInt("idRes"));
+                ressources.setTypeRes(rs.getString("typeRes"));
+                ressources.setSpeciesRes(rs.getString("speciesRes"));
+                ressources.setQuantiteRes(rs.getInt("quantiteRes"));
+                
+                ressource.add(ressources);
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return ressource;
+}
+    
+    
+    public Ressource getOneBySpecies(String species) {
+    Ressource ressource = null;
+    try {
+        String req = "SELECT * FROM `ressource` WHERE `speciesRes` = ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, species);
 
         ResultSet rs = ps.executeQuery();
 

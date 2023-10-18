@@ -33,13 +33,14 @@ public class ServiceActivite implements IService<Activite>  {
       @Override
     public void ajouter(Activite t) {
         try {
-        String req = "INSERT INTO `activite`(`objetAct`, `descriptionAct`, `distAct`, `emailDist`) VALUES (?, ?, ?, ?)";
+        String req = "INSERT INTO `activite`(`objetAct`, `descriptionAct`, `distAct`, `emailDist`, `speciesRES`) VALUES (?, ?, ?, ?,?)";
 
         PreparedStatement ps = cnx.prepareStatement(req);
         ps.setString(1, t.getObjetAct());
         ps.setString(2, t.getDescriptionAct());
         ps.setString(3, t.getDistAct());
         ps.setString(4, t.getEmailDist());
+        ps.setString(5, t.getSpeciesRES());
 
         ps.executeUpdate();
     } catch (SQLException ex) {
@@ -56,7 +57,7 @@ public class ServiceActivite implements IService<Activite>  {
     public void modifier(Activite t) {
         try {
             
-            String req = "UPDATE `activite` SET `objetAct` = ?, `descriptionAct` = ?, `distAct` = ?, `emailDist` = ? WHERE `idAct` = ?";
+            String req = "UPDATE `activite` SET `objetAct` = ?, `descriptionAct` = ?, `distAct` = ?, `emailDist` = ? ,`speciesRES` = ? WHERE `idAct` = ?";
 
             PreparedStatement ps = cnx.prepareStatement(req);
 
@@ -64,7 +65,8 @@ public class ServiceActivite implements IService<Activite>  {
             ps.setString(2, t.getDescriptionAct());
             ps.setString(3, t.getDistAct());
             ps.setString(4, t.getEmailDist());
-            ps.setInt(5, t.getIdAct());
+            ps.setString(5, t.getSpeciesRES());
+            ps.setInt(6, t.getIdAct());
             ps.executeUpdate();
     }    
         catch (SQLException ex) {
@@ -109,6 +111,7 @@ public class ServiceActivite implements IService<Activite>  {
             activite.setDescriptionAct(rs.getString("descriptionAct"));
             activite.setDistAct(rs.getString("distAct"));
             activite.setEmailDist(rs.getString("emailDist"));
+            activite.setSpeciesRES(rs.getString("speciesRES"));
         }
         
         ps.close();
@@ -123,29 +126,30 @@ public class ServiceActivite implements IService<Activite>  {
 
     @Override
     public List<Activite> getAll(Activite t) {
+        List<Activite> activiteList = new ArrayList<>();
+    try {
         String req = "SELECT * FROM `activite`";
-        ArrayList<Activite> activites = new ArrayList<>();
-        Statement stm;
-        try {
-            stm = this.cnx.createStatement();
-            ResultSet rs = stm.executeQuery(req);
-            while (rs.next()) {
-                Activite a = new Activite();
-                a.setIdAct(rs.getInt(1));
-                a.setObjetAct(rs.getString("objetAct"));
-                a.setDescriptionAct(rs.getString("descriptionAct"));
-                a.setDistAct(rs.getString("distAct"));
-                a.setEmailDist(rs.getString("emailDist"));
-                activites.add(a);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Activite activite = new Activite();
+            activite.setIdAct(rs.getInt("idAct"));
+            activite.setObjetAct(rs.getString("objetAct"));
+            activite.setDescriptionAct(rs.getString("descriptionAct"));
+            activite.setDistAct(rs.getString("distAct"));
+            activite.setEmailDist(rs.getString("emailDist"));
+            activite.setSpeciesRES(rs.getString("speciesRES"));
+            
+            activiteList.add(activite);
         }
-        return activites;
+
+        ps.close();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
-
-    
-
+    return activiteList;
+    }
     
     
     

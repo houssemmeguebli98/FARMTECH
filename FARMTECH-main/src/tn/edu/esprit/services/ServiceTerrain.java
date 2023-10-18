@@ -84,6 +84,31 @@ public class ServiceTerrain implements IService<Terrain> {
         }
         return terrain;
     }
+    
+    
+public Terrain getOneByNom(String nomTerrain) {
+    Terrain terrain = null;
+    try {
+        String req = "SELECT * FROM `terrain` WHERE `nomTerrain` = ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, nomTerrain);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            terrain = new Terrain();
+            terrain.setIdTerrain(rs.getInt("idTerrain"));
+            terrain.setNomTerrain(rs.getString("nomTerrain"));
+            terrain.setLocalisation(rs.getString("localisation"));
+            terrain.setSuperficie(rs.getString("superficie"));
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return terrain;
+}
 
 
 

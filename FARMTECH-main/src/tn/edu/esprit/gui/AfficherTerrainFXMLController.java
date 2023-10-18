@@ -5,17 +5,26 @@
  */
 package tn.edu.esprit.gui;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import tn.edu.esprit.entities.Terrain;
 import tn.edu.esprit.services.ServiceTerrain;
 
@@ -36,26 +45,17 @@ public class AfficherTerrainFXMLController implements Initializable {
     @FXML
     private TableColumn<Terrain, String> superficie;
     private List<Terrain> data;
+    @FXML
+    private TextField txtchercherTerrain;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         editTerrain(); 
+        afficheTerrain(null);
     }
 
    
-
-    @FXML
-    private void AfficheTerrain(ActionEvent event) {
-    ServiceTerrain sp = new ServiceTerrain();
-        Terrain t = new Terrain();
-        data = sp.getAll(t);
-
-        viewTerrain.setItems(FXCollections.observableArrayList(data));
-        
-        nomTerrain.setCellValueFactory(new PropertyValueFactory<Terrain , String>("nomTerrain"));
-        localisation.setCellValueFactory(new PropertyValueFactory<Terrain , String>("localisation"));
-        superficie.setCellValueFactory(new PropertyValueFactory<Terrain , String>("Superficie"));
-    }
+    
 
     @FXML
     private void SupprimerTerrain(ActionEvent event) {
@@ -102,4 +102,143 @@ public class AfficherTerrainFXMLController implements Initializable {
         st.modifier(terrain);
     });
 } 
+
+    
+      
+
+    @FXML
+    private void AjouterRessource(ActionEvent event) {
+        try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterRessourceFXML.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        Terrain selectedTerrain = viewTerrain.getSelectionModel().getSelectedItem();
+
+        if (selectedTerrain != null) {
+            SelectedTerrainManager.setSelectedTerrain(selectedTerrain);
+
+            AjouterRessourceFXMLController controller = loader.getController();
+            controller.initData(selectedTerrain);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Ajouter materiel ");
+            stage.show();
+        } else {
+            // Aucun parc sélectionné, afficher une alerte
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Aucun parc sélectionné.\nVeuillez séelectionner une parc de la liste.");
+            alert.showAndWait();
+        }
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
     }
+    }
+
+    @FXML
+    private void AjouterTerrain(ActionEvent event) {
+        try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterTerrainFXML.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Ajouter Terrain"); // Titre de la nouvelle fenêtre
+        stage.show();
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+    }
+    }
+
+    @FXML
+    private void retourAfficherTerrain(ActionEvent event) {
+     try {
+        // Chargez le fichier FXML de la vue FirstPageFXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/firstPageFXML.fxml"));
+        Parent root = loader.load();
+
+        // Créez une nouvelle scène avec la vue FirstPageFXML
+        Scene scene = new Scene(root);
+
+        // Obtenez la fenêtre actuelle à partir de l'événement
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Affichez la nouvelle scène dans la fenêtre
+        currentStage.setScene(scene);
+        currentStage.setTitle("First Page"); // Mettez à jour le titre de la fenêtre si nécessaire
+        currentStage.show();
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+    }
+}
+
+    @FXML
+    private void afficherRessourceTerrain(ActionEvent event) {
+      try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AfficherRessourceFXML.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        Terrain selectedTerrain = viewTerrain.getSelectionModel().getSelectedItem();
+        if (selectedTerrain!= null) {
+        // Set the selected parc's name to the test TextField
+        AfficherRessourceFXMLController t = loader.getController();
+        t.initData(selectedTerrain);
+        SelectedTerrainManager.setSelectedTerrain(selectedTerrain);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.setTitle("Liste des Ressources");
+        stage.show();
+        } else {
+            // Aucun parc sélectionné, afficher une alerte
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Aucun Terrain sélectionné.\nVeuillez séelectionner un terrain de la liste.");
+            alert.showAndWait();
+        }
+    } catch (IOException ex) {
+        System.out.println(ex.getMessage());
+    }
+    }
+
+    private void afficheTerrain(ActionEvent event) {
+    ServiceTerrain sp = new ServiceTerrain();
+        Terrain t = new Terrain();
+        data = sp.getAll(t);
+
+        viewTerrain.setItems(FXCollections.observableArrayList(data));
+        nomTerrain.setCellValueFactory(new PropertyValueFactory<Terrain , String>("nomTerrain"));
+        localisation.setCellValueFactory(new PropertyValueFactory<Terrain , String>("localisation"));
+        superficie.setCellValueFactory(new PropertyValueFactory<Terrain , String>("Superficie"));
+    }
+
+    @FXML
+    private void chercherTerrain(ActionEvent event) {
+    String nom = txtchercherTerrain.getText();
+
+    // Appelez la méthode getOneBySpecies pour obtenir la ressource correspondante
+    ServiceTerrain st = new ServiceTerrain();
+    Terrain t = st.getOneByNom(nom);
+
+    // Créez une liste contenant cette ressource (ou vide si aucune correspondance n'est trouvée)
+    List<Terrain> data = new ArrayList<>();
+    if (t != null) {
+        data.add(t);
+    }
+        
+        
+        viewTerrain.setItems(FXCollections.observableArrayList(data));
+        nomTerrain.setCellValueFactory(new PropertyValueFactory<Terrain , String>("nomTerrain"));
+        localisation.setCellValueFactory(new PropertyValueFactory<Terrain , String>("localisation"));
+        superficie.setCellValueFactory(new PropertyValueFactory<Terrain , String>("Superficie"));
+    
+    }
+    
+}
+    

@@ -15,25 +15,33 @@ public class Activite {
     private String descriptionAct;
     private String distAct;
     private String emailDist;
+    private String speciesRES;
    
 
     public Activite() {
     }
 
-    public Activite(String objetAct, String descriptionAct, String distAct, String emailDist) {
+    public Activite(String objetAct, String descriptionAct, String distAct, String emailDist, String speciesRES) {
         this.objetAct = objetAct;
         this.descriptionAct = descriptionAct;
         this.distAct = distAct;
         this.emailDist = emailDist;
+        this.speciesRES = speciesRES;
     }
 
-    public Activite(int idAct, String objetAct, String descriptionAct, String distAct, String emailDist) {
+    public Activite(int idAct, String objetAct, String descriptionAct, String distAct, String emailDist, String speciesRES) {
         this.idAct = idAct;
         this.objetAct = objetAct;
         this.descriptionAct = descriptionAct;
         this.distAct = distAct;
         this.emailDist = emailDist;
+        this.speciesRES = speciesRES;
     }
+
+    
+   
+
+    
 
     public int getIdAct() {
         return idAct;
@@ -75,11 +83,24 @@ public class Activite {
         this.emailDist = emailDist;
     }
 
+    public String getSpeciesRES() {
+        return speciesRES;
+    }
+
+    public void setSpeciesRES(String speciesRES) {
+        this.speciesRES = speciesRES;
+    }
+
     @Override
     public String toString() {
-        return "Activite{" + "idAct=" + idAct + ", objetAct=" + objetAct + ", descriptionAct=" + descriptionAct + ", distAct=" + distAct + ", emailDist=" + emailDist + '}';
+        return "Activite{" + "idAct=" + idAct + ", objetAct=" + objetAct + ", descriptionAct=" + descriptionAct + ", distAct=" + distAct + ", emailDist=" + emailDist + ", speciesRES=" + speciesRES + '}';
     }
+
+   
+
     
+
+   
     
     
     

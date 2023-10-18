@@ -5,6 +5,8 @@
  */
 package tn.edu.esprit.entities;
 
+import java.util.List;
+
 /**
  *
  * @author rihab
@@ -14,8 +16,24 @@ public class Terrain {
     private String nomTerrain;
     private String localisation;
     private String superficie;
+    private List<Ressource> ressource ; 
 
     public Terrain() {
+    }
+
+    public Terrain(int idTerrain, String nomTerrain, String localisation, String superficie, List<Ressource> ressource) {
+        this.idTerrain = idTerrain;
+        this.nomTerrain = nomTerrain;
+        this.localisation = localisation;
+        this.superficie = superficie;
+        this.ressource = ressource;
+    }
+
+    public Terrain(String nomTerrain, String localisation, String superficie, List<Ressource> ressource) {
+        this.nomTerrain = nomTerrain;
+        this.localisation = localisation;
+        this.superficie = superficie;
+        this.ressource = ressource;
     }
 
     public Terrain(String nomTerrain, String localisation, String superficie) {
@@ -24,12 +42,7 @@ public class Terrain {
         this.superficie = superficie;
     }
 
-    public Terrain(int idTerrain, String nomTerrain, String localisation, String superficie) {
-        this.idTerrain = idTerrain;
-        this.nomTerrain = nomTerrain;
-        this.localisation = localisation;
-        this.superficie = superficie;
-    }
+    
 
     public int getIdTerrain() {
         return idTerrain;
@@ -63,10 +76,19 @@ public class Terrain {
         this.superficie = superficie;
     }
 
+    public List<Ressource> getRessource() {
+        return ressource;
+    }
+
+    public void setRessource(List<Ressource> ressource) {
+        this.ressource = ressource;
+    }
+
     @Override
     public String toString() {
-        return "Terrain{" + "idTerrain=" + idTerrain + ", nomTerrain=" + nomTerrain + ", localisation=" + localisation + ", superficie=" + superficie + '}';
+        return "Terrain{" + "idTerrain=" + idTerrain + ", nomTerrain=" + nomTerrain + ", localisation=" + localisation + ", superficie=" + superficie + ", ressource=" + ressource + '}';
     }
+
     
     
     

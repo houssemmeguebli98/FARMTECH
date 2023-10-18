@@ -15,17 +15,19 @@
             <Image url="@../../../../image/Capture%20d'écran%202023-10-13%20111510.png" />
          </image>
       </ImageView>
-      <Label layoutX="208.0" layoutY="163.0" text="Objet : " />
-      <Label layoutX="206.0" layoutY="217.0" text="Description : " />
-      <Label layoutX="206.0" layoutY="266.0" text="Distinataire : " />
+      <Label layoutX="208.0" layoutY="130.0" text="Objet : " />
+      <Label layoutX="206.0" layoutY="179.0" text="Description : " />
+      <Label layoutX="206.0" layoutY="233.0" text="Distinataire : " />
       <Label layoutX="322.0" layoutY="75.0" text="Ajouter un Activité" />
-      <TextField fx:id="txtObjetA" layoutX="405.0" layoutY="158.0" prefHeight="31.0" prefWidth="167.0" />
-      <TextField fx:id="txtDistA" layoutX="405.0" layoutY="261.0" prefHeight="31.0" prefWidth="167.0" />
-      <TextField fx:id="txtDescriptionA" layoutX="405.0" layoutY="212.0" prefHeight="31.0" prefWidth="167.0" />
-      <Button layoutX="364.0" layoutY="409.0" mnemonicParsing="false" onAction="#AjouterActivite" text="Ajouter" />
+      <TextField fx:id="txtObjetA" layoutX="405.0" layoutY="125.0" prefHeight="31.0" prefWidth="167.0" />
+      <TextField fx:id="txtDistA" layoutX="405.0" layoutY="228.0" prefHeight="31.0" prefWidth="167.0" />
+      <TextField fx:id="txtDescriptionA" layoutX="405.0" layoutY="174.0" prefHeight="31.0" prefWidth="167.0" />
+      <Button layoutX="364.0" layoutY="415.0" mnemonicParsing="false" onAction="#AjouterActivite" text="Ajouter" />
       <Button layoutX="164.0" layoutY="70.0" mnemonicParsing="false" onAction="#RetourAjoutAct" prefHeight="24.0" prefWidth="44.0" text="&lt; " />
-      <Label layoutX="208.0" layoutY="315.0" text="Email de distinataire : " />
-      <TextField fx:id="txtEmaildistA" layoutX="405.0" layoutY="310.0" prefHeight="31.0" prefWidth="167.0" />
-      <CheckBox fx:id="checkActivite" layoutX="208.0" layoutY="370.0" mnemonicParsing="false" text="envoyer un mail d'urgence " />
+      <Label layoutX="208.0" layoutY="282.0" text="Email de distinataire : " />
+      <TextField fx:id="txtEmaildistA" layoutX="405.0" layoutY="277.0" prefHeight="31.0" prefWidth="167.0" />
+      <CheckBox fx:id="checkActivite" layoutX="208.0" layoutY="377.0" mnemonicParsing="false" text="envoyer un mail d'urgence " />
+      <Label layoutX="208.0" layoutY="329.0" text="Species " />
+      <TextField fx:id="txtSpecies" layoutX="405.0" layoutY="324.0" prefHeight="31.0" prefWidth="167.0" />
    </children>
 </AnchorPane>

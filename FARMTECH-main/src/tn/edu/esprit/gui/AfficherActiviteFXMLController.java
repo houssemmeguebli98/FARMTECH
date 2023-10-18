@@ -5,17 +5,24 @@
  */
 package tn.edu.esprit.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import tn.edu.esprit.entities.Activite;
 import tn.edu.esprit.services.ServiceActivite;
 
@@ -37,6 +44,10 @@ public class AfficherActiviteFXMLController implements Initializable {
     private TableColumn<Activite, String> distinataireA;
     @FXML
     private TableColumn<Activite, String> EmailDisA;
+    @FXML
+    private TableColumn<Activite, String> speciesAct;
+    @FXML
+    private TextField chercherActivite;
 
     /**
      * Initializes the controller class.
@@ -44,10 +55,10 @@ public class AfficherActiviteFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         editData();
+        AfficheActivite();
     }    
 
-    @FXML
-    private void AfficheActivite(ActionEvent event) {
+    private void AfficheActivite() {
         ServiceActivite sa = new ServiceActivite();
         Activite a = new Activite();
         data = sa.getAll(a);
@@ -55,7 +66,7 @@ public class AfficherActiviteFXMLController implements Initializable {
         descriptionA.setCellValueFactory(new PropertyValueFactory<Activite, String>("descriptionAct"));
         distinataireA.setCellValueFactory(new PropertyValueFactory<Activite, String>("distAct"));
         EmailDisA.setCellValueFactory(new PropertyValueFactory<Activite, String>("emailDist"));
-
+        speciesAct.setCellValueFactory(new PropertyValueFactory<Activite, String>("speciesRES"));
         viewActivite.setItems(FXCollections.observableArrayList(data));
     }
 
@@ -113,6 +124,52 @@ public class AfficherActiviteFXMLController implements Initializable {
         sa.modifier(activite);
     });
 }
+
+    @FXML
+    private void retourAfficherActivite(ActionEvent event) {
+     try {
+        // Chargez le fichier FXML de la vue FirstPageFXML
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/firstPageFXML.fxml"));
+        Parent root = loader.load();
+
+        // Créez une nouvelle scène avec la vue FirstPageFXML
+        Scene scene = new Scene(root);
+
+        // Obtenez la fenêtre actuelle à partir de l'événement
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Affichez la nouvelle scène dans la fenêtre
+        currentStage.setScene(scene);
+        currentStage.setTitle("First Page"); // Mettez à jour le titre de la fenêtre si nécessaire
+        currentStage.show();
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+    }
+}
+
+
+    @FXML
+    private void ajouterNouveauActivite(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterActiviteFXML.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        // Obtenez la scène actuelle depuis l'événement
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Affichez la nouvelle scène dans la fenêtre
+        stage.setScene(scene);
+        stage.setTitle("Ajouter Activité"); // Modifiez le titre de la fenêtre si nécessaire
+        stage.show();
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+    }
+}
+
+    @FXML
+    private void chercherActivite(ActionEvent event) {
+    }
 
         
     }
