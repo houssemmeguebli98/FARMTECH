@@ -26,20 +26,9 @@ public class NewFXMain extends Application {
   
    @Override
     public void start(Stage primaryStage) {
-                  /*
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("../gui/AjouterParcFXML.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("/*******Ajouter Parc /******");
-            primaryStage.show();
-        
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-            */
+      
           try {
-            Parent root = FXMLLoader.load(getClass().getResource("../gui/GetAllFXML.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../gui/WelcomePage.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Liste de parc ");
@@ -48,31 +37,6 @@ public class NewFXMain extends Application {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-       /*
-          try {
-            Parent root = FXMLLoader.load(getClass().getResource("../gui/AjouterMaterielFXML.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Ajouter materiel ");
-            primaryStage.show();
-        
-        } catch (IOException ex) { 
-            System.out.println(ex.getMessage());
-        }
-       
-
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("../gui/TableAllMateriel.fxml"));
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Liste des materiels ");
-            primaryStage.show();
-        
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-       */ 
            } 
     public static void main(String[] args) {
         launch(args);

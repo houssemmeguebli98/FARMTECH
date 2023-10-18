@@ -25,6 +25,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -66,6 +68,7 @@ public class TableAllMaterielController implements Initializable {
     @FXML
     private TextField fxChercheField;
     
+    
 
     /**
      * Initializes the controller class.
@@ -86,18 +89,29 @@ public class TableAllMaterielController implements Initializable {
     }
 
     @FXML
-    private void fxSupp(ActionEvent event) {
- 
+private void fxSupp(ActionEvent event) {
     Materiel materielSelectionne = fxAllMateriel.getSelectionModel().getSelectedItem();
 
     if (materielSelectionne != null) {
-       
-        ServiceMateriel sm = new ServiceMateriel();
-        sm.supprimerMateriel(materielSelectionne.getIdMat());
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer ce matériel ?");
 
-        // Mettez à jour la TableView après la suppression
-        List<Materiel> materiels = sm.getAllMateriels(); // Mettez à jour la liste des matériels
-        fxAllMateriel.getItems().setAll(materiels);
+        ButtonType boutonOui = new ButtonType("Oui");
+        ButtonType boutonNon = new ButtonType("Non", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(boutonOui, boutonNon);
+
+        alert.showAndWait().ifPresent(reponse -> {
+            if (reponse == boutonOui) {
+                ServiceMateriel sm = new ServiceMateriel();
+                sm.supprimerMateriel(materielSelectionne.getIdMat());
+
+                // Mettez à jour la TableView après la suppression
+                List<Materiel> materiels = sm.getAllMateriels(); // Mettez à jour la liste des matériels
+                fxAllMateriel.getItems().setAll(materiels);
+            }
+        });
     } else {
         System.out.println("Aucun matériel sélectionné.");
     }
@@ -186,7 +200,6 @@ private void editData() {
 
 }
 
-    @FXML
     private void Fxgotoupdtae(ActionEvent event) {
          try {
          FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/ModifierMaterielFXML.fxml"));
@@ -224,6 +237,22 @@ private void editData() {
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(AjouterMaterielFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void gotomenu(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/WelcomePage.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Liste de materiels");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(GetAllFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

@@ -20,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -46,18 +47,26 @@ public class AjouterMaterielFXMLController implements Initializable {
     @FXML
     private ToggleGroup Etat;
     private Parc selectedParc ;
+    @FXML
+    private Label fxnomparc;
 
-    /**
+    /**  
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+ 
      
     }    
   
     
  public Parc initData(Parc selectedParc) {
-    return selectedParc;
+   
+             
+    String nomParc = selectedParc.getNomParc();
+    fxnomparc.setText("' "+nomParc+" '");
+     return selectedParc;
 }
 @FXML
 private void fxSaveMateriel(ActionEvent event) {

@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -50,6 +51,8 @@ public class GetAllFXMLController implements Initializable {
     private Parc selectedParc;
     @FXML
     private Button fxAjouterduMat;
+    @FXML
+    private Button fxsupp;
     
 
     
@@ -58,6 +61,14 @@ public void initialize(URL url, ResourceBundle rb) {
     fxAfficher(new ActionEvent());
     //fxChercher(new ActionEvent()); 
     editData();
+     fxTableParc.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Un élément a été sélectionné
+            fxsupp.setVisible(true);
+        } else {
+            fxsupp.setVisible(false);
+        }
+  });
     
 
     fxTableParc.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -93,17 +104,34 @@ public void initialize(URL url, ResourceBundle rb) {
 
     }
 
-    @FXML
-    private void fxSupprimer(ActionEvent event) {
-   ServiceParc sp = new ServiceParc();
+   
+@FXML
+private void fxSupprimer(ActionEvent event) {
+    ServiceParc sp = new ServiceParc();
     Parc parcSelectionne = fxTableParc.getSelectionModel().getSelectedItem();
 
     if (parcSelectionne != null) {
-        sp.supprimer(parcSelectionne.getIdParc()); // Supprimez l'élément de la base de données
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer ce parc ?");
 
-        // Mettez à jour la TableView
-        data.remove(parcSelectionne);
-        fxTableParc.getItems().setAll(data);
+        // Options de boutons
+        ButtonType boutonOui = new ButtonType("Oui");
+        ButtonType boutonNon = new ButtonType("Non");
+        alert.getButtonTypes().setAll(boutonOui, boutonNon);
+
+        // Récupérer la réponse de l'utilisateur
+        alert.showAndWait().ifPresent(reponse -> {
+            if (reponse == boutonOui) {
+                // Utilisateur a cliqué sur "Oui", donc supprimez l'élément
+                sp.supprimer(parcSelectionne.getIdParc());
+
+                // Mettez à jour la TableView
+                data.remove(parcSelectionne);
+                fxTableParc.getItems().setAll(data);
+            }
+        });
     } else {
         System.out.println("Vous devez sélectionner un élément avant de le supprimer.");
     }
@@ -235,7 +263,7 @@ private void fxAjouterduMat(ActionEvent event) {
     @FXML
     private void fxMenuGetALL(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GetAllFXML.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/WelcomePage.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             

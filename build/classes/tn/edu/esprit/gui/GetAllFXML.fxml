@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -24,24 +25,33 @@
             <TableColumn fx:id="fxSuperficie" minWidth="0.0" prefWidth="195.0" text="Superficie" />
          </columns>
       </TableView>
-      <Button layoutX="612.0" layoutY="179.0" mnemonicParsing="false" onAction="#fxAfficher" prefHeight="37.0" prefWidth="106.0" text="Actualiser" textFill="#792032">
+      <Button layoutX="495.0" layoutY="179.0" mnemonicParsing="false" onAction="#fxAfficher" prefHeight="37.0" prefWidth="37.0" textFill="#792032">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>
+         <graphic>
+            <FontAwesomeIcon fill="#792032" iconName="REFRESH" />
+         </graphic>
       </Button>
-      <Button layoutX="768.0" layoutY="179.0" mnemonicParsing="false" onAction="#fxSupprimer" prefHeight="37.0" prefWidth="106.0" text="Supprimer" textAlignment="CENTER" textFill="RED">
+      <Button fx:id="fxsupp" layoutX="544.0" layoutY="179.0" mnemonicParsing="false" onAction="#fxSupprimer" prefHeight="37.0" prefWidth="37.0" textAlignment="CENTER" textFill="RED" visible="false">
          <font>
             <Font name="System Bold Italic" size="16.0" />
          </font>
+         <graphic>
+            <FontAwesomeIcon fill="RED" iconName="TRASH" textAlignment="CENTER" />
+         </graphic>
       </Button>
-      <TextField fx:id="fxtextchercher" layoutX="250.0" layoutY="179.0" prefHeight="37.0" prefWidth="187.0" text="chercher ...">
+      <TextField fx:id="fxtextchercher" layoutX="250.0" layoutY="179.0" prefHeight="37.0" prefWidth="187.0" text="chercher...">
          <font>
             <Font name="Lucida Sans Regular" size="15.0" />
          </font></TextField>
-      <Button layoutX="455.0" layoutY="179.0" mnemonicParsing="false" onAction="#fxChercher" prefHeight="37.0" prefWidth="106.0" text="Chercher" textFill="#2d05cd">
+      <Button layoutX="447.0" layoutY="179.0" mnemonicParsing="false" onAction="#fxChercher" prefHeight="37.0" prefWidth="4.0" textFill="#2d05cd">
          <font>
             <Font name="System Bold" size="16.0" />
-         </font></Button>
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="#2d05cd" iconName="SEARCH" />
+         </graphic></Button>
       <Button fx:id="fxTransferButton" layoutX="653.0" layoutY="531.0" mnemonicParsing="false" onAction="#fxTranfserpage" prefHeight="37.0" prefWidth="217.0" text="Afficher materiel du parc" textFill="#1b9443" visible="false">
          <font>
             <Font name="System Bold" size="16.0" />
@@ -50,10 +60,13 @@
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Button>
-      <Button layoutX="250.0" layoutY="89.0" mnemonicParsing="false" onAction="#fxMenuGetALL" text="Menu" textFill="#1da85b">
+      <Button layoutX="250.0" layoutY="89.0" mnemonicParsing="false" onAction="#fxMenuGetALL" prefHeight="34.0" prefWidth="37.0" textFill="#1da85b">
          <font>
             <Font name="System Bold" size="16.0" />
-         </font></Button>
+         </font>
+         <graphic>
+            <FontAwesomeIcon fill="#1da85b" iconName="BARS" />
+         </graphic></Button>
       <Button layoutX="437.0" layoutY="531.0" mnemonicParsing="false" onAction="#fxGoToAddParc" prefHeight="37.0" prefWidth="209.0" text="Ajouter Parc" textFill="#1b9443">
          <font>
             <Font name="System Bold" size="16.0" />

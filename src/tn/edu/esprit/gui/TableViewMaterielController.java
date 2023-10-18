@@ -32,8 +32,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -72,24 +74,27 @@ GetAllFXMLController tableparc;
        ServiceMateriel smateriel = new ServiceMateriel();
 
     private Parc selectedParc ;
-    private Button fxSuppMat;
+    @FXML
+    private TextField fxfind;
+    @FXML
+    private Button fxdelete;
+    @FXML
+    private Label fxnomdeparc;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         editData();
-        /*
-    fxTableMateriel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-    if (newSelection != null) {
-        // Un élément a été sélectionné
-       fxSuppMat.setDisable(false); // Activer le bouton de suppression
-    } else {
-        fxSuppMat.setDisable(true); // Désactiver le bouton de suppression s'il n'y a pas de sélection
-    }
 
-});
-*/
+        fxTableMateriel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Un élément a été sélectionné
+            fxdelete.setVisible(true);
+        } else {
+            fxdelete.setVisible(false);
+        }
+    });
     }
       
 
@@ -109,6 +114,8 @@ GetAllFXMLController tableparc;
     fxQunatite.setCellValueFactory(new PropertyValueFactory<>("quantiteMat"));
     fxEtat.setCellValueFactory(new PropertyValueFactory<>("etatMat"));
     fxDate.setCellValueFactory(new PropertyValueFactory<>("dateAjout"));
+    String nomParc = selectedParc.getNomParc();
+    fxnomdeparc.setText("' "+nomParc+" '");
 }
  
    
@@ -145,21 +152,30 @@ private void editData() {
   
 }
 
-
 @FXML
 private void fxSupprimer(ActionEvent event) {
     ServiceMateriel sm = new ServiceMateriel();
     Materiel MaterielSelectionne = fxTableMateriel.getSelectionModel().getSelectedItem();
 
     if (MaterielSelectionne != null) {
-        sm.supprimerMateriel(MaterielSelectionne.getIdMat()); // Supprimez l'élément de la base de données
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer ce matériel ?");
 
-        // Rafraîchir la TableView
-        // 1. Récupérer les nouvelles données depuis la base de données
-        List<Materiel> nouvellesDonnees = sm.getAllMaterielsForParc(MaterielSelectionne.getIdParc());/*méthode pour récupérer les données*/;
+        ButtonType boutonOui = new ButtonType("Oui");
+        ButtonType boutonNon = new ButtonType("Non", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(boutonOui, boutonNon);
 
-        // 2. Mettre à jour la TableView avec les nouvelles données
-        fxTableMateriel.setItems(FXCollections.observableArrayList(nouvellesDonnees));
+        alert.showAndWait().ifPresent(reponse -> {
+            if (reponse == boutonOui) {
+                sm.supprimerMateriel(MaterielSelectionne.getIdMat());
+
+                // Rafraîchir la TableView
+                List<Materiel> nouvellesDonnees = sm.getAllMaterielsForParc(MaterielSelectionne.getIdParc());
+                fxTableMateriel.setItems(FXCollections.observableArrayList(nouvellesDonnees));
+            }
+        });
     } else {
         System.out.println("Vous devez sélectionner un élément avant de le supprimer.");
     }
@@ -199,6 +215,45 @@ private void fxSupprimer(ActionEvent event) {
     // Mettez à jour la TableView avec les nouvelles données
     fxTableMateriel.setItems(FXCollections.observableArrayList(nouvellesDonnees));
     }
+
+    @FXML
+    private void fxchercherMat(ActionEvent event) {
+        
+        String nomCherche = fxfind.getText(); // Récupérer le texte du champ de recherche
+
+    // Appeler la méthode getMaterielByNom avec le nom cherché
+    ServiceMateriel sm = new ServiceMateriel();
+    List<Materiel> materiels = sm.getMaterielByNom(nomCherche);
+
+    if (!materiels.isEmpty()) {
+        // Mettre à jour la TableView avec les détails des matériels trouvés
+        fxTableMateriel.getItems().setAll(materiels);
+    } else {
+        // Afficher une alerte si aucun matériel n'est trouvé
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Aucun matériel trouvé");
+        alert.setHeaderText(null);
+        alert.setContentText("Aucun matériel trouvé avec ce nom.");
+        alert.showAndWait();
+    }
+    }
+
+    @FXML
+    private void gotomenu(ActionEvent event) {
+         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/WelcomePage.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Liste de materiels");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(GetAllFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
 
 }
