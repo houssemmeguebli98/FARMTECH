@@ -5,16 +5,28 @@
  */
 package tn.edu.esprit.services;
 
+import java.sql.SQLException;
 import java.util.List;
+import tn.edu.esprit.entities.Transaction;
 
 /**
  *
  * @author abdelazizmezri
+ * @param <T>
  */
 public interface IService <T> {
     public void ajouter(T t);
     public void modifier(T t);
-    public void supprimer(int id);
-    public T getOne(T t);
-    public List<T> getAll(T t);
+    public void supprimer(int id_tra);
+    public void rechercheType (int id_tra);
+    public List remplircombo ();
+    /**
+     *
+     * @param id_tra
+     * @return
+     */
+   
+    public T getOne(Integer id_tra);
+    public List<T> getAll();
+    public T getPneById(int id) throws SQLException;
 }

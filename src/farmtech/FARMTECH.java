@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package farmtech;
 
+
+package farmtech;
+import tn.edu.esprit.tools.DataSource;
 /**
  *
  * @author megbl
@@ -16,6 +13,11 @@ public class FARMTECH {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        DataSource.getInstance();
+        DataSource.getInstance();
+        DataSource.getInstance();
+        DataSource.getInstance();
+        DataSource.getInstance();   
     }
     
 }

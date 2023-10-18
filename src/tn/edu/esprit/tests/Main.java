@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package tn.edu.esprit.tests;
-
-import tn.edu.esprit.tools.DataSource;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+import tn.edu.esprit.entities.Categtra;
+import tn.edu.esprit.services.Servicetransaction;
+import tn.edu.esprit.entities.Transaction;
+import tn.edu.esprit.services.Servicecategtra;
 
 /**
  *
@@ -13,10 +18,11 @@ import tn.edu.esprit.tools.DataSource;
  */
 public class Main {
       public static void main(String[] args) {
-        DataSource.getInstance();
-        DataSource.getInstance();
-        DataSource.getInstance();
-        DataSource.getInstance();
-        DataSource.getInstance();
-    }
+        /*Categtra t = new Categtra();
+        t.setNom_cat_tra("Payement facture");
+        t.setDescrip_cat_tra("Payement facture STEG, SONEDE");
+        */
+        Servicecategtra Servicecategtra = new Servicecategtra();
+      }
+      
 }

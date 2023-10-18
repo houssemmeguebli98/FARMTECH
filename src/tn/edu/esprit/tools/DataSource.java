@@ -16,10 +16,14 @@ import java.util.logging.Logger;
  * @author abdelazizmezri
  */
 public class DataSource {
+
+    public static Connection getConnect() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     private Connection cnx;
     private static DataSource instance;
     
-    private String url = "jdbc:mysql://localhost:3306/esprit";
+    private String url = "jdbc:mysql://localhost:3306/farmtech";
     private String user = "root";
     private String password = "";
     
