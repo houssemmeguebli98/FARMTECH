@@ -27,29 +27,56 @@ public class FARMTECH {
         System.out.println("hello");
 
        // Créez une instance de DataSource pour établir la connexion à la base de données
-        DataSource dataSource = DataSource.getInstance();
+    DataSource dataSource = DataSource.getInstance();
 
-        // Créez une instance de ServiceUser
-        ServiceUser service = new ServiceUser();
+    // Créez une instance de ServiceUser
+    ServiceUser service = new ServiceUser();
 
-        ouvrier ouv = new ouvrier("Nom", "Prenom", "email2@example.com", "0123456789", "MotDePasse", "Tunis", "M","mecanicien");
+    // Créez un nouvel administrateur
+    Admin admin = new Admin("Ben Mahmoud", "Ala", "email@admin.com", "0123456789", "aqwzsxedc");
 
-        // Ajoutez l'Agriculteur à la base de données
-        User createdUser = service.create(ouv);
+    // Ajoutez l'administrateur à la base de données
+    User createdUser = service.create(admin);
 
-        if (createdUser != null) {
-            System.out.println("Utilisateur créé avec succès.");
+    if (createdUser != null) {
+        System.out.println("Administrateur créé avec succès.");
+    } else {
+        System.out.println("Échec de la création de l'administrateur.");
+    }
+     Connection connection = DataSource.getInstance().getConnection();
+
+        if (connection != null) {
+            System.out.println("Connected to the database!");
         } else {
-            System.out.println("Échec de la création de l'utilisateur.");
+            System.out.println("Connection to the database failed.");
+            return;
         }
 
+        // Créez une instance de ServiceUser
+         ServiceUser userService = new ServiceUser();
+
+        // Appelez la méthode getAll() pour récupérer la liste des utilisateurs
+        List<User> users = userService.getAll();
+
+        // Affichez les utilisateurs dans la console
+        for (User user : users) {
+            System.out.println(user);
+        }
+
+        // N'oubliez pas de fermer la connexion à la base de données lorsque vous avez terminé
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
         
       
     
-    ServiceUser userService = new ServiceUser();
+    /*ServiceUser userService = new ServiceUser();
     userService.delete(4);
 
-        System.out.println("enjazczk");
+        System.out.println("enjazczk");*/
     }  
 }
     

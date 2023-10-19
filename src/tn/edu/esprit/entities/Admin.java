@@ -18,5 +18,11 @@ public class Admin extends User {
         super( nom, prenom, mail, numeroTelephone, UserRole.ADMIN, motDePasse); // Incrémentation de l'ID automatiquement
     }
 
+    public Admin(String nom, String prenom, String mail, String numeroTelephone, String motDePasse, String ville, String sexe) {
+    super(nom, prenom, mail, numeroTelephone, UserRole.ADMIN, motDePasse, ville, sexe);
+}
+
+    
+
     
 }

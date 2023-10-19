@@ -27,74 +27,75 @@ import tn.edu.esprit.tools.DataSource;
 
 public class ServiceUser implements IService<User> {
     private Connection cnx;
+public ServiceUser() {
+    this.cnx = DataSource.getInstance().getConnection();
+}
 
-    public ServiceUser() {
-        this.cnx = DataSource.getInstance().getConnection();
-    }
+   
 
     @Override
-    public User create(User user) {
-        String email = user.getMail();
-        UserRole userRole = user.getRole();
 
-        if (!isEmailUnique(email)) {
+public User create(User user) {
+    String email = user.getMail();
+    UserRole userRole = user.getRole();
+
+    if (!isEmailUnique(email)) {
         System.out.println("Erreur : L'adresse e-mail n'est pas unique.");
         return null;
     }
 
-        try {
-            String insertQuery = "INSERT INTO users (nom, prenom, mail, numeroTelephone, role, motDePasse, ville, sexe, certification, specialite, superficieFerme) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
+        String insertQuery = "INSERT INTO users (nom, prenom, mail, numeroTelephone, role, motDePasse, ville, sexe, certification, specialite, superficieFerme) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            try (PreparedStatement statement = cnx.prepareStatement(insertQuery)) {
-                statement.setString(1, user.getNom());
-                statement.setString(2, user.getPrenom());
-                statement.setString(3, user.getMail());
-                statement.setString(4, user.getNumeroTelephone());
-                statement.setString(5, user.getRole().toString());
-                statement.setString(6, user.getMotDePasse());
-                
+        try (PreparedStatement statement = cnx.prepareStatement(insertQuery)) {
+            statement.setString(1, user.getNom());
+            statement.setString(2, user.getPrenom());
+            statement.setString(3, user.getMail());
+            statement.setString(4, user.getNumeroTelephone());
+            statement.setString(5, user.getRole().toString());
+            statement.setString(6, user.getMotDePasse());
 
-                if (user instanceof Admin) {
-                    Admin admin = (Admin) user;
-                    statement.setNull(9, java.sql.Types.BLOB); // La colonne "certification" ne s'applique pas à un administrateur
-                    statement.setNull(10, java.sql.Types.VARCHAR); // La colonne "specialite" ne s'applique pas à un administrateur
-                    statement.setNull(11, java.sql.Types.DOUBLE); // La colonne "superficie_ferme" ne s'applique pas à un administrateur
-                } else if (user instanceof Agriculteur) {
-                    Agriculteur agriculteur = (Agriculteur) user;
-                    
-                    statement.setString(7, agriculteur.getVille());
-                    statement.setString(8, agriculteur.getSexe());
-                    statement.setNull(9, java.sql.Types.BLOB); // La colonne "certification" ne s'applique pas à un agriculteur
-                    statement.setNull(10, java.sql.Types.VARCHAR); // La colonne "specialite" ne s'applique pas à un agriculteur
-                    //statement.setDouble(11, agriculteur.getSuperficieFerme());
-                } else if (user instanceof veterinaire) {
-                    veterinaire vet = (veterinaire) user;
-                    // Insérer ici le code pour traiter la colonne "certification" à partir de l'objet Image
-                    //statement.setBlob(9, ...);
-                    statement.setString(7, vet.getVille());
-                    statement.setString(8, vet.getSexe());
-                    statement.setNull(10, java.sql.Types.VARCHAR); // La colonne "specialite" ne s'applique pas à un vétérinaire
-                    statement.setNull(11, java.sql.Types.DOUBLE); // La colonne "superficie_ferme" ne s'applique pas à un vétérinaire
-                } else if (user instanceof ouvrier) {
-                    ouvrier ouv = (ouvrier) user;
-                    
-                    statement.setString(7, ouv.getVille());
-                    statement.setString(8, ouv.getSexe());
-                    statement.setNull(9, java.sql.Types.BLOB); // La colonne "certification" ne s'applique pas à un ouvrier
-                    statement.setString(10, ouv.getSpecialite());
-                    statement.setNull(11, java.sql.Types.DOUBLE); // La colonne "superficie_ferme" ne s'applique pas à un ouvrier
-                }
-
-                statement.executeUpdate();
+            if (user instanceof Admin) {
+                Admin admin = (Admin) user;
+                statement.setString(7, admin.getVille());
+                statement.setString(8, admin.getSexe());
+                statement.setNull(9, java.sql.Types.BLOB);
+                statement.setNull(10, java.sql.Types.VARCHAR);
+                statement.setNull(11, java.sql.Types.DOUBLE);
+            } else if (user instanceof Agriculteur) {
+                Agriculteur agriculteur = (Agriculteur) user;
+                statement.setString(7, agriculteur.getVille());
+                statement.setString(8, agriculteur.getSexe());
+                statement.setNull(9, java.sql.Types.BLOB);
+                statement.setNull(10, java.sql.Types.VARCHAR);
+                statement.setNull(11, java.sql.Types.DOUBLE);
+            } else if (user instanceof veterinaire) {
+                veterinaire vet = (veterinaire) user;
+                statement.setString(7, vet.getVille());
+                statement.setString(8, vet.getSexe());
+                statement.setNull(10, java.sql.Types.VARCHAR);
+                statement.setNull(11, java.sql.Types.DOUBLE);
+            } else if (user instanceof ouvrier) {
+                ouvrier ouv = (ouvrier) user;
+                statement.setString(7, ouv.getVille());
+                statement.setString(8, ouv.getSexe());
+                statement.setNull(9, java.sql.Types.BLOB);
+                statement.setString(10, ouv.getSpecialite());
+                statement.setNull(11, java.sql.Types.DOUBLE);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            statement.executeUpdate();
         }
 
-        return user;
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return null;
     }
+
+    return user;
+}
+
+
 
    private boolean isEmailUnique(String email) {
     try {
@@ -116,7 +117,6 @@ public class ServiceUser implements IService<User> {
 
 
 
-@Override
 public List<User> getAll() {
     List<User> users = new ArrayList<>();
     try {
@@ -124,7 +124,8 @@ public List<User> getAll() {
         try (PreparedStatement statement = cnx.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
-                
+                // Récupérez les autres informations de l'utilisateur
+                int id = resultSet.getInt("id");
                 String nom = resultSet.getString("nom");
                 String prenom = resultSet.getString("prenom");
                 String mail = resultSet.getString("mail");
@@ -133,19 +134,18 @@ public List<User> getAll() {
                 String motDePasse = resultSet.getString("motDePasse");
                 String ville = resultSet.getString("ville");
                 String sexe = resultSet.getString("sexe");
-                // Vous pouvez également extraire les autres colonnes selon votre schéma
 
                 // Créez un objet User avec les détails extraits
                 User user = new User();
-                
+                user.setId(id);
                 user.setNom(nom);
                 user.setPrenom(prenom);
                 user.setMail(mail);
                 user.setNumeroTelephone(numeroTelephone);
                 user.setRole(role);
                 user.setMotDePasse(motDePasse);
-                
-                // Remplissez les autres détails de l'utilisateur ici
+                user.setVille(ville);
+                user.setSexe(sexe);
 
                 users.add(user);
             }
@@ -155,6 +155,7 @@ public List<User> getAll() {
     }
     return users;
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

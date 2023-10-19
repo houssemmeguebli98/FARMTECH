@@ -26,8 +26,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
+import tn.edu.esprit.entities.UserRole;
 import tn.edu.esprit.tools.DataSource;
 
 /**
@@ -44,6 +46,8 @@ public class SigninController implements Initializable {
     
     @FXML
     private Button loginButton;
+    @FXML
+    private Label fxnotfound;
     
 
 
@@ -54,8 +58,12 @@ public class SigninController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 
-   @FXML
-    private void loginAction() {
+  
+
+// ...
+
+@FXML
+private void loginAction() {
     String email = emailField.getText();
     String password = passwordField.getText();
 
@@ -75,23 +83,50 @@ public class SigninController implements Initializable {
             if (resultSet.next()) {
                 // Authentification réussie
                 String role = resultSet.getString("role");
-                // Vous pouvez traiter le rôle de l'utilisateur ici
+
+                // Vérifiez si l'utilisateur est un administrateur
+                if (UserRole.ADMIN.toString().equals(role)) {
+                    // L'utilisateur est un administrateur, ouvrez l'interface Ajout_user
+                    openAjoutUserWindow();
+                } else {
+                    // L'utilisateur n'est pas un administrateur, vous pouvez traiter les autres rôles ici
+                }
 
                 // Fermez la fenêtre de connexion actuelle
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.close();
-
-                // Ouvrez la nouvelle fenêtre ou effectuez d'autres actions appropriées
-                //openMainApplicationWindow(role);
             } else {
                 // Informez l'utilisateur que l'authentification a échoué
-                AlertHelper.showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Nom d'utilisateur ou mot de passe incorrect.");
+                AlertHelper.showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Email ou mot de passe incorrect.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 }
+
+// Méthode pour ouvrir l'interface Ajout_user
+private void openAjoutUserWindow() {
+    try {
+        // Charger la vue FXML de l'interface Ajout_user
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin_interface.fxml"));
+        Parent root = loader.load();
+
+        // Créer une nouvelle scène
+        Scene scene = new Scene(root);
+
+        // Créer un nouveau stage (fenêtre)
+        Stage stage = new Stage();
+        stage.setTitle("Ajout d'utilisateur"); // Titre de la nouvelle fenêtre
+        stage.setScene(scene);
+
+        // Afficher la nouvelle fenêtre
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
 
     @FXML
 private void goToSignup() {

@@ -43,11 +43,11 @@ public class User {
     }
 
     public User(String nom, String prenom, String email, String telephone, UserRole role, String sexe, String ville, String motDePasse) {
-this.id = ++lastId; // Incrémentation de l'ID automatiquement
+    this.id = ++lastId; // Incrémentation de l'ID automatiquement
     this.nom = nom;
     this.prenom = prenom;
-    this.mail = mail;
-    this.numeroTelephone = numeroTelephone;
+    this.mail = email;
+    this.numeroTelephone = telephone;
     this.role = role; // Utilisez la variable locale "role" pour initialiser la propriété "UserRole".
     this.motDePasse = motDePasse;
      this.sexe= sexe;
@@ -57,6 +57,9 @@ this.id = ++lastId; // Incrémentation de l'ID automatiquement
      // Getter pour l'ID
     public int getId() {
         return id;
+    }
+     public void setId(int id) {
+        this.id=id;
     }
     
     public String getNom() {
