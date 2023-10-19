@@ -25,7 +25,7 @@ public class FXMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("firstPageFXML.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("../gui/firstPageFXML.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("/*******FARMTECH /******");
