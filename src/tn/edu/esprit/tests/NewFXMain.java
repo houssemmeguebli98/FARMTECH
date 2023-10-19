@@ -18,7 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
- *
+ *  
  * @author megbl
  */
 public class NewFXMain extends Application {
@@ -27,11 +27,11 @@ public class NewFXMain extends Application {
    @Override
     public void start(Stage primaryStage) {
       
-          try {
+              try {
             Parent root = FXMLLoader.load(getClass().getResource("../gui/WelcomePage.fxml"));
             Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Liste de parc ");
+                           primaryStage.setScene(scene);
+                         primaryStage.setTitle("Liste de parc ");
             primaryStage.show();
         
         } catch (IOException ex) {
@@ -41,5 +41,5 @@ public class NewFXMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
-}
+    }
+
