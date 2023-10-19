@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,6 +22,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -62,6 +65,12 @@ public class Admin_interfaceController implements Initializable {
     private JFXTextField Filter;
     @FXML
     private JFXButton addPartsButton;
+    @FXML
+    private JFXButton delete;
+    @FXML
+    private JFXButton search;
+    @FXML
+    private JFXButton modifier;
 
     /**
      * Initializes the controller class.
@@ -97,9 +106,6 @@ public class Admin_interfaceController implements Initializable {
         }
     }
     
-    @FXML
-    private void partsSearchButtonAction(ActionEvent event) {
-    }
 
    @FXML
 private void partAddButtonAction(ActionEvent event) {
@@ -123,16 +129,54 @@ private void partAddButtonAction(ActionEvent event) {
 
 
 
-   @FXML
-private void partsModifyButtonAction(ActionEvent event) {
-    
-}
 
+
+   @FXML
+private void deleteUserAction(ActionEvent event) {
+    // Get the selected user from the TableView
+    User selectedUser = UsersTable.getSelectionModel().getSelectedItem();
+
+    // Check if a user is selected
+    if (selectedUser == null) {
+        // No user is selected, you can display an error message or handle it as needed
+        System.out.println("No user selected for deletion.");
+        return;
+    }
+
+    // Get the user's ID
+    int userId = selectedUser.getId();
+
+    // Display a confirmation dialog
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation");
+    alert.setHeaderText("Delete Confirmation");
+    alert.setContentText("Are you sure you want to delete this user?");
+    Optional<ButtonType> result = alert.showAndWait();
+
+    if (result.get() == ButtonType.OK) {
+        // Call the method from your service to delete the user
+        ServiceUser serviceUser = new ServiceUser();
+        boolean deletionSuccess = serviceUser.delete(userId);
+
+        if (deletionSuccess) {
+            // Deletion successful
+            // You can update the TableView here, for example, remove the selected user
+            UsersTable.getItems().remove(selectedUser);
+        } else {
+            // Deletion failed, you can display an error message or handle it as needed
+            System.out.println("User deletion failed.");
+        }
+    }
+}
 
     @FXML
-private void deletePartsAction(ActionEvent event) {
-    
-}
+    private void searchUserAction(ActionEvent event) {
+    }
 
+    @FXML
+    private void modifierButtonAction(ActionEvent event) {
+    }
+
+  
     
 }

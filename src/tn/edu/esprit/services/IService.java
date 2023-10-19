@@ -22,6 +22,6 @@ public interface IService<T> {
 
     public void update(T t);
 
-    public void delete(int id);
+    public boolean delete(int id);
 }
 

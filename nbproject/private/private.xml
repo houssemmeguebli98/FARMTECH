@@ -4,11 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/farmtech/FARMTECH.java</file>
+            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/services/IService.java</file>
             <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/entities/User.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Ajout_userController.java</file>
             <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/services/ServiceUser.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/ajout_user.fxml</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/SignupController.java</file>
             <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Admin_interfaceController.java</file>
         </group>
     </open-files>

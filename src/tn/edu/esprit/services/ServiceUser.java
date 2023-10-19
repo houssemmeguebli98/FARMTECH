@@ -212,8 +212,8 @@ public List<User> getAll() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   @Override
-public void delete(int id) {
+  @Override
+    public boolean delete(int id) {
     try {
         String deleteQuery = "DELETE FROM users WHERE id = ?";
         try (PreparedStatement statement = cnx.prepareStatement(deleteQuery)) {
@@ -222,14 +222,18 @@ public void delete(int id) {
             
             if (rowsAffected > 0) {
                 System.out.println("Utilisateur avec l'ID " + id + " supprimé avec succès.");
+                return true; // Return true for a successful deletion
             } else {
                 System.out.println("Aucun utilisateur trouvé avec l'ID " + id);
+                return false; // Return false if no user is found
             }
         }
     } catch (SQLException e) {
         e.printStackTrace();
+        return false; // Return false in case of an exception
     }
 }
+
  
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
