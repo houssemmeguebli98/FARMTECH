@@ -26,16 +26,16 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="UsersTable" layoutX="181.0" layoutY="132.0" prefHeight="242.0" prefWidth="594.0">
+      <TableView fx:id="UsersTable" editable="true" layoutX="181.0" layoutY="132.0" prefHeight="242.0" prefWidth="587.0">
          <columns>
-            <TableColumn fx:id="userID" editable="false" prefWidth="57.0" text="ID" />
-            <TableColumn fx:id="userNom" prefWidth="91.20002746582031" text="Nom" />
-            <TableColumn fx:id="userPrenom" prefWidth="99.199951171875" text="Prenom" />
-            <TableColumn fx:id="userEmail" prefWidth="100.0" text="Email" />
-            <TableColumn fx:id="userNumero" prefWidth="72.79998779296875" text="Numero" />
-            <TableColumn fx:id="userRole" prefWidth="75.199951171875" text="Role" />
-            <TableColumn fx:id="userVille" prefWidth="60.7999267578125" text="Ville" />
-            <TableColumn fx:id="userSexe" prefWidth="35.2000732421875" text="Sexe" />
+            <TableColumn fx:id="userID" editable="false" prefWidth="89.60002136230469" text="ID" />
+            <TableColumn fx:id="userNom" prefWidth="92.0" text="Nom" />
+            <TableColumn fx:id="userPrenom" prefWidth="92.800048828125" text="Prenom" />
+            <TableColumn fx:id="userEmail" prefWidth="114.4000244140625" text="Email" />
+            <TableColumn fx:id="userNumero" prefWidth="93.60003662109375" text="Numero" />
+            <TableColumn fx:id="userRole" prefWidth="72.79998779296875" text="Role" />
+            <TableColumn fx:id="userVille" minWidth="3.199951171875" prefWidth="55.9998779296875" text="Ville" />
+            <TableColumn fx:id="userSexe" prefWidth="139.19998779296873" text="Sexe" />
          </columns>
       </TableView>
       <JFXButton fx:id="search" buttonType="RAISED" layoutX="552.0" layoutY="90.0" onAction="#searchUserAction" ripplerFill="#2196f3" style="-fx-background-color: FAFAFA;" text="Search">

@@ -7,6 +7,7 @@ package tn.edu.esprit.GUI;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -28,9 +29,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tn.edu.esprit.entities.User;
+import tn.edu.esprit.entities.UserRole;
 import tn.edu.esprit.services.ServiceUser;
 
 /**
@@ -46,21 +49,21 @@ public class Admin_interfaceController implements Initializable {
     private TableView<User> UsersTable;
 
     @FXML
-    private TableColumn<?, ?> userID;
+    private TableColumn<User,Integer > userID;
     @FXML
-    private TableColumn<?, ?> userNom;
+    private TableColumn<User, String> userNom;
     @FXML
-    private TableColumn<?, ?> userPrenom;
+    private TableColumn<User, String> userPrenom;
     @FXML
-    private TableColumn<?, ?> userEmail;
+    private TableColumn<User, String> userEmail;
     @FXML
-    private TableColumn<?, ?> userNumero;
+    private TableColumn<User,String > userNumero;
     @FXML
-    private TableColumn<?, ?> userRole;
+    private TableColumn<User, UserRole> userRole;
     @FXML
-    private TableColumn<?, ?> userVille;
+    private TableColumn<User, String> userVille;
     @FXML
-    private TableColumn<?, ?> userSexe;
+    private TableColumn<User, String>userSexe;
     @FXML
     private JFXTextField Filter;
     @FXML
@@ -89,6 +92,7 @@ public class Admin_interfaceController implements Initializable {
 
         // Chargez les utilisateurs depuis la base de données et affichez-les
         loadUsers();
+        editData();
     }
      // Méthode pour charger les utilisateurs depuis la base de données
     private void loadUsers() {
@@ -143,10 +147,10 @@ private void deleteUserAction(ActionEvent event) {
         return;
     }
 
-    // Get the user's ID
+   
     int userId = selectedUser.getId();
 
-    // Display a confirmation dialog
+   
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Confirmation");
     alert.setHeaderText("Delete Confirmation");
@@ -154,16 +158,15 @@ private void deleteUserAction(ActionEvent event) {
     Optional<ButtonType> result = alert.showAndWait();
 
     if (result.get() == ButtonType.OK) {
-        // Call the method from your service to delete the user
+        
         ServiceUser serviceUser = new ServiceUser();
         boolean deletionSuccess = serviceUser.delete(userId);
 
         if (deletionSuccess) {
-            // Deletion successful
-            // You can update the TableView here, for example, remove the selected user
+            
             UsersTable.getItems().remove(selectedUser);
         } else {
-            // Deletion failed, you can display an error message or handle it as needed
+            
             System.out.println("User deletion failed.");
         }
     }
@@ -173,10 +176,99 @@ private void deleteUserAction(ActionEvent event) {
     private void searchUserAction(ActionEvent event) {
     }
 
+   /* @FXML
+private void modifierButtonAction(ActionEvent event) {
+    // Récupérer l'index de la ligne sélectionnée dans le TableView
+    int selectedIndex = UsersTable.getSelectionModel().getSelectedIndex();
+
+    if (selectedIndex >= 0) {
+        // Récupérer l'utilisateur sélectionné
+        User selectedUser = UsersTable.getItems().get(selectedIndex);
+
+        // Récupérer l'ID de l'utilisateur sélectionné
+        int userId = selectedUser.getId();
+
+        try {
+            // Charger la vue FXML de l'interface Ajout_user
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajout_user.fxml"));
+
+            // Créer une nouvelle instance du contrôleur AjoutUserController en passant l'ID de l'utilisateur
+            Ajout_userController controller = new Ajout_userController(userId);
+            loader.setController(controller);
+
+            Parent root = loader.load();
+
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+
+            // Obtenir la scène actuelle (à partir du bouton cliqué)
+            Stage currentStage = (Stage) modifier.getScene().getWindow();
+
+            // Remplacer la scène actuelle par la nouvelle scène (Ajout_user)
+            currentStage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+
+*/
+    
+    private void editData() {
+    // Éditer le nom du parc
+    userNom.setCellFactory(TextFieldTableCell.<User>forTableColumn());
+    userNom.setOnEditCommit(event -> {
+        User user= event.getRowValue(); 
+        user.setNom(event.getNewValue());
+        System.out.println("Le nom de " +  user.getNom()+ " a été mis à jour à " + event.getNewValue());
+        ServiceUser su = new ServiceUser();
+        su.update(user);
+    }); 
+     userPrenom.setCellFactory(TextFieldTableCell.<User>forTableColumn());
+     userPrenom.setOnEditCommit(event -> {
+        User user= event.getRowValue(); 
+        user.setNom(event.getNewValue());
+        System.out.println("Le prenom de " +  user.getNom()+ " a été mis à jour à " + event.getNewValue());
+        ServiceUser su = new ServiceUser();
+        su.update(user);
+    });
+     userEmail.setCellFactory(TextFieldTableCell.<User>forTableColumn());
+     userEmail.setOnEditCommit(event -> {
+    User user = event.getRowValue();
+    user.setMail(event.getNewValue());
+    System.out.println("L'email de " + user.getNom() + " a été mis à jour à " + event.getNewValue());
+    ServiceUser su = new ServiceUser();
+    su.update(user);
+});
+     userVille.setCellFactory(TextFieldTableCell.<User>forTableColumn());
+     userVille.setOnEditCommit(event -> {
+    User user = event.getRowValue();
+    user.setVille(event.getNewValue());
+    System.out.println("La ville de " + user.getNom() + " a été mise à jour à " + event.getNewValue());
+    ServiceUser su = new ServiceUser();
+    su.update(user);
+});
+     userNumero.setCellFactory(TextFieldTableCell.<User>forTableColumn());
+     userNumero.setOnEditCommit(event -> {
+    User user = event.getRowValue();
+    user.setNumeroTelephone(event.getNewValue());
+    System.out.println("Le numéro de téléphone de " + user.getNom() + " a été mis à jour à " + event.getNewValue());
+    ServiceUser su = new ServiceUser();
+    su.update(user);
+});
+
+   
+  
+}
+
     @FXML
     private void modifierButtonAction(ActionEvent event) {
     }
 
+
+  
+    } 
+
+
   
     
-}
+

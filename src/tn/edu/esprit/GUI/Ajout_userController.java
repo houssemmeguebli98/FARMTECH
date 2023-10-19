@@ -177,6 +177,11 @@ public class Ajout_userController implements Initializable {
 
     @FXML
     private void ouvrierButtonAction(ActionEvent event) {
+        
+        
+        
+        
+        
     }
     
     @FXML

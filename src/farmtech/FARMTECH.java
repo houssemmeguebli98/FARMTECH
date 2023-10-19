@@ -24,7 +24,7 @@ import tn.edu.esprit.services.IService;
 
 public class FARMTECH {
     public static void main(String[] args) {
-        System.out.println("hello");
+        /*System.out.println("hello");
 
        // Créez une instance de DataSource pour établir la connexion à la base de données
     DataSource dataSource = DataSource.getInstance();
@@ -77,6 +77,27 @@ public class FARMTECH {
     userService.delete(4);
 
         System.out.println("enjazczk");*/
+        System.out.println("hello");
+
+    // Créez une instance de DataSource pour établir la connexion à la base de données
+    DataSource dataSource = DataSource.getInstance();
+
+    // Créez une instance de ServiceUser
+    ServiceUser serviceUser = new ServiceUser();
+
+    // Remplacez l'ID par l'ID de l'utilisateur que vous souhaitez récupérer
+    int userId = 1; // Remplacez par l'ID souhaité
+
+    // Appelez la méthode getById pour récupérer l'utilisateur par son ID
+    User retrievedUser = serviceUser.getById(userId);
+
+    if (retrievedUser != null) {
+        // Si l'utilisateur est trouvé, affichez-le
+        System.out.println("Retrieved User: " + retrievedUser);
+    } else {
+        // Si l'utilisateur n'est pas trouvé, affichez un message d'erreur
+        System.out.println("User not found with ID: " + userId);
+    }
     }  
 }
     
