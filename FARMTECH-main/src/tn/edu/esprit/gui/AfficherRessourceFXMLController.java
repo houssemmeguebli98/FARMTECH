@@ -13,6 +13,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -37,12 +41,23 @@ private TableColumn<Ressource, String> speciesRes;
 private TableColumn<Ressource, Integer> quantiteRes;
     @FXML
     private TextField txtRechercherRes;
+    @FXML
+    private Button suppRES;
 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          ServiceRessource sr = new ServiceRessource();
          editData();
+         
+         viewRessource.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Un élément a été sélectionné
+            suppRES.setVisible(true);
+        } else {
+            suppRES.setVisible(false);
+        }
+    });
     }
 
     
@@ -67,14 +82,25 @@ private TableColumn<Ressource, Integer> quantiteRes;
     @FXML
 private void SupprimerRessource(ActionEvent event) {
     Ressource ressourceSelectionnee = viewRessource.getSelectionModel().getSelectedItem();
-
+    ServiceRessource sr = new ServiceRessource();
     if (ressourceSelectionnee != null) {
-        ServiceRessource sr = new ServiceRessource();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer cette Ressource ?");
+
+        ButtonType boutonOui = new ButtonType("Oui");
+        ButtonType boutonNon = new ButtonType("Non", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(boutonOui, boutonNon);
+        
+        alert.showAndWait().ifPresent(reponse -> {
+        if (reponse == boutonOui) {
+        
         sr.supprimer(ressourceSelectionnee.getIdRes()); // Supprimez l'élément de la base de données
 
         // Mettez à jour la TableView
         viewRessource.getItems().remove(ressourceSelectionnee); // Supprimez l'élément de la TableView
-
+        }});
     } else {
         System.out.println("Vous devez sélectionner une ressource avant de la supprimer.");
     }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -19,6 +20,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -47,11 +51,43 @@ public class AfficherTerrainFXMLController implements Initializable {
     private List<Terrain> data;
     @FXML
     private TextField txtchercherTerrain;
+    @FXML
+    private Button suppTerrain;
+    @FXML
+    private Button addRES;
+    @FXML
+    private Button showRES;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         editTerrain(); 
         afficheTerrain(null);
+         viewTerrain.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Un élément a été sélectionné
+            suppTerrain.setVisible(true);
+        } else {
+            suppTerrain.setVisible(false);
+        }
+    });
+         
+         viewTerrain.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Un élément a été sélectionné
+            addRES.setVisible(true);
+        } else {
+            addRES.setVisible(false);
+        }
+    });
+         
+       viewTerrain.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Un élément a été sélectionné
+            showRES.setVisible(true);
+        } else {
+            showRES.setVisible(false);
+        }
+    });  
     }
 
    
@@ -59,16 +95,27 @@ public class AfficherTerrainFXMLController implements Initializable {
 
     @FXML
     private void SupprimerTerrain(ActionEvent event) {
-  
+    ServiceTerrain st = new ServiceTerrain();
     Terrain terrainSelectionne = viewTerrain.getSelectionModel().getSelectedItem();
 
     if (terrainSelectionne != null) {
-        ServiceTerrain st = new ServiceTerrain();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer cette Terrain ?");
+
+        ButtonType boutonOui = new ButtonType("Oui");
+        ButtonType boutonNon = new ButtonType("Non", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(boutonOui, boutonNon);
+        
+        alert.showAndWait().ifPresent(reponse -> {
+        if (reponse == boutonOui) {
         st.supprimer(terrainSelectionne.getIdTerrain()); // Supprimez l'élément de la base de données
 
         // Mettez à jour la TableView
         data.remove(terrainSelectionne);
         viewTerrain.getItems().setAll(data);
+        }});
     } else {
         System.out.println("Vous devez sélectionner un élément avant de le supprimer.");
     }
@@ -239,6 +286,28 @@ public class AfficherTerrainFXMLController implements Initializable {
         superficie.setCellValueFactory(new PropertyValueFactory<Terrain , String>("Superficie"));
     
     }
+
+    @FXML
+    private void refresh(ActionEvent event) {
+    try {
+        // Chargez le fichier FXML de la vue AfficherTerrain
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AfficherTerrainFXML.fxml"));
+        Parent root = loader.load();
+
+        // Créez une nouvelle scène avec la vue AfficherTerrain
+        Scene scene = new Scene(root);
+
+        // Obtenez la fenêtre actuelle à partir de l'événement
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // Affichez la nouvelle scène dans la fenêtre
+        currentStage.setScene(scene);
+        currentStage.setTitle("Afficher Terrain"); // Mettez à jour le titre de la fenêtre si nécessaire
+        currentStage.show();
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+    }
+}
     
 }
     

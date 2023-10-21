@@ -17,6 +17,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -48,6 +52,8 @@ public class AfficherActiviteFXMLController implements Initializable {
     private TableColumn<Activite, String> speciesAct;
     @FXML
     private TextField chercherActivite;
+    @FXML
+    private Button supACT;
 
     /**
      * Initializes the controller class.
@@ -56,6 +62,14 @@ public class AfficherActiviteFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         editData();
         AfficheActivite();
+        viewActivite.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        if (newSelection != null) {
+            // Un élément a été sélectionné
+            supACT.setVisible(true);
+        } else {
+            supACT.setVisible(false);
+        }
+    });
     }    
 
     private void AfficheActivite() {
@@ -73,14 +87,27 @@ public class AfficherActiviteFXMLController implements Initializable {
     @FXML
     private void SupprimerActivite(ActionEvent event) {
         Activite activiteSelectionnee = viewActivite.getSelectionModel().getSelectedItem();
-
+        ServiceActivite serviceActivite = new ServiceActivite();
+        
         if (activiteSelectionnee != null) {
-            ServiceActivite serviceActivite = new ServiceActivite();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation de suppression");
+        alert.setHeaderText(null);
+        alert.setContentText("Êtes-vous sûr de vouloir supprimer cette Activité ?");
+
+        ButtonType boutonOui = new ButtonType("Oui");
+        ButtonType boutonNon = new ButtonType("Non", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(boutonOui, boutonNon);
+        
+        alert.showAndWait().ifPresent(reponse -> {
+        if (reponse == boutonOui) {    
             serviceActivite.supprimer(activiteSelectionnee.getIdAct()); // Supprimez l'activité de la base de données
 
             // Mettez à jour la TableView
             data.remove(activiteSelectionnee);
             viewActivite.getItems().setAll(data);
+            
+        }});
         } else {
             System.out.println("Vous devez sélectionner une activité avant de la supprimer.");
         }
