@@ -6,23 +6,19 @@
 package tn.edu.esprit.gui;
 
 import java.io.IOException;
-import javafx.util.converter.FloatStringConverter;
 
-import java.io.PrintStream;
+
 import java.net.URL;
 import java.sql.Date;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,15 +30,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
@@ -133,12 +124,22 @@ private void editData() {
     });
 
       // Éditer l'adresse du parc
-    fxEtat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
-    fxEtat.setOnEditCommit(event -> {
+   fxEtat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
+fxEtat.setOnEditCommit(event -> {
+    String newValue = event.getNewValue();
+    if (newValue.equals("On marche") || newValue.equals("On panne")) {
         Materiel materiel = event.getRowValue();
-        materiel.setEtatMat(event.getNewValue());
+        materiel.setEtatMat(newValue);
         ServiceMateriel smateriel = new ServiceMateriel();
         smateriel.modifierMateriel(materiel);
+    } else {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur de saisie");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez saisir soit 'On marche' ou 'On panne'.");
+        alert.showAndWait();
+    }
+
     });
 
     // Éditer la superficie du parc

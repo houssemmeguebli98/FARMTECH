@@ -3,14 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/TableAllMateriel.fxml</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/tests/NewFXMain.java</file>
             <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/TableViewMaterielController.java</file>
             <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/ExporterPDFMateriel.java</file>
-            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/ExporterPDF.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/SendMail.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/ModifierMaterielFXML.fxml</file>
             <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/GetAllFXMLController.java</file>
-            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/ServiceMateriel.java</file>
-            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/TableAllMaterielController.java</file>
-            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/farmtech/FARMTECH.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/SelectedParcManager.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/entities/Materiel.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/entities/Parc.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/AjouterMaterielFXMLController.java</file>
             <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/ExporterPDFAllMateriel.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/WelcomePageController.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/tests/Main.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/ExporterPDF.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/AjouterMaterielFXML.fxml</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/IService.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/ServiceMateriel.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/ModifierMaterielFXMLController.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/services/ServiceParc.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/AjouterParcFXMLController.java</file>
+            <file>file:/C:/Users/megbl/Documents/NetBeansProjects/FARMTECH/src/tn/edu/esprit/gui/TableAllMaterielController.java</file>
         </group>
     </open-files>
 </project-private>
