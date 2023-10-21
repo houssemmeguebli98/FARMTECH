@@ -41,6 +41,8 @@ import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import tn.edu.esprit.entities.Materiel;
 import tn.edu.esprit.entities.Parc;
+import tn.edu.esprit.services.ExporterPDFAllMateriel;
+import tn.edu.esprit.services.ExporterPDFMateriel;
 import tn.edu.esprit.services.ServiceMateriel;
 
 /**
@@ -255,8 +257,32 @@ private void editData() {
             Logger.getLogger(GetAllFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    @FXML
+    private void fxExportToPDF(ActionEvent event) {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation d'exportation PDF");
+    alert.setHeaderText("Voulez-vous exporter le PDF ?");
+    alert.setContentText("Êtes-vous sûr de vouloir exporter le PDF ?");
+
+    ButtonType buttonTypeOui = new ButtonType("Oui");
+    ButtonType buttonTypeNon = new ButtonType("Non");
+
+    alert.getButtonTypes().setAll(buttonTypeOui, buttonTypeNon);
+
+    alert.showAndWait().ifPresent(response -> {
+        if (response == buttonTypeOui) {
+            ServiceMateriel sm = new ServiceMateriel();
+            List<Materiel> materiel = sm.getAllMateriels();
+            ExporterPDFAllMateriel pdfall = new ExporterPDFAllMateriel();
+            pdfall.exportMaterielToPDF(materiel);
+        }
+    });
 }
+
+    }
+    
+
 
 
     

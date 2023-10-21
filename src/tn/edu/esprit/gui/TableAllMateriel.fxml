@@ -66,5 +66,10 @@
             <Font name="Times New Roman" size="23.0" />
          </font>
       </Label>
+      <Button layoutX="753.0" layoutY="176.0" mnemonicParsing="false" onAction="#fxExportToPDF" prefHeight="37.0" prefWidth="146.0" text="Exporter on PDF">
+         <graphic>
+            <FontAwesomeIcon fill="#1919d0" iconName="DOWNLOAD" />
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

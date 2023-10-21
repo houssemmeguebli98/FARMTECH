@@ -29,6 +29,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
 import tn.edu.esprit.entities.Materiel;
 import tn.edu.esprit.entities.Parc;
+import tn.edu.esprit.services.ExporterPDF;
 import tn.edu.esprit.services.ServiceParc;
 
 public class GetAllFXMLController implements Initializable {
@@ -309,7 +310,30 @@ private void fxAjouterduMat(ActionEvent event) {
         }
     }
 
+   
+@FXML
+private void fxexportToPDF(ActionEvent event) {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirmation d'exportation PDF");
+    alert.setHeaderText("Voulez-vous exporter le PDF ?");
+    alert.setContentText("Êtes-vous sûr de vouloir exporter le PDF ?");
+
+    ButtonType buttonTypeOui = new ButtonType("Oui");
+    ButtonType buttonTypeNon = new ButtonType("Non");
+
+    alert.getButtonTypes().setAll(buttonTypeOui, buttonTypeNon);
+
+    alert.showAndWait().ifPresent(response -> {
+        if (response == buttonTypeOui) {
+            ServiceParc sp = new ServiceParc();
+            List<Parc> parcs = sp.getAll();
+            ExporterPDF pdf = new ExporterPDF();
+            pdf.exportToPDF(parcs);
+        }
+    });
+
     }
+}
 
 
 

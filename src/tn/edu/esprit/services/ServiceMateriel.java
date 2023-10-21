@@ -140,7 +140,6 @@ private String getNomParcForId(int idParc) {
 
                 while (rs.next()) {
                     Materiel materiel = new Materiel();
-                    materiel.setIdMat(rs.getInt("idMAt"));// Appel de la méthode pour récupérer le nomParc
                     materiel.setNomParc(rs.getString("nomParc"));
                     materiel.setNomMat(rs.getString("nomMat"));
                     materiel.setEtatMat(rs.getString("etatMat"));
