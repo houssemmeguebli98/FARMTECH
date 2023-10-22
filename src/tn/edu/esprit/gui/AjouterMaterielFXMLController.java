@@ -25,6 +25,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import javax.mail.MessagingException;
 import tn.edu.esprit.entities.Materiel;
 import tn.edu.esprit.entities.Parc;
 import tn.edu.esprit.services.ServiceMateriel;
@@ -69,7 +70,7 @@ public class AjouterMaterielFXMLController implements Initializable {
      return selectedParc;
 }
 @FXML
-private void fxSaveMateriel(ActionEvent event) {
+private void fxSaveMateriel(ActionEvent event) throws MessagingException {
     Parc parcSelectionne = SelectedParcManager.getSelectedParc();
 
     if (parcSelectionne != null) {
@@ -109,10 +110,11 @@ private void fxSaveMateriel(ActionEvent event) {
             if(fxON.isSelected()){etatmateriel= "On marche" ;
             }else{etatmateriel= "On panne ";  } 
               nouveauMateriel.setEtatMat(etatmateriel);
-
+              
             
             serviceMateriel.ajouterMateriel(nouveauMateriel);
-
+            serviceMateriel.verifierEtat(nouveauMateriel);
+            
             // Si l'ajout réussit, afficher une alerte de confirmation
             afficherConfirmation("Succès", "Le matériel a été ajouté avec succès.");
 

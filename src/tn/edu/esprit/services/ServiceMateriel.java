@@ -13,6 +13,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javax.mail.MessagingException;
 import tn.edu.esprit.entities.Materiel;
 import tn.edu.esprit.tools.DataSource;
 
@@ -171,8 +175,48 @@ private String getNomParcForId(int idParc) {
     } catch (SQLException ex) {
         System.out.println(ex.getMessage());
     }
+ 
+    }
+ 
+   public void verifierEtat(Materiel materiel) throws MessagingException {
+       SendMail mail = new SendMail();
+    if (materiel.getEtatMat().trim().equalsIgnoreCase("On panne")) { 
+        System.out.println("Le matériel est en panne.");
+        planifierEnvoiMailRappel(materiel);
+    } 
+    }
+    public void verifierEtatModifier(Materiel materiel) throws MessagingException {
+       SendMail mail = new SendMail();
+    if (materiel.getEtatMat().trim().equalsIgnoreCase("On panne")) { 
+        System.out.println("Le matériel est changé a on panne.");
+        planifierEnvoiMailRappel(materiel);
+    }else{
+        System.out.println("Le matériel est changé a on marche.");
+        mail.envoyerMailConfirmation(materiel);
+    }
+    }
+   public void planifierEnvoiMailRappel( Materiel materiel) {
+    
+    SendMail mail = new SendMail();
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+    Runnable envoyeurMail = () -> {
+        try {
+        mail.envoyerEmailMaterielEnPanne(materiel);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.err.println("Erreur lors de l'envoi de l'e-mail : " + e.getMessage());
+        }
+    };
+
+    int delaiInitial = 0; // Démarrer immédiatement
+    int intervalle = 1; // Tous les 3 jours
+    scheduler.scheduleAtFixedRate(envoyeurMail, delaiInitial, intervalle, TimeUnit.MINUTES);
+}
 
 }
-}
+
+
+
 
 

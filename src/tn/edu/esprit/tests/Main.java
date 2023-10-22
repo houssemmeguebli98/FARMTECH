@@ -18,16 +18,7 @@ import tn.edu.esprit.tools.DataSource;
 public class Main {
       public static void main(String[] args) throws MessagingException {
         DataSource.getInstance();
-        
-        Materiel materiel = new Materiel();
-    materiel.setIdMat(112); // Remplacez 1 par l'ID du matériel que vous souhaitez modifier
-    materiel.setNomMat("Nouveau Nom");
-    materiel.setEtatMat("En marche");
-    materiel.setQuantiteMat(10);
-    
-    ServiceMateriel sm =  new ServiceMateriel();
-
-        sm.modifierMateriel(materiel);
+  
     }
         }
     

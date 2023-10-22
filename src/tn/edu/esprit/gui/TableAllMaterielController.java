@@ -32,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
+import javax.mail.MessagingException;
 import tn.edu.esprit.entities.Materiel;
 
 import tn.edu.esprit.services.ExporterPDFAllMateriel;
@@ -187,10 +188,16 @@ private void editData() {
     // Éditer l'adresse du parc
     fxEtatMat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
     fxEtatMat.setOnEditCommit(event -> {
-        Materiel materiel = event.getRowValue();
-        materiel.setEtatMat(event.getNewValue());
-        ServiceMateriel smateriel = new ServiceMateriel();
-        smateriel.modifierMateriel(materiel);
+        try {
+            Materiel materiel = event.getRowValue();
+            materiel.setEtatMat(event.getNewValue());
+            ServiceMateriel smateriel = new ServiceMateriel();
+            smateriel.verifierEtatModifier(materiel);
+            smateriel.modifierMateriel(materiel);
+        } catch (MessagingException ex) {
+            Logger.getLogger(TableAllMaterielController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     });
 
 }
