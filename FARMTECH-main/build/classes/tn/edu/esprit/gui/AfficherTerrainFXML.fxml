@@ -26,7 +26,7 @@
          <columns>
             <TableColumn fx:id="nomTerrain" prefWidth="153.0" text="nom terrain" />
             <TableColumn fx:id="localisation" prefWidth="176.0" text="localisation" />
-            <TableColumn fx:id="superficie" prefWidth="163.0" text="superficie" />
+            <TableColumn fx:id="superficie" prefWidth="169.0" text="superficie" />
          </columns>
       </TableView>
       <Button fx:id="suppTerrain" layoutX="547.0" layoutY="162.0" mnemonicParsing="false" onAction="#SupprimerTerrain" prefHeight="41.0" prefWidth="41.0" visible="false">
@@ -47,11 +47,11 @@
          <graphic>
             <FontAwesomeIcon iconName="LIST" wrappingWidth="16.0" />
          </graphic></Button>
-      <Button layoutX="652.0" layoutY="536.0" mnemonicParsing="false" onAction="#AjouterTerrain" prefHeight="41.0" prefWidth="129.0" text="Terrain">
+      <Button fx:id="btnAjouterTerrain" layoutX="652.0" layoutY="536.0" mnemonicParsing="false" onAction="#AjouterTerrain" prefHeight="41.0" prefWidth="129.0" text="Terrain">
          <graphic>
             <FontAwesomeIcon fill="#08d72a" iconName="PLUS" />
          </graphic></Button>
-      <Button layoutX="223.0" layoutY="104.0" mnemonicParsing="false" onAction="#retourAfficherTerrain" prefHeight="35.0" prefWidth="41.0">
+      <Button fx:id="btnRetourAfficherTerrain" layoutX="223.0" layoutY="104.0" mnemonicParsing="false" onAction="#retourAfficherTerrain" prefHeight="35.0" prefWidth="41.0">
          <graphic>
             <FontAwesomeIcon iconName="ARROW_LEFT" />
          </graphic></Button>
@@ -60,5 +60,6 @@
             <FontAwesomeIcon iconName="REFRESH" />
          </graphic>
       </Button>
+      <Button layoutX="652.0" layoutY="162.0" mnemonicParsing="false" onAction="#afficherSurCarte" prefHeight="41.0" prefWidth="129.0" text="Afficher sur map" />
    </children>
 </AnchorPane>

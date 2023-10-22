@@ -122,6 +122,33 @@ public class ServiceActivite implements IService<Activite>  {
 }
 
     
+    public Activite getOneByEmail(String email) {
+    Activite activite = null;
+    try {
+        String req = "SELECT * FROM `activite` WHERE `emailDist` = ?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setString(1, email);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            activite = new Activite();
+            activite.setIdAct(rs.getInt("idAct"));
+            activite.setObjetAct(rs.getString("objetAct"));
+            activite.setDescriptionAct(rs.getString("descriptionAct"));
+            activite.setDistAct(rs.getString("distAct"));
+            activite.setEmailDist(rs.getString("emailDist"));
+            activite.setSpeciesRES(rs.getString("speciesRES"));
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return activite;
+}
+
+    
     
 
     @Override

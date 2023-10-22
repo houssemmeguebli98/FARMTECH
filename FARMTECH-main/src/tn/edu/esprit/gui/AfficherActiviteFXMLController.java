@@ -7,8 +7,11 @@ package tn.edu.esprit.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +30,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import tn.edu.esprit.entities.Activite;
 import tn.edu.esprit.services.ServiceActivite;
 
@@ -54,6 +58,10 @@ public class AfficherActiviteFXMLController implements Initializable {
     private TextField chercherActivite;
     @FXML
     private Button supACT;
+    @FXML
+    private Button btnRetourAfficherActivite;
+    @FXML
+    private Button btnAjouterNouveauActivite;
 
     /**
      * Initializes the controller class.
@@ -150,53 +158,106 @@ public class AfficherActiviteFXMLController implements Initializable {
         ServiceActivite sa = new ServiceActivite();
         sa.modifier(activite);
     });
+    
+    speciesAct.setCellFactory(TextFieldTableCell.<Activite>forTableColumn());
+    speciesAct.setOnEditCommit(event -> {
+    Activite activite = event.getTableView().getItems().get(event.getTablePosition().getRow());
+    activite.setSpeciesRES(event.getNewValue());
+    System.out.println("La colonne speciesAct a été mise à jour à " + event.getNewValue() + " à la ligne " + (event.getTablePosition().getRow() + 1));
+    ServiceActivite sa = new ServiceActivite();
+    sa.modifier(activite);
+});
 }
 
     @FXML
     private void retourAfficherActivite(ActionEvent event) {
      try {
-        // Chargez le fichier FXML de la vue FirstPageFXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/firstPageFXML.fxml"));
-        Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/firstPageFXML.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
 
-        // Créez une nouvelle scène avec la vue FirstPageFXML
-        Scene scene = new Scene(root);
+            // Obtenez la scène actuelle à partir du bouton
+            Scene currentScene = btnRetourAfficherActivite.getScene();
 
-        // Obtenez la fenêtre actuelle à partir de l'événement
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Créez une transition de translation
+            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), root);
+            translateTransition.setFromX(-currentScene.getWidth());
+            translateTransition.setToX(0);
 
-        // Affichez la nouvelle scène dans la fenêtre
-        currentStage.setScene(scene);
-        currentStage.setTitle("First Page"); // Mettez à jour le titre de la fenêtre si nécessaire
-        currentStage.show();
-    } catch (IOException ex) {
-        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+            // Créez une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), root);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+
+            // Exécutez les deux transitions en parallèle
+            translateTransition.play();
+            fadeTransition.play();
+
+            // Changez de scène après la fin de la transition
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setScene(scene);
+            stage.setTitle("First Page");
+        } catch (IOException ex) {
+            System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+        }
     }
-}
 
 
     @FXML
     private void ajouterNouveauActivite(ActionEvent event) {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterActiviteFXML.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterActiviteFXML.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
 
-        // Obtenez la scène actuelle depuis l'événement
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Obtenez la scène actuelle à partir du bouton
+            Scene currentScene = btnAjouterNouveauActivite.getScene();
 
-        // Affichez la nouvelle scène dans la fenêtre
-        stage.setScene(scene);
-        stage.setTitle("Ajouter Activité"); // Modifiez le titre de la fenêtre si nécessaire
-        stage.show();
-    } catch (IOException ex) {
-        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+            // Créez une transition de translation
+            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), root);
+            translateTransition.setFromX(currentScene.getWidth());
+            translateTransition.setToX(0);
+
+            // Créez une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), root);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+
+            // Exécutez les deux transitions en parallèle
+            translateTransition.play();
+            fadeTransition.play();
+
+            // Changez de scène après la fin de la transition
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Ajouter Activité");
+        } catch (IOException ex) {
+            System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+        }
     }
-}
 
     @FXML
     private void chercherActivite(ActionEvent event) {
+    String email = chercherActivite.getText();
+
+    // Appelez la méthode getOneByEmail pour obtenir l'activité correspondante
+    ServiceActivite sa = new ServiceActivite();
+    Activite activite = sa.getOneByEmail(email);
+
+    // Créez une liste contenant cette activité (ou vide si aucune correspondance n'est trouvée)
+    List<Activite> data = new ArrayList<>();
+    if (activite != null) {
+        data.add(activite);
     }
+
+    // Mettez à jour la TableView
+    viewActivite.setItems(FXCollections.observableArrayList(data));
+    objetA.setCellValueFactory(new PropertyValueFactory<Activite, String>("objetAct"));
+    descriptionA.setCellValueFactory(new PropertyValueFactory<Activite, String>("descriptionAct"));
+    distinataireA.setCellValueFactory(new PropertyValueFactory<Activite, String>("distAct"));
+    EmailDisA.setCellValueFactory(new PropertyValueFactory<Activite, String>("emailDist"));
+    speciesAct.setCellValueFactory(new PropertyValueFactory<Activite, String>("speciesRES"));
+}
 
         
     }

@@ -10,35 +10,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="495.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterActiviteFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="618.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterActiviteFXMLController">
    <children>
-      <ImageView fitHeight="495.0" fitWidth="745.0">
+      <ImageView fitHeight="618.0" fitWidth="916.0">
          <image>
             <Image url="@../../../../image/Capture%20d'écran%202023-10-13%20111510.png" />
          </image>
       </ImageView>
-      <Label layoutX="208.0" layoutY="130.0" text="Objet : " />
-      <Label layoutX="206.0" layoutY="179.0" text="Description : " />
-      <Label layoutX="206.0" layoutY="233.0" text="Distinataire : " />
-      <Label layoutX="322.0" layoutY="75.0" text="Ajouter un Activité" textFill="#e80c0c">
+      <Label layoutX="263.0" layoutY="185.0" text="Objet : " />
+      <Label layoutX="261.0" layoutY="234.0" text="Description : " />
+      <Label layoutX="263.0" layoutY="314.0" text="Distinataire : " />
+      <Label layoutX="394.0" layoutY="100.0" text="Ajouter un Activité" textFill="#e80c0c">
          <font>
-            <Font size="16.0" />
+            <Font size="23.0" />
          </font></Label>
-      <TextField fx:id="txtObjetA" layoutX="405.0" layoutY="125.0" prefHeight="31.0" prefWidth="167.0" />
-      <TextField fx:id="txtDistA" layoutX="405.0" layoutY="228.0" prefHeight="31.0" prefWidth="167.0" />
-      <TextField fx:id="txtDescriptionA" layoutX="405.0" layoutY="174.0" prefHeight="31.0" prefWidth="167.0" />
-      <Button layoutX="358.0" layoutY="408.0" mnemonicParsing="false" onAction="#AjouterActivite" prefHeight="38.0" prefWidth="94.0" text="Ajouter">
+      <TextField fx:id="txtObjetA" layoutX="460.0" layoutY="180.0" prefHeight="31.0" prefWidth="208.0" />
+      <TextField fx:id="txtDistA" layoutX="462.0" layoutY="309.0" prefHeight="31.0" prefWidth="208.0" />
+      <TextField fx:id="txtDescriptionA" layoutX="460.0" layoutY="229.0" prefHeight="59.0" prefWidth="291.0" />
+      <Button layoutX="454.0" layoutY="509.0" mnemonicParsing="false" onAction="#AjouterActivite" prefHeight="38.0" prefWidth="94.0" text="Ajouter">
          <graphic>
             <FontAwesomeIcon fill="#0cc339" iconName="PLUS" />
          </graphic></Button>
-      <Button layoutX="164.0" layoutY="70.0" mnemonicParsing="false" onAction="#RetourAjoutAct" prefHeight="24.0" prefWidth="44.0">
+      <Button fx:id="btnRetourAjoutAct" layoutX="196.0" layoutY="102.0" mnemonicParsing="false" onAction="#RetourAjoutAct" prefHeight="24.0" prefWidth="44.0">
          <graphic>
             <FontAwesomeIcon iconName="ARROW_LEFT" />
          </graphic></Button>
-      <Label layoutX="208.0" layoutY="282.0" text="Email de distinataire : " />
-      <TextField fx:id="txtEmaildistA" layoutX="405.0" layoutY="277.0" prefHeight="31.0" prefWidth="167.0" />
-      <CheckBox fx:id="checkActivite" layoutX="208.0" layoutY="377.0" mnemonicParsing="false" text="envoyer un mail d'urgence " />
-      <Label layoutX="208.0" layoutY="329.0" text="Species " />
-      <TextField fx:id="txtSpecies" layoutX="405.0" layoutY="324.0" prefHeight="31.0" prefWidth="167.0" />
+      <Label layoutX="265.0" layoutY="363.0" text="Email de distinataire : " />
+      <TextField fx:id="txtEmaildistA" layoutX="462.0" layoutY="358.0" prefHeight="31.0" prefWidth="208.0" />
+      <CheckBox fx:id="checkActivite" layoutX="261.0" layoutY="466.0" mnemonicParsing="false" text="envoyer un mail d'urgence " />
+      <Label layoutX="265.0" layoutY="410.0" text="Species " />
+      <TextField fx:id="txtSpecies" layoutX="462.0" layoutY="405.0" prefHeight="31.0" prefWidth="208.0" />
    </children>
 </AnchorPane>

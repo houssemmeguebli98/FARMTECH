@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,9 +30,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.web.WebEngine;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import tn.edu.esprit.entities.Terrain;
 import tn.edu.esprit.services.ServiceTerrain;
+import javafx.scene.Scene;
 
 /**
  * FXML Controller class
@@ -57,6 +62,10 @@ public class AfficherTerrainFXMLController implements Initializable {
     private Button addRES;
     @FXML
     private Button showRES;
+    @FXML
+    private Button btnAjouterTerrain;
+    @FXML
+    private Button btnRetourAfficherTerrain;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -170,7 +179,7 @@ public class AfficherTerrainFXMLController implements Initializable {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Ajouter materiel ");
+            stage.setTitle("Ajouter Ressource ");
             stage.show();
         } else {
             // Aucun parc sélectionné, afficher une alerte
@@ -186,41 +195,71 @@ public class AfficherTerrainFXMLController implements Initializable {
     }
 
     @FXML
-    private void AjouterTerrain(ActionEvent event) {
-        try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterTerrainFXML.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
+private void AjouterTerrain(ActionEvent event) {
+    try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/AjouterTerrainFXML.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.setTitle("Ajouter Terrain"); // Titre de la nouvelle fenêtre
-        stage.show();
-    } catch (IOException ex) {
-        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+            // Obtenez la scène actuelle à partir du bouton
+            Scene currentScene = btnAjouterTerrain.getScene();
+
+            // Créez une transition de translation
+            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), root);
+            translateTransition.setFromX(currentScene.getWidth());
+            translateTransition.setToX(0);
+
+            // Créez une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), root);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+
+            // Exécutez les deux transitions en parallèle
+            translateTransition.play();
+            fadeTransition.play();
+
+            // Changez de scène après la fin de la transition
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Ajouter Terrain");
+        } catch (IOException ex) {
+            System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+        }
     }
-    }
+
 
     @FXML
     private void retourAfficherTerrain(ActionEvent event) {
      try {
-        // Chargez le fichier FXML de la vue FirstPageFXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/firstPageFXML.fxml"));
-        Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/firstPageFXML.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
 
-        // Créez une nouvelle scène avec la vue FirstPageFXML
-        Scene scene = new Scene(root);
+            // Obtenez la scène actuelle à partir du bouton
+            Scene currentScene = btnRetourAfficherTerrain.getScene();
 
-        // Obtenez la fenêtre actuelle à partir de l'événement
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Créez une transition de translation
+            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.5), root);
+            translateTransition.setFromX(-currentScene.getWidth());
+            translateTransition.setToX(0);
 
-        // Affichez la nouvelle scène dans la fenêtre
-        currentStage.setScene(scene);
-        currentStage.setTitle("First Page"); // Mettez à jour le titre de la fenêtre si nécessaire
-        currentStage.show();
-    } catch (IOException ex) {
-        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
-    }
+            // Créez une transition de fondu
+            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), root);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+
+            // Exécutez les deux transitions en parallèle
+            translateTransition.play();
+            fadeTransition.play();
+
+            // Changez de scène après la fin de la transition
+            Stage stage = (Stage) currentScene.getWindow();
+            stage.setScene(scene);
+            stage.setTitle("First Page");
+        } catch (IOException ex) {
+            System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+        }
+    
 }
 
     @FXML
@@ -308,6 +347,47 @@ public class AfficherTerrainFXMLController implements Initializable {
         System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
     }
 }
+
+    @FXML
+private void afficherSurCarte(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/MapFXML.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        Terrain selectedTerrain = viewTerrain.getSelectionModel().getSelectedItem();
+
+        if (selectedTerrain != null) {
+            // Obtenez le moteur WebEngine du WebView dans le contrôleur MapFXML
+            MapFXMLController mapController = loader.getController();
+            WebEngine webEngine = mapController.mapView.getEngine();
+
+            // Créez l'URL Google Maps avec la localisation
+            String googleMapsUrl = "https://www.google.com/maps/place/" + selectedTerrain.getLocalisation();
+
+            // Chargez la page Google Maps dans le WebView
+            webEngine.load(googleMapsUrl);
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Carte Google Maps");
+            stage.show();
+        } else {
+            // Gérez le cas où aucun terrain n'est sélectionné.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Aucun terrain sélectionné.\nVeuillez sélectionner un terrain dans la liste.");
+            alert.showAndWait();
+        }
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de la page de la carte : " + ex.getMessage());
+    }
+}
+
+
     
+
+
 }
     

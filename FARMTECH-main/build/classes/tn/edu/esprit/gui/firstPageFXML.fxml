@@ -14,12 +14,12 @@
             <Image url="@../../../../image/Capture%20d'écran%202023-10-18%20201634.png" />
          </image>
       </ImageView>
-      <Button layoutX="195.0" layoutY="259.0" mnemonicParsing="false" onAction="#gestionTerrain" prefHeight="78.0" prefWidth="206.0" text="Gestion de terrain" textFill="#e80404">
+      <Button fx:id="btnGestionTerrain" layoutX="195.0" layoutY="259.0" mnemonicParsing="false" onAction="#gestionTerrain" prefHeight="78.0" prefWidth="206.0" text="Gestion de terrain" textFill="#e80404">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button layoutX="442.0" layoutY="259.0" mnemonicParsing="false" onAction="#gestionActivité" prefHeight="78.0" prefWidth="206.0" text="Gestion d'Activité" textFill="#eb0909">
+      <Button fx:id="btnGestionActivité" layoutX="442.0" layoutY="259.0" mnemonicParsing="false" onAction="#gestionActivité" prefHeight="78.0" prefWidth="206.0" text="Gestion d'Activité" textFill="#eb0909">
          <font>
             <Font size="16.0" />
          </font>

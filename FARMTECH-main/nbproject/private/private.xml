@@ -7,6 +7,7 @@
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/entities/Terrain.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/services/ServiceTerrain.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AjouterRessourceFXMLController.java</file>
+            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/MapFXMLController.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/FirstPageFXMLController.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AjouterTerrainFXMLController.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/farmtech/FARMTECH.java</file>
@@ -17,7 +18,6 @@
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/services/ServiceRessource.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AfficherTerrainFXMLController.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/entities/Activite.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/DashboardController.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AfficherActiviteFXMLController.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/tests/FXMain.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/entities/Ressource.java</file>

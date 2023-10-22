@@ -9,28 +9,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="552.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterTerrainFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="872.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.AjouterTerrainFXMLController">
    <children>
-      <ImageView fitHeight="552.0" fitWidth="757.0">
+      <ImageView fitHeight="620.0" fitWidth="872.0">
          <image>
             <Image url="@../../../../image/Capture%20d'écran%202023-10-13%20111510.png" />
          </image>
       </ImageView>
-      <Label layoutX="192.0" layoutY="193.0" text="Nom du terrain :" />
-      <Label layoutX="192.0" layoutY="255.0" text="Localisation :" />
-      <Label layoutX="192.0" layoutY="319.0" text="Superficie :" />
-      <Label layoutX="325.0" layoutY="88.0" text="Ajouter un terrain" textFill="#dd0808">
+      <Label layoutX="247.0" layoutY="213.0" text="Nom du terrain :" />
+      <Label layoutX="247.0" layoutY="275.0" text="Localisation :" />
+      <Label layoutX="247.0" layoutY="339.0" text="Superficie :" />
+      <Label layoutX="380.0" layoutY="108.0" text="Ajouter un terrain" textFill="#dd0808">
          <font>
-            <Font size="16.0" />
+            <Font size="20.0" />
          </font></Label>
-      <TextField fx:id="txtNomTerrain" layoutX="384.0" layoutY="188.0" prefHeight="31.0" prefWidth="208.0" />
-      <TextField fx:id="txtSuperficieTerrain" layoutX="384.0" layoutY="314.0" prefHeight="31.0" prefWidth="208.0" />
-      <TextField fx:id="txtLocalisation" layoutX="384.0" layoutY="250.0" prefHeight="31.0" prefWidth="208.0" />
-      <Button layoutX="358.0" layoutY="419.0" mnemonicParsing="false" onAction="#AjouterTerrain" prefHeight="41.0" prefWidth="109.0" text=" Ajouter">
+      <TextField fx:id="txtNomTerrain" layoutX="439.0" layoutY="208.0" prefHeight="31.0" prefWidth="208.0" />
+      <TextField fx:id="txtSuperficieTerrain" layoutX="439.0" layoutY="334.0" prefHeight="31.0" prefWidth="208.0" />
+      <TextField fx:id="txtLocalisation" layoutX="439.0" layoutY="270.0" prefHeight="31.0" prefWidth="208.0" />
+      <Button layoutX="404.0" layoutY="475.0" mnemonicParsing="false" onAction="#AjouterTerrain" prefHeight="41.0" prefWidth="109.0" text=" Ajouter">
          <graphic>
             <FontAwesomeIcon fill="#07d329" iconName="PLUS" />
          </graphic></Button>
-      <Button layoutX="170.0" layoutY="83.0" mnemonicParsing="false" onAction="#RetourAjout" prefHeight="24.0" prefWidth="44.0">
+      <Button fx:id="btnRetourAjout" layoutX="189.0" layoutY="106.0" mnemonicParsing="false" onAction="#RetourAjout" prefHeight="24.0" prefWidth="44.0">
          <graphic>
             <FontAwesomeIcon iconName="ARROW_LEFT" />
          </graphic></Button>
