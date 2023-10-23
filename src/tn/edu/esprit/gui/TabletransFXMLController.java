@@ -39,11 +39,9 @@ public class TabletransFXMLController implements Initializable {
     @FXML
     private TableView<Transaction> transactionstable1;
     @FXML
-    private TableColumn<Transaction,Integer> idcolumn;
-    @FXML
     private TableColumn<Transaction, String> categoriecolumn;
     @FXML
-    private TableColumn<Transaction, Boolean> typecolumn;
+    private TableColumn<Transaction, String> typecolumn;
     @FXML
     private TableColumn<Transaction, Date> datecolumn;
     @FXML
@@ -55,8 +53,12 @@ public class TabletransFXMLController implements Initializable {
     Servicetransaction st = new Servicetransaction();
     @FXML
     private Label tranotfound;
+     @FXML
+    private Label nbtra;
     @FXML
     private Label tranotfound1;
+    @FXML
+    private Label tranotfound2;
     @FXML
     private Button buttonajoutertra;
     private Transaction selectedTransaction;
@@ -76,21 +78,27 @@ public class TabletransFXMLController implements Initializable {
         //affichertra(new ActionEvent());
         //cherchertra(new ActionEvent()); 
          //tranotfound.setVisible(false);
-        categoriecolumn.setCellValueFactory(new PropertyValueFactory<>("categ_tra"));
-        typecolumn.setCellValueFactory(new PropertyValueFactory<>("type_tra"));
-        datecolumn.setCellValueFactory(new PropertyValueFactory<>("date_tra"));
-        montantcolumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
-
         //transactionstable1.setItems(observableList);
         transactionstable1.setEditable(true);
         editData();
+         Servicetransaction servicetransaction = new Servicetransaction();
+        data = servicetransaction.getAll(); // Assurez-vous que votre ServiceParc retourne une List<Parc>
 
+        transactionstable1.setItems(FXCollections.observableArrayList(data));
+        categoriecolumn.setCellValueFactory(new PropertyValueFactory<>("categ_tra"));
+        //categoriecolumn.setCellValueFactory(new PropertyValueFactory<Transaction , String>("categ_tra"));
+        typecolumn.setCellValueFactory(new PropertyValueFactory<>("type_tra"));
+        datecolumn.setCellValueFactory(new PropertyValueFactory<>("date_tra"));
+        montantcolumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
+        tranotfound2.setText("vous avez "+ servicetransaction.caisse() + "DT dans la caisse");
+         nbtra.setText("vous avez effectué "+ servicetransaction.nbligne() + " Transactions");
         transactionstable1.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if (newSelection != null) {
             buttonajoutertra.setVisible(true);
         } else buttonajoutertra.setVisible(false);
 
         selectedTransaction = newSelection;
+       
     });
 
 
@@ -98,6 +106,9 @@ public class TabletransFXMLController implements Initializable {
     @FXML
     private void supprimertra(ActionEvent event)throws IOException {
    Servicetransaction st = new Servicetransaction();
+           tranotfound2.setText("");  
+           nbtra.setText(""); 
+
     Transaction  transacSelectionne = transactionstable1.getSelectionModel().getSelectedItem();
 
     if (transacSelectionne != null) {
@@ -106,6 +117,9 @@ public class TabletransFXMLController implements Initializable {
         // Mettez à jour la TableView
         data.remove(transacSelectionne);
         transactionstable1.getItems().setAll(data);
+        tranotfound2.setText("vous avez "+ st.caisse() + "DT dans la caisse");
+        nbtra.setText("vous avez effectué "+ st.nbligne() + " Transactions");
+
     } else {
         System.out.println("Vous devez sélectionner un élément avant de le supprimer.");
     }
@@ -150,7 +164,6 @@ public class TabletransFXMLController implements Initializable {
         data = servicetransaction.getAll(); // Assurez-vous que votre ServiceParc retourne une List<Parc>
 
         transactionstable1.setItems(FXCollections.observableArrayList(data));
-        idcolumn.setCellValueFactory(new PropertyValueFactory<>("id_tra"));
         categoriecolumn.setCellValueFactory(new PropertyValueFactory<>("categ_tra"));
         //categoriecolumn.setCellValueFactory(new PropertyValueFactory<Transaction , String>("categ_tra"));
         typecolumn.setCellValueFactory(new PropertyValueFactory<>("type_tra"));
@@ -167,8 +180,8 @@ public class TabletransFXMLController implements Initializable {
         return;
         }
         String textInput= textcherchertra.getText();
-        int id_tra = Integer.parseInt(textInput);
-        Transaction transaction = st.getOne(id_tra);
+        String categ_tra = textInput;
+        Transaction transaction = st.getOne(categ_tra);
 
     if (transaction != null) {
         // Mettre à jour la TableView avec les détails du parc trouvé
@@ -202,6 +215,33 @@ public class TabletransFXMLController implements Initializable {
             stage.show();
 
     }
+    @FXML
+    private void gotoupdate(ActionEvent event) {
+        tranotfound1.setText("");
+
+         try {
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/modifiertransactionFXML.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        Transaction selectedTransaction = new Transaction();
+        selectedTransaction = transactionstable1.getSelectionModel().getSelectedItem();
+        Selectedtransmanager.setSelectedTransaction(selectedTransaction);
+        if (selectedTransaction != null) {
+          
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Modifier materiel ");
+            stage.show();
+        } else {
+            System.out.println("Aucun materil sélectionné.");
+            tranotfound.setText("selectionnez une transaction");
+        }
+    } catch (IOException ex) {
+        System.out.println("Erreur lors du chargement de l'interface utilisateur : " + ex.getMessage());
+    }
+}
+
 }
 
    

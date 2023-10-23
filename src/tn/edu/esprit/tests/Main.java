@@ -11,6 +11,7 @@ import tn.edu.esprit.entities.Categtra;
 import tn.edu.esprit.services.Servicetransaction;
 import tn.edu.esprit.entities.Transaction;
 import tn.edu.esprit.services.Servicecategtra;
+import tn.edu.esprit.services.Servicechatgpt;
 
 /**
  *
@@ -21,8 +22,10 @@ public class Main {
         /*Categtra t = new Categtra();
         t.setNom_cat_tra("Payement facture");
         t.setDescrip_cat_tra("Payement facture STEG, SONEDE");
-        */
-        Servicecategtra Servicecategtra = new Servicecategtra();
+        */        Servicechatgpt Servicechatgpt = new Servicechatgpt();
+
+        //Servicecategtra Servicecategtra = new Servicecategtra();
+        System.out.println(Servicechatgpt.chatGPT("who are you?"));
       }
       
 }

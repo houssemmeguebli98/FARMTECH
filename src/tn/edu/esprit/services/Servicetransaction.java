@@ -17,6 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 import tn.edu.esprit.tools.DataSource;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -36,7 +41,7 @@ Connection cnx ;
         
                PreparedStatement ps = cnx.prepareStatement(req); 
                ps.setString(1, t.getCateg_tra());
-               ps.setBoolean(2, t.getType_tra());
+               ps.setString(2, t.getType_tra());
                /*java.util.Date utilDate = t.getDate_tra();
                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
                */
@@ -62,7 +67,7 @@ Connection cnx ;
             
                try(PreparedStatement ps = (PreparedStatement)cnx.prepareStatement(req)){
                ps.setString(1, t.getCateg_tra());
-               ps.setBoolean(2, t.getType_tra());
+               ps.setString(2, t.getType_tra());
                ps.setDate(3, (Date) t.getDate_tra());
                ps.setInt(4, t.getMontant());
                 ps.setInt(5, t.getId_tra()); 
@@ -114,21 +119,20 @@ Connection cnx ;
         return List;
     }
     @Override
-    public Transaction getOne(Integer id_tra) {
-        Transaction transaction = new Transaction();
-        String req = "SELECT id_tra, categ_tra, type_tra, date_tra, montant FROM transaction WHERE id_tra = ?";
+   public Transaction getOne(String categ_tra) {
+    Transaction transaction = new Transaction();
+    String req = "SELECT id_tra, categ_tra, type_tra, date_tra, montant FROM transaction WHERE categ_tra = ?";
 
     try (PreparedStatement ps = (PreparedStatement) cnx.prepareStatement(req)) {
-        ps.setInt(1, id_tra);
+        ps.setString(1, categ_tra);
 
         try (ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
-                //transaction = new Transaction();
                 transaction.setId_tra(rs.getInt("id_tra"));
                 transaction.setCateg_tra(rs.getString("categ_tra"));
-                transaction.setType_tra(rs.getBoolean("type_tra"));
-                 transaction.setDate_tra(rs.getDate("date_tra"));
-                 transaction.setMontant(rs.getInt("montant"));
+                transaction.setType_tra(rs.getString("type_tra"));
+                transaction.setDate_tra(rs.getDate("date_tra"));
+                transaction.setMontant(rs.getInt("montant"));
             }
         }
     } catch (SQLException ex) {
@@ -136,7 +140,12 @@ Connection cnx ;
     }
 
     return transaction;
-}    
+}
+
+
+
+
+
 
     
 @Override
@@ -149,7 +158,7 @@ Connection cnx ;
             Transaction p = new Transaction();
             p.setId_tra(rs.getInt("Id_tra"));
             p.setCateg_tra(rs.getString("Categ_tra"));
-            p.setType_tra(rs.getBoolean("Type_tra"));
+            p.setType_tra(rs.getString("Type_tra"));
             p.setDate_tra(rs.getDate("Date_tra"));
             p.setMontant(rs.getInt("Montant"));
                
@@ -170,8 +179,62 @@ Connection cnx ;
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public int caisse() {
+    int dep = 0; // Initialize dep to 0 for Dépense
+    int rev = 0; // Initialize rev to 0 for Revenu
+
+    // Calculate the sum of Dépense transactions
+    String queryDepense = "SELECT SUM(montant) FROM transaction WHERE type_tra = 'Dépense'";
+    try (PreparedStatement psDepense = (PreparedStatement) cnx.prepareStatement(queryDepense);
+         ResultSet rsDepense = psDepense.executeQuery()) {
+        if (rsDepense.next()) {
+            dep = rsDepense.getInt(1); // Retrieve the sum and store it in dep
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+
+    // Calculate the sum of Revenu transactions
+    String queryRevenu = "SELECT SUM(montant) FROM transaction WHERE type_tra = 'Revenu'";
+    try (PreparedStatement psRevenu = (PreparedStatement) cnx.prepareStatement(queryRevenu);
+         ResultSet rsRevenu = psRevenu.executeQuery()) {
+        if (rsRevenu.next()) {
+            rev = rsRevenu.getInt(1); // Retrieve the sum and store it in rev
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+
+    // Calculate the net balance (Revenu - Dépense)
+    int x = rev - dep;
+
+    return x;
+}
+     @Override
+    public int nbligne() {
+    int nb = 0; // Initialize dep to 0 for Dépense
     
-   
+
+    // Calculate the sum of Dépense transactions
+    String queryDepense = "SELECT COUNT(*) FROM transaction";
+    try (PreparedStatement psDepense = (PreparedStatement) cnx.prepareStatement(queryDepense);
+         ResultSet rsDepense = psDepense.executeQuery()) {
+        if (rsDepense.next()) {
+            nb = rsDepense.getInt(1); // Retrieve the sum and store it in dep
+            
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+     return nb;
+    }
+
+
+    @Override
+    public String chatGPT(String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 
     

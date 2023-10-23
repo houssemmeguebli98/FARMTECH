@@ -26,7 +26,11 @@ public interface IService <T> {
      * @return
      */
    
-    public T getOne(Integer id_tra);
+    public T getOne(String categ_tra);
     public List<T> getAll();
     public T getPneById(int id) throws SQLException;
+    public int caisse ();
+    public String chatGPT (String message);
+    public int nbligne();
+   
 }

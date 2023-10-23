@@ -118,26 +118,26 @@ try{
      
      
     @Override
-    public Categtra getOne(Integer id_cat_tra) {
-        Categtra categtra = new Categtra();
-        String req = "SELECT id_cat_tra, nom_cat_tra, descrip_cat_tra  FROM categtrans WHERE id_cat_tra = ?";
+   public Categtra getOne(String nom_cat_tra) {
+    Categtra categtra = new Categtra();
+    String req = "SELECT id_cat_tra, nom_cat_tra, descrip_cat_tra FROM categtrans WHERE nom_cat_tra = ?";
 
-        try (PreparedStatement ps = (PreparedStatement) cnx.prepareStatement(req)) {
-             ps.setInt(1, id_cat_tra);
+    try (PreparedStatement ps = (PreparedStatement) cnx.prepareStatement(req)) {
+        ps.setString(1, nom_cat_tra);
 
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                //transaction = new Transaction();
-                    categtra.setId_cat_tra(rs.getInt("id_cat_tra"));
-                    categtra.setNom_cat_tra(rs.getString("nom_cat_tra"));
-                    categtra.setDescrip_cat_tra(rs.getString("descrip_cat_tra"));
-                 }
-             }
-        } catch (SQLException ex) {
-             System.out.println(ex.getMessage());
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                categtra.setId_cat_tra(rs.getInt("id_cat_tra"));
+                categtra.setNom_cat_tra(rs.getString("nom_cat_tra"));
+                categtra.setDescrip_cat_tra(rs.getString("descrip_cat_tra"));
+            }
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
     }
-    return categtra;    
-    }
+
+    return categtra;
+}
     
     
     
@@ -172,5 +172,31 @@ try{
     public Categtra getPneById(int id) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+  @Override
+    public int caisse () {  
+        return 5;
+    } 
+
+    @Override
+    public String chatGPT(String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int nbligne() {
+    int nb = 0; // Initialize dep to 0 for Dépense
     
+
+    // Calculate the sum of Dépense transactions
+    String queryDepense = "SELECT COUNT(*) FROM categtrans";
+    try (PreparedStatement psDepense = (PreparedStatement) cnx.prepareStatement(queryDepense);
+         ResultSet rsDepense = psDepense.executeQuery()) {
+        if (rsDepense.next()) {
+            nb = rsDepense.getInt(1); // Retrieve the sum and store it in dep
+            
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+     return nb;    }
 }

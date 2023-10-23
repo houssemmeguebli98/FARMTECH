@@ -35,8 +35,7 @@ public class TablecatFXMLController implements Initializable {
     private TableView<Categtra> transactionstable2;
     private List<Categtra> data;
 
-    @FXML
-    private TableColumn<Categtra,Integer> idcatcolumn;
+   
     @FXML
     private TableColumn<Categtra, String> nomcatcolumn;
     @FXML
@@ -46,6 +45,8 @@ public class TablecatFXMLController implements Initializable {
     Servicecategtra sc = new Servicecategtra();
     @FXML
     private Label catnotfound;
+     @FXML
+    private Label nbcat;
     @FXML
     private Label catnotfound1;
     @FXML
@@ -71,13 +72,15 @@ public class TablecatFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Servicecategtra servicecategtra = new Servicecategtra();
+        data = servicecategtra.getAll(); // Assurez-vous que votre ServiceParc retourne une List<Parc>
+
+        transactionstable2.setItems(FXCollections.observableArrayList(data));
         nomcatcolumn.setCellValueFactory(new PropertyValueFactory<>("nom_cat_tra"));
         descriptioncatcolumn.setCellValueFactory(new PropertyValueFactory<>("descrip_cat_tra"));
-        //transactionstable1.setItems(observableList);
         transactionstable2.setEditable(true);
         editData();
-
+        nbcat.setText("vous avez "+ servicecategtra.nbligne() + " catégories de transaction");
         transactionstable2.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if (newSelection != null) {
             buttonajoutercat.setVisible(true);
@@ -97,10 +100,10 @@ public class TablecatFXMLController implements Initializable {
         catnotfound1.setText("");
         catnotfound.setText("");
         String textInput= textcherchercat.getText();
-        int id_cat_tra = Integer.parseInt(textInput);
+         String nom_cat_tra = textInput;
     // Appeler la méthode getOne avec le id cherché
     
-        Categtra categtra = sc.getOne(id_cat_tra);
+        Categtra categtra = sc.getOne(nom_cat_tra);
        // catnotfound1.setText("catégorie disponible");
         if (categtra != null) {
         // Mettre à jour la TableView avec les détails du parc trouvé
@@ -140,7 +143,6 @@ public class TablecatFXMLController implements Initializable {
         data = servicecategtra.getAll(); // Assurez-vous que votre ServiceParc retourne une List<Parc>
 
         transactionstable2.setItems(FXCollections.observableArrayList(data));
-        idcatcolumn.setCellValueFactory(new PropertyValueFactory<>("id_cat_tra"));
         nomcatcolumn.setCellValueFactory(new PropertyValueFactory<>("nom_cat_tra"));
         descriptioncatcolumn.setCellValueFactory(new PropertyValueFactory<>("descrip_cat_tra"));
         
@@ -154,6 +156,7 @@ public class TablecatFXMLController implements Initializable {
     private void supprimercat(ActionEvent event) throws IOException {
         catnotfound.setText("");
         catnotfound1.setText("");
+         nbcat.setText("");
     Servicecategtra sc = new Servicecategtra();
     Categtra  categSelectionne = transactionstable2.getSelectionModel().getSelectedItem();
 
@@ -164,6 +167,7 @@ public class TablecatFXMLController implements Initializable {
         data.remove(categSelectionne);
         transactionstable2.getItems().setAll(data);
         catnotfound1.setText("supprimé");
+        nbcat.setText("vous avez "+ sc.nbligne() + " catégories de transaction");
     } else {
         System.out.println("Vous devez sélectionner un élément avant de le supprimer.");
         catnotfound.setText("selectionner catégorie à supprimer");
@@ -178,7 +182,16 @@ public class TablecatFXMLController implements Initializable {
     
     
      @FXML
-    private void voircat(ActionEvent event) throws IOException {}
+    private void voircat(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("../gui/meteoFXML.fxml"));
+        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("météo");
+        stage.show();
+    
+    
+    }
     
     
     

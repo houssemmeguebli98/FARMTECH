@@ -73,7 +73,8 @@ public class AjouterFXMLController implements Initializable {
         tranotadd.setText("veuillez remplir tous les champs");
         return;
         }
-        boolean typetrans = fxDepense.isSelected();
+        boolean isSelected = fxDepense.isSelected();
+        String typetrans = isSelected ? "Dépense" : "Revenu";
         Servicetransaction sp = new Servicetransaction();
         //String montantText = fxMontant.getText();
         int Montant = (int) Float.parseFloat(fxMontant.getText());

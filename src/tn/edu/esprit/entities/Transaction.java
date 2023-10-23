@@ -15,14 +15,14 @@ import javafx.scene.control.ChoiceBox;
 public class Transaction {
   private int id_tra;
     private String categ_tra;
-    private boolean type_tra;
+    private String type_tra;
     private Date date_tra;
     private int montant;
     public Transaction(){
         
     }
 
-    public Transaction(String categ_tra,boolean type_tra,Date date_tra, int montant ){
+    public Transaction(String categ_tra,String type_tra,Date date_tra, int montant ){
         this.categ_tra = categ_tra;
         this.type_tra = type_tra;
         this.date_tra = date_tra;
@@ -41,7 +41,7 @@ public class Transaction {
         return categ_tra;
     }
 
-    public boolean getType_tra() {
+    public String getType_tra() {
         return type_tra;
     }
 
@@ -53,7 +53,7 @@ public class Transaction {
         this.categ_tra = categ_tra;
     }
 
-    public void setType_tra(boolean type_tra) {
+    public void setType_tra(String type_tra) {
         this.type_tra = type_tra;
     }
 
