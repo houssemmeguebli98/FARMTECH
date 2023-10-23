@@ -49,8 +49,6 @@ public class Admin_interfaceController implements Initializable {
     private TableView<User> UsersTable;
 
     @FXML
-    private TableColumn<User,Integer > userID;
-    @FXML
     private TableColumn<User, String> userNom;
     @FXML
     private TableColumn<User, String> userPrenom;
@@ -72,8 +70,6 @@ public class Admin_interfaceController implements Initializable {
     private JFXButton delete;
     @FXML
     private JFXButton search;
-    @FXML
-    private JFXButton modifier;
 
     /**
      * Initializes the controller class.
@@ -81,7 +77,7 @@ public class Admin_interfaceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Configurez vos colonnes du TableView
-       userID.setCellValueFactory(new PropertyValueFactory<>("id"));
+    
     userNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
     userPrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
     userEmail.setCellValueFactory(new PropertyValueFactory<>("mail"));
@@ -260,9 +256,6 @@ private void modifierButtonAction(ActionEvent event) {
   
 }
 
-    @FXML
-    private void modifierButtonAction(ActionEvent event) {
-    }
 
 
   

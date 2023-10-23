@@ -18,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,6 +31,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import tn.edu.esprit.entities.UserRole;
+import tn.edu.esprit.services.ServiceUser;
 import tn.edu.esprit.tools.DataSource;
 
 /**
@@ -49,7 +51,11 @@ public class SigninController implements Initializable {
     @FXML
     private Label fxnotfound;
     
-
+    @FXML
+    private Button signup;
+    @FXML
+    private Hyperlink forgetPassword;
+    
 
     /**
      * Initializes the controller class.
@@ -128,36 +134,36 @@ private void openAjoutUserWindow() {
 }
 
 
+
+
+
+
     @FXML
-private void goToSignup() {
+private void goToSignupAction(ActionEvent event) {
     try {
-        // Charger la vue FXML de la page d'inscription
         FXMLLoader loader = new FXMLLoader(getClass().getResource("signup.fxml"));
         Parent root = loader.load();
-
-        // Créer une nouvelle scène
         Scene scene = new Scene(root);
-
-        // Créer un nouveau stage (fenêtre)
-        Stage stage = new Stage();
-        stage.setTitle("Inscription"); // Titre de la nouvelle fenêtre
+        Stage stage = (Stage) signup.getScene().getWindow();
         stage.setScene(scene);
+    } catch (IOException e) {
+        e.printStackTrace(); // Gérez l'exception correctement en cas d'erreur de chargement de la scène
+    }
+}
 
-        // Afficher la nouvelle fenêtre
-        stage.show();
-
-        // Fermer la fenêtre actuelle (fenêtre de connexion)
-        Stage currentStage = (Stage) loginButton.getScene().getWindow();
-        currentStage.close();
+   @FXML
+private void forgotPasswordAction(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ForgetPassword1.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) forgetPassword.getScene().getWindow();
+        stage.setScene(scene);
     } catch (IOException e) {
         e.printStackTrace();
     }
 }
 
 
-    @FXML
-    private void forgotPassword() {
-        // Ajoutez la logique de récupération de mot de passe ici.
-    }
     
 }

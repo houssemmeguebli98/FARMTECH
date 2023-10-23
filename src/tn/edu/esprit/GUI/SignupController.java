@@ -5,19 +5,33 @@
  */
 package tn.edu.esprit.GUI;
 
+import com.gluonhq.charm.glisten.control.AutoCompleteTextField;
 import java.sql.Connection;
 import com.gluonhq.charm.glisten.control.TextField;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
+import static helper.AlertHelper.showAlert;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import tn.edu.esprit.entities.User;
 import tn.edu.esprit.entities.UserRole;
 import tn.edu.esprit.services.ServiceUser;
@@ -31,31 +45,55 @@ import tn.edu.esprit.tools.DataSource;
  */
 public class SignupController implements Initializable {
     
-    private Connection con; // Déclarez la variable con ici
+   
 
-    @FXML
-    private TextField Nom;
-    @FXML
-    private TextField Prenom;
-    @FXML
-    private TextField Email;
-    @FXML
-    private TextField Telephome;
+    
+   
     @FXML
     private Button registerButton;
+    
+    
+    
     @FXML
-    private RadioButton agriculteurbutton;
+    private JFXButton annuler;
+    
     @FXML
-    private RadioButton ouvrierbutton;
+    private RadioButton agriculteurButton;
     @FXML
-    private RadioButton veterinairebutton;
+    private RadioButton veterinaireButton;
     @FXML
-    private TextField Sexe;
+    private RadioButton ouvrierButton;
+    
     @FXML
-    private TextField Ville;
+    private JFXTextField partNameTextField;
     @FXML
-    private PasswordField MotDePasse;
-
+    private JFXTextField partLnvField;
+    @FXML
+    private JFXTextField partPriceField;
+    @FXML
+    private JFXTextField villeField;
+    @FXML
+    private JFXTextField sexeField;
+    
+    @FXML
+    private JFXTextField NomTextField1;
+    @FXML
+    private Label password;
+    @FXML
+    private ToggleGroup usertype;
+    @FXML
+    private ImageView MotDePasse;
+    @FXML
+    private Label password1;
+    @FXML
+    private JFXPasswordField passwordField;
+    @FXML
+    private JFXPasswordField passwordField1;
+    @FXML
+    private JFXTextField passwordidentique;
+   
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -63,113 +101,148 @@ public class SignupController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    public SignupController() {
-           con = DataSource.getInstance().getConnection();
-       }    
+   
 
-    @FXML
-private void register() {
-    // Récupérez les valeurs des champs de texte
-    String nom = Nom.getText();
-    String prenom = Prenom.getText();
-    String email = Email.getText();
-    String telephone = Telephome.getText();
-    String motDePasse = MotDePasse.getText();
-
-    // Utilisez l'énumération pour définir le rôle de l'utilisateur
+   @FXML
+private void register(ActionEvent event) {
+    String nom = NomTextField1.getText();
+    String prenom = partNameTextField.getText();
+    String email = partLnvField.getText();
+    String telephone = partPriceField.getText();
+    String ville = villeField.getText();
+    String sexe = sexeField.getText();
+    String password = passwordField.getText();
+    String confirmPassword = passwordField1.getText();
     UserRole role = null;
-    if (agriculteurbutton.isSelected()) {
+
+    if (agriculteurButton.isSelected()) {
         role = UserRole.AGRICULTEUR;
-    } else if (ouvrierbutton.isSelected()) {
+    } else if (ouvrierButton.isSelected()) {
         role = UserRole.OUVRIER;
-    } else if (veterinairebutton.isSelected()) {
+    } else if (veterinaireButton.isSelected()) {
         role = UserRole.VETERINAIRE;
     }
 
-    String sexe = Sexe.getText();
-    String ville = Ville.getText();
+    if (isValidInput(nom) && isValidInput(prenom) && isValidEmail(email) && isValidPhoneNumber(telephone) && role != null && !password.isEmpty() && !confirmPassword.isEmpty()) {
+        if (password.equals(confirmPassword)) {
+            // Use the UserService method to check the uniqueness of the email
+            ServiceUser userService = new ServiceUser();
+            if (userService.isEmailUnique(email)) {
+                Connection con = DataSource.getInstance().getConnection();
 
-    // Validez les données
-    if (nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || role == null || motDePasse.isEmpty()) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erreur d'inscription");
-        alert.setHeaderText("Veuillez remplir tous les champs obligatoires.");
-        alert.showAndWait();
-        return; // Sortez de la méthode car les données sont incorrectes
-    }
+                try {
+                    String query = "INSERT INTO users (nom, prenom, mail, numeroTelephone, role, motDePasse, ville, sexe) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                    PreparedStatement ps = con.prepareStatement(query);
+                    ps.setString(1, nom);
+                    ps.setString(2, prenom);
+                    ps.setString(3, email);
+                    ps.setString(4, telephone);
+                    ps.setString(5, role.toString());
+                    ps.setString(6, password);
+                    ps.setString(7, ville);
+                    ps.setString(8, sexe);
 
-    // À ce stade, les données sont valides, vous pouvez continuer le processus d'inscription
-
-    try {
-        PreparedStatement ps;
-        String query ="INSERT INTO users (nom, prenom, mail, numeroTelephone, role, motDePasse, ville, sexe) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        ps = con.prepareStatement(query);
-        ps.setString(1, nom);
-        ps.setString(2, prenom);
-        ps.setString(3, email);
-        ps.setString(4, telephone);
-        ps.setString(5, role.toString());
-        ps.setString(6, motDePasse);
-        ps.setString(7, ville);
-        ps.setString(8, sexe);
-        
-
-        int rowsAffected = ps.executeUpdate();
-        if (rowsAffected > 0) { // L'insertion a réussi
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Inscription réussie");
-            successAlert.setHeaderText("Félicitations, votre inscription a été effectuée avec succès.");
-            successAlert.showAndWait();
-
-            resetFields(); // Réinitialisez les champs de texte
+                    int rowsAffected = ps.executeUpdate();
+                    if (rowsAffected > 0) {
+                        passwordidentique.setText("Mot de passe identique");
+                        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                        successAlert.setTitle("Inscription réussie");
+                        successAlert.setHeaderText("Félicitations, votre inscription a été effectuée avec succès.");
+                        successAlert.showAndWait();
+                        resetFields();
+                    } else {
+                        showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
+                }
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Cet email est déjà utilisé.");
+            }
         } else {
-            // L'insertion a échoué
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Erreur d'inscription");
-            errorAlert.setHeaderText("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
-            errorAlert.showAndWait();
+            showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Les mots de passe ne correspondent pas.");
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-        errorAlert.setTitle("Erreur d'inscription");
-        errorAlert.setHeaderText("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
-        errorAlert.showAndWait();
+    } else {
+        showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Veuillez remplir correctement tous les champs obligatoires.");
     }
 }
 
+private void handlePasswordChange() {
+    String password1 = passwordField.getText();
+    String password2 = passwordField1.getText();
 
-
-private void resetFields() {
-    // Réinitialisez les champs de texte après une inscription réussie
-   Nom.setText("");
-    Prenom.setText("");
-    Email.setText("");
-    Telephome.setText("");
-    Sexe.setText("");
-    Ville.setText("");
-    
-    MotDePasse.clear();
-
-    // Décochez également les boutons radio si nécessaire
-    agriculteurbutton.setSelected(false);
-    ouvrierbutton.setSelected(false);
-    veterinairebutton.setSelected(false);
-
-    
+    if (password1.equals(password2)) {
+        passwordidentique.setText("Mot de passe identique");
+        // You can enable the register button or call your register() method here
+        // register();
+    } else {
+        passwordidentique.setText("Mot de passe différent");
+        // You might want to disable the register button or show an error message
+    }
 }
 
+    private boolean isValidPhoneNumber(String phoneNumber) {
+                    return phoneNumber.matches("^\\d+$");
+                }
+
+    private boolean isValidEmail(String email) {
+                return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$");
+            }
+
+
+    private boolean isValidInput(String input) {
+                    return !input.isEmpty() && !input.matches(".*\\d+.*");
+                }
+
+    private void resetFields() {
+                    // Réinitialisez les champs de texte après une inscription réussie
+                    NomTextField1.clear();
+                    partNameTextField.clear();
+                    partLnvField.clear();
+                    partPriceField.clear();
+                    villeField.clear();
+                    sexeField.clear();
+                    passwordField.clear();
+                    passwordField1.clear();
+
+                    // Décochez également les boutons radio si nécessaire
+                    agriculteurButton.setSelected(false);
+                    ouvrierButton.setSelected(false);
+                    veterinaireButton.setSelected(false);
+            }
+
+ @FXML
+    private void annulerAction(ActionEvent event) {
+        try {
+            // Charger la scène signin.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("signin.fxml"));
+            Parent root = loader.load();
+    
+            // Créer une nouvelle scène
+            Scene scene = new Scene(root);
+    
+            // Obtenir la scène actuelle (à partir du bouton "Annuler")
+            Stage stage = (Stage) annuler.getScene().getWindow();
+    
+            // Définir la nouvelle scène
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace(); // Affichez l'erreur pour le débogage
+        }
+    }
+
 
     @FXML
-    private void roleAgriculteur(ActionEvent event) {
+    private void agriculteurButtonAction(ActionEvent event) {
     }
 
     @FXML
-    private void roleOuvrier(ActionEvent event) {
+    private void ouvrierButtonAction(ActionEvent event) {
     }
 
     @FXML
-    private void roleVeterinaire(ActionEvent event) {
+    private void veterinaireButtonAction(ActionEvent event) {
     }
     
 }

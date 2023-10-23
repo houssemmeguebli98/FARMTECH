@@ -23,12 +23,11 @@
       </ImageView>
       <Label fx:id="label1" alignment="CENTER" layoutX="236.0" layoutY="75.0" minHeight="16" minWidth="69" prefHeight="41.0" prefWidth="102.0" text="Users">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
       <TableView fx:id="UsersTable" editable="true" layoutX="181.0" layoutY="132.0" prefHeight="242.0" prefWidth="587.0">
          <columns>
-            <TableColumn fx:id="userID" editable="false" prefWidth="89.60002136230469" text="ID" />
             <TableColumn fx:id="userNom" prefWidth="92.0" text="Nom" />
             <TableColumn fx:id="userPrenom" prefWidth="92.800048828125" text="Prenom" />
             <TableColumn fx:id="userEmail" prefWidth="114.4000244140625" text="Email" />
@@ -43,9 +42,8 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="Filter" focusColor="#2196f3" labelFloat="true" layoutX="626.0" layoutY="90.0" prefHeight="26.0" prefWidth="115.0" text="ID" />
-      <JFXButton fx:id="addPartsButton" buttonType="RAISED" layoutX="483.0" layoutY="387.0" onAction="#partAddButtonAction" prefHeight="26.0" prefWidth="77.0" ripplerFill="#2196f3" style="-fx-background-color: FAFAFA;" text="Ajouter" />
-      <JFXButton fx:id="modifier" buttonType="RAISED" layoutX="579.0" layoutY="387.0" onAction="#modifierButtonAction" prefHeight="26.0" prefWidth="78.0" ripplerFill="#2196f3" style="-fx-background-color: FAFAFA;" text="Modifier" />
+      <JFXTextField fx:id="Filter" focusColor="#2196f3" labelFloat="true" layoutX="626.0" layoutY="90.0" prefHeight="26.0" prefWidth="115.0" text="Nom" />
+      <JFXButton fx:id="addPartsButton" buttonType="RAISED" layoutX="555.0" layoutY="387.0" onAction="#partAddButtonAction" prefHeight="26.0" prefWidth="90.0" ripplerFill="#2196f3" style="-fx-background-color: FAFAFA;" text="Ajouter" />
       <JFXButton fx:id="delete" buttonType="RAISED" layoutX="676.0" layoutY="387.0" onAction="#deleteUserAction" prefHeight="26.0" prefWidth="90.0" ripplerFill="#2196f3" style="-fx-background-color: FAFAFA;" text="Supprimer" />
    </children>
 </AnchorPane>

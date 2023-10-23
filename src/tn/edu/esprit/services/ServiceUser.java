@@ -97,7 +97,7 @@ public User create(User user) {
 
 
 
-   private boolean isEmailUnique(String email) {
+   public boolean isEmailUnique(String email) {
     try {
         String query = "SELECT COUNT(*) FROM users WHERE mail = ?";
         try (PreparedStatement statement = cnx.prepareStatement(query)) {
