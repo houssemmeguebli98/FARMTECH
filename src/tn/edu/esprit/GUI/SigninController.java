@@ -147,10 +147,35 @@ private void loginAction() {
 
 
                     } else {
-                        // Redirigez les autres utilisateurs vers une interface par défaut
-                        // Exemple : Ouvrir une nouvelle fenêtre
+                        if (userRole == UserRole.AGRICULTEUR) {
+                        // Redirigez l'administrateur vers l'interface d'administrateur
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Agriculteur1.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+
+                        // Fermez la fenêtre de connexion actuelle
+                        Stage loginStage = (Stage) loginButton.getScene().getWindow();
+                        loginStage.close();
                     }
-                } else {
+                        else{
+                            if (userRole == UserRole.VETERINAIRE) {
+                        // Redirigez l'administrateur vers l'interface d'administrateur
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Vet1.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+
+                        // Fermez la fenêtre de connexion actuelle
+                        Stage loginStage = (Stage) loginButton.getScene().getWindow();
+                        loginStage.close();
+                    }
+                            
+                        }
+                    }
+                }else {
                     AlertHelper.showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Email ou mot de passe incorrect.");
                 }
             } else {
