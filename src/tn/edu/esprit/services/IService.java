@@ -5,11 +5,14 @@
  */
 package tn.edu.esprit.services;
 
+import java.sql.SQLException;
 import java.util.List;
+import tn.edu.esprit.entities.Transaction;
 
 /**
  *
  * @author abdelazizmezri
+ * @param <T>
  */
 <<<<<<< HEAD
 import java.util.List;
@@ -28,9 +31,28 @@ public interface IService<T> {
 public interface IService <T> {
     public void ajouter(T t);
     public void modifier(T t);
+<<<<<<< HEAD
     public void supprimer(int id);
     public T getOne(int id);
     public List<T> getAll(T t);
 >>>>>>> origin/gestion-terrain
+=======
+    public void supprimer(int id_tra);
+    public void rechercheType (int id_tra);
+    public List remplircombo ();
+    /**
+     *
+     * @param id_tra
+     * @return
+     */
+   
+    public T getOne(String categ_tra);
+    public List<T> getAll();
+    public T getPneById(int id) throws SQLException;
+    public int caisse ();
+    public String chatGPT (String message);
+    public int nbligne();
+   
+>>>>>>> origin/gestion_treso
 }
 

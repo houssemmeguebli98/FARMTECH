@@ -8,10 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DataSource {
+
+    public static Connection getConnect() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     private Connection cnx;
     private static DataSource instance;
 <<<<<<< HEAD
     
+<<<<<<< HEAD
 <<<<<<< HEAD
     private String url = "jdbc:mysql://localhost/esprit";
 =======
@@ -21,6 +26,9 @@ public class DataSource {
 =======
     private String url = "jdbc:mysql://localhost:3306/FARMTECH";
 >>>>>>> origin/gestion-terrain
+=======
+    private String url = "jdbc:mysql://localhost:3306/farmtech";
+>>>>>>> origin/gestion_treso
     private String user = "root";
     private String password = "";
 

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package tn.edu.esprit.tests;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
@@ -193,6 +194,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 >>>>>>> origin/gestion_users
+=======
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+import tn.edu.esprit.entities.Categtra;
+import tn.edu.esprit.services.Servicetransaction;
+import tn.edu.esprit.entities.Transaction;
+import tn.edu.esprit.services.Servicecategtra;
+import tn.edu.esprit.services.Servicechatgpt;
+>>>>>>> origin/gestion_treso
 
 /**
  *
@@ -201,6 +212,7 @@ import java.util.List;
 
 /*
 public class Main {
+<<<<<<< HEAD
 <<<<<<< HEAD
       public static void main(String[] args) throws MessagingException {
         DataSource.getInstance();
@@ -222,6 +234,18 @@ for (CategorieMateriel categorie : toutesLesCategories) {
     System.out.println("Nom : " + categorie.getNomCatMat());
     System.out.println("Description : " + categorie.getDescripCatMat());
     System.out.println("-----------------------------");
+=======
+      public static void main(String[] args) {
+        /*Categtra t = new Categtra();
+        t.setNom_cat_tra("Payement facture");
+        t.setDescrip_cat_tra("Payement facture STEG, SONEDE");
+        */        Servicechatgpt Servicechatgpt = new Servicechatgpt();
+
+        //Servicecategtra Servicecategtra = new Servicecategtra();
+        System.out.println(Servicechatgpt.chatGPT("who are you?"));
+      }
+      
+>>>>>>> origin/gestion_treso
 }
 
 

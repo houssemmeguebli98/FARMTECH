@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package farmtech;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -99,6 +94,11 @@ import tn.edu.esprit.services.ServiceRessource;
 import tn.edu.esprit.services.ServiceTerrain;
 import tn.edu.esprit.tools.DataSource;
 
+=======
+
+package farmtech;
+import tn.edu.esprit.tools.DataSource;
+>>>>>>> origin/gestion_treso
 /**
  *
  * @author megbl
@@ -109,14 +109,23 @@ public class FARMTECH {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+<<<<<<< HEAD
+=======
+        // TODO code application logic here
+>>>>>>> origin/gestion_treso
         DataSource.getInstance();
         DataSource.getInstance();
         DataSource.getInstance();
         DataSource.getInstance();
+<<<<<<< HEAD
         DataSource.getInstance();
         
         ServiceActivite serviceActivite = new ServiceActivite();
 
+=======
+        DataSource.getInstance();   
+    }
+>>>>>>> origin/gestion_treso
     
    // Activite nouvelleActivite = new Activite();
     //nouvelleActivite.setObjetAct("Objet de l'activité");

@@ -5,6 +5,7 @@
         <group>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/services/MessageService.java</file>
             <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/tests/NewFXMain.java</file>
             <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/gui/AjouterReclamationController.java</file>
@@ -56,6 +57,12 @@
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/entities/Ressource.java</file>
             <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AjouterActiviteFXMLController.java</file>
 >>>>>>> origin/gestion-terrain
+=======
+            <file>file:/C:/Users/jouin/Downloads/FARMTECH-main/FARMTECH-main/src/tn/edu/esprit/gui/TablecatFXMLController.java</file>
+            <file>file:/C:/Users/jouin/Downloads/FARMTECH-main/FARMTECH-main/src/tn/edu/esprit/gui/TabletransFXMLController.java</file>
+            <file>file:/C:/Users/jouin/Downloads/FARMTECH-main/FARMTECH-main/src/tn/edu/esprit/services/Servicecategtra.java</file>
+            <file>file:/C:/Users/jouin/Downloads/FARMTECH-main/FARMTECH-main/src/tn/edu/esprit/services/Servicetransaction.java</file>
+>>>>>>> origin/gestion_treso
         </group>
     </open-files>
 </project-private>
