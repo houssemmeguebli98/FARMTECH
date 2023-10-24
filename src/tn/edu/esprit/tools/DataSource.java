@@ -12,11 +12,15 @@ public class DataSource {
     private static DataSource instance;
 <<<<<<< HEAD
     
+<<<<<<< HEAD
     private String url = "jdbc:mysql://localhost/esprit";
 =======
 
     private String url = "jdbc:mysql://localhost:3306/esprit";
 >>>>>>> origin/gestion_users
+=======
+    private String url = "jdbc:mysql://localhost:3306/FARMTECH";
+>>>>>>> origin/gestion-terrain
     private String user = "root";
     private String password = "";
 

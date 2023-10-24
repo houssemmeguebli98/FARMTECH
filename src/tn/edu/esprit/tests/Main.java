@@ -5,6 +5,7 @@
  */
 package tn.edu.esprit.tests;
 
+<<<<<<< HEAD
 import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import java.util.Iterator;
@@ -20,6 +21,11 @@ import tn.edu.esprit.services.MessageService;
 import tn.edu.esprit.gui.AjouterMessageController;
 import tn.edu.esprit.services.MessageService;
 import tn.edu.esprit.services.ReclamationService;
+=======
+import tn.edu.esprit.entities.Ressource;
+import tn.edu.esprit.services.ServiceActivite;
+import tn.edu.esprit.services.ServiceRessource;
+>>>>>>> origin/gestion-terrain
 import tn.edu.esprit.tools.DataSource;
 <<<<<<< HEAD
 /*
@@ -198,6 +204,7 @@ public class Main {
 <<<<<<< HEAD
       public static void main(String[] args) throws MessagingException {
         DataSource.getInstance();
+<<<<<<< HEAD
  
 /*       
         CategorieMateriel categorieMateriel = new CategorieMateriel();
@@ -256,7 +263,34 @@ for (Parc parc : tousLesParcs) {
         System.out.println("Superficie : " + parcRecupere.getSuperficieParc());
     } else {
         System.out.println("Aucun parc trouvé avec l'ID spécifié.");
+=======
+        
+        ServiceActivite serviceActivite = new ServiceActivite();
+        
+    // Activite nouvelleActivite = new Activite();
+    //nouvelleActivite.setObjetAct("activité 1");
+    //nouvelleActivite.setDescriptionAct("Description activité 1");
+    //nouvelleActivite.setDistAct("Distribution activité 1");
+    //nouvelleActivite.setEmailDist("hassan@gmail.com");
+    //serviceActivite.ajouter(nouvelleActivite);
+   
+    
+    // serviceActivite.supprimer(1);
+    
+    
+    //Activite activiteAModifier = new Activite();
+    //activiteAModifier.setIdAct(3); // Remplacez 1 par l'ID de l'activité que vous souhaitez modifier
+    //activiteAModifier.setObjetAct("Nouvel objet");
+    //activiteAModifier.setDescriptionAct("Nouvelle description");
+    //activiteAModifier.setDistAct("Nouvelle distribution");
+    //activiteAModifier.setEmailDist("nouveau@email.com");
+    //serviceActivite.modifier(activiteAModifier);
+    
+>>>>>>> origin/gestion-terrain
     }
+      
+      
+      
 }
 
        // Ajouter un matériel
