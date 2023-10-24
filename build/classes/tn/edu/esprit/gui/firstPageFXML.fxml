@@ -14,20 +14,21 @@
             <Image url="@../../../../image/Capture%20d'écran%202023-10-18%20201634.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnGestionTerrain" layoutX="195.0" layoutY="259.0" mnemonicParsing="false" onAction="#gestionTerrain" prefHeight="78.0" prefWidth="206.0" text="Gestion de terrain" textFill="#e80404">
+      <Button fx:id="btnGestionTerrain" layoutX="309.0" layoutY="181.0" mnemonicParsing="false" onAction="#gestionTerrain" prefHeight="78.0" prefWidth="206.0" text="Gestion de terrain" textFill="#e80404">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnGestionActivité" layoutX="442.0" layoutY="259.0" mnemonicParsing="false" onAction="#gestionActivité" prefHeight="78.0" prefWidth="206.0" text="Gestion d'Activité" textFill="#eb0909">
+      <Button fx:id="btnGestionActivité" layoutX="310.0" layoutY="285.0" mnemonicParsing="false" onAction="#gestionActivité" prefHeight="78.0" prefWidth="206.0" text="Gestion d'Activité" textFill="#eb0909">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Label layoutX="253.0" layoutY="128.0" text="Bienvenue dans FARMTECH" textFill="#e10c0c">
+      <Label layoutX="254.0" layoutY="85.0" text="Bienvenue dans FARMTECH" textFill="#e10c0c">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
+      <Button layoutX="310.0" layoutY="393.0" mnemonicParsing="false" onAction="#afficherStat" prefHeight="78.0" prefWidth="206.0" text="Statistique" textFill="#da0b0b" />
    </children>
 </AnchorPane>

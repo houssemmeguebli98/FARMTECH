@@ -134,4 +134,33 @@ public Terrain getOneByNom(String nomTerrain) {
         return terrains;
     }
 
+    public int getNombreTotalTerrains() {
+    int nombreTotalTerrains = 0;
+    try {
+        String req = "SELECT COUNT(*) AS total FROM `terrain`";
+        Statement stm = cnx.createStatement();
+        ResultSet rs = stm.executeQuery(req);
+        if (rs.next()) {
+            nombreTotalTerrains = rs.getInt("total");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return nombreTotalTerrains;
+}
+
+public double getSuperficieTotale() {
+    double superficieTotale = 0.0;
+    try {
+        String req = "SELECT SUM(CAST(superficie AS DECIMAL(10,2))) AS totalSuperficie FROM `terrain`";
+        Statement stm = cnx.createStatement();
+        ResultSet rs = stm.executeQuery(req);
+        if (rs.next()) {
+            superficieTotale = rs.getDouble("totalSuperficie");
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return superficieTotale;
+}
 }

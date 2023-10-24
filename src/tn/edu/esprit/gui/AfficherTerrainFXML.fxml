@@ -22,7 +22,7 @@
          <graphic>
             <FontAwesomeIcon iconName="SEARCH" />
          </graphic></Button>
-      <TableView fx:id="viewTerrain" editable="true" layoutX="282.0" layoutY="232.0" prefHeight="276.0" prefWidth="499.0">
+      <TableView fx:id="viewTerrain" editable="true" layoutX="282.0" layoutY="216.0" prefHeight="276.0" prefWidth="499.0">
          <columns>
             <TableColumn fx:id="nomTerrain" prefWidth="153.0" text="nom terrain" />
             <TableColumn fx:id="localisation" prefWidth="176.0" text="localisation" />
@@ -33,7 +33,7 @@
          <graphic>
             <FontAwesomeIcon fill="#c60606" iconName="TRASH" />
          </graphic></Button>
-      <Button fx:id="addRES" layoutX="436.0" layoutY="536.0" mnemonicParsing="false" onAction="#AjouterRessource" prefHeight="41.0" prefWidth="129.0" text="Ressource" visible="false">
+      <Button fx:id="addRES" layoutX="436.0" layoutY="564.0" mnemonicParsing="false" onAction="#AjouterRessource" prefHeight="41.0" prefWidth="129.0" text="Ressource" visible="false">
          <graphic>
             <FontAwesomeIcon fill="#08d72a" iconName="PLUS" />
          </graphic></Button>
@@ -43,11 +43,11 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="showRES" layoutX="282.0" layoutY="536.0" mnemonicParsing="false" onAction="#afficherRessourceTerrain" prefHeight="41.0" prefWidth="129.0" text="Ressource" visible="false">
+      <Button fx:id="showRES" layoutX="282.0" layoutY="564.0" mnemonicParsing="false" onAction="#afficherRessourceTerrain" prefHeight="41.0" prefWidth="129.0" text="Ressource" visible="false">
          <graphic>
             <FontAwesomeIcon iconName="LIST" wrappingWidth="16.0" />
          </graphic></Button>
-      <Button fx:id="btnAjouterTerrain" layoutX="652.0" layoutY="536.0" mnemonicParsing="false" onAction="#AjouterTerrain" prefHeight="41.0" prefWidth="129.0" text="Terrain">
+      <Button fx:id="btnAjouterTerrain" layoutX="653.0" layoutY="564.0" mnemonicParsing="false" onAction="#AjouterTerrain" prefHeight="41.0" prefWidth="129.0" text="Terrain">
          <graphic>
             <FontAwesomeIcon fill="#08d72a" iconName="PLUS" />
          </graphic></Button>
@@ -60,6 +60,11 @@
             <FontAwesomeIcon iconName="REFRESH" />
          </graphic>
       </Button>
-      <Button layoutX="652.0" layoutY="162.0" mnemonicParsing="false" onAction="#afficherSurCarte" prefHeight="41.0" prefWidth="129.0" text="Afficher sur map" />
+      <Button layoutX="653.0" layoutY="161.0" mnemonicParsing="false" onAction="#afficherSurCarte" prefHeight="35.0" prefWidth="45.0">
+         <graphic>
+            <FontAwesomeIcon iconName="GLOBE" size="2em" text="" wrappingWidth="24.000004336237907" />
+         </graphic></Button>
+      <Button layoutX="282.0" layoutY="500.0" mnemonicParsing="false" onAction="#convertToHectares" prefHeight="41.0" prefWidth="116.0" text="= en Hectars" />
+      <Label fx:id="hectareLabel" layoutX="474.0" layoutY="505.0" />
    </children>
 </AnchorPane>

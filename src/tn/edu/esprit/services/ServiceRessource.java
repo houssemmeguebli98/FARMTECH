@@ -11,7 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import tn.edu.esprit.entities.Ressource;
 import tn.edu.esprit.tools.DataSource;
 
@@ -183,6 +185,33 @@ public class ServiceRessource implements IService<Ressource> {
     }
     return ressource;
 }
+
+   public Map<String, Integer> getNombreTotalRessourcesPourTousTerrains() {
+    Map<String, Integer> nombreRessourcesParTerrain = new HashMap<>();
+
+    try {
+        String req = "SELECT t.nomterrain, SUM(r.quantiteRes) as totalRessources " +
+                     "FROM terrain t " +
+                     "LEFT JOIN ressource r ON t.idterrain = r.idterrain " +
+                     "WHERE r.quantiteRes IS NOT NULL " +
+                     "GROUP BY t.nomterrain";
+        PreparedStatement ps = cnx.prepareStatement(req);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            String nomTerrain = rs.getString("nomterrain");
+            int totalRessources = rs.getInt("totalRessources");
+
+            nombreRessourcesParTerrain.put(nomTerrain, totalRessources);
+        }
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+
+    return nombreRessourcesParTerrain;
+}
+
 
     }
     

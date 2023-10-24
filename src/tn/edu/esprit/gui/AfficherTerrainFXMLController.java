@@ -36,6 +36,7 @@ import javafx.util.Duration;
 import tn.edu.esprit.entities.Terrain;
 import tn.edu.esprit.services.ServiceTerrain;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -66,6 +67,8 @@ public class AfficherTerrainFXMLController implements Initializable {
     private Button btnAjouterTerrain;
     @FXML
     private Button btnRetourAfficherTerrain;
+    @FXML
+    private Label hectareLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,7 +83,7 @@ public class AfficherTerrainFXMLController implements Initializable {
         }
     });
          
-         viewTerrain.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        viewTerrain.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
         if (newSelection != null) {
             // Un élément a été sélectionné
             addRES.setVisible(true);
@@ -384,6 +387,25 @@ private void afficherSurCarte(ActionEvent event) {
         System.out.println("Erreur lors du chargement de la page de la carte : " + ex.getMessage());
     }
 }
+
+   @FXML
+private void convertToHectares(ActionEvent event) {
+    Terrain terrainSelectionne = viewTerrain.getSelectionModel().getSelectedItem();
+
+    if (terrainSelectionne != null) {
+        try {
+            double superficieM2 = Double.parseDouble(terrainSelectionne.getSuperficie());
+            double superficieHa = superficieM2 / 10000.0; // 1 hectare = 10 000 m²
+            hectareLabel.setText("Superficie en hectares : " + superficieHa + " ha");
+        } catch (NumberFormatException ex) {
+            hectareLabel.setText("Erreur de conversion");
+        }
+    } else {
+        // Gérez le cas où aucune ligne n'est sélectionnée.
+        hectareLabel.setText("Sélectionnez une ligne pour convertir.");
+    }
+}
+
 
 
     
