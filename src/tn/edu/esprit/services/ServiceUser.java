@@ -274,5 +274,49 @@ public User getById(int id) {
     return user;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+public int getNumberOfUsers() {
+        // Vous devrez établir une connexion à la base de données et exécuter une requête SQL pour compter les utilisateurs.
+        // Supposons que vous ayez une table 'users' dans la base de données.
+        int count = 0; // Initialisez le compteur à 0
+
+        try {
+            Connection connection = DataSource.getInstance().getConnection();
+            String query = "SELECT COUNT(*) AS userCount FROM users";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                count = resultSet.getInt("userCount");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count-1;
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public int getNumberOfUsersByRole(UserRole role) {
+        int count = 0;
+
+        try {
+            Connection connection = DataSource.getInstance().getConnection();
+            String query = "SELECT COUNT(*) AS userCount FROM users WHERE role = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, role.toString()); // Utilisez la valeur de l'énumération comme rôle
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                count = resultSet.getInt("userCount");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
 
 }

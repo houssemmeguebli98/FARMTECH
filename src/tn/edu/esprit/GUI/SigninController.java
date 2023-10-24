@@ -12,7 +12,10 @@ import javafx.scene.control.TextField;
 
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,6 +37,24 @@ import tn.edu.esprit.entities.UserRole;
 import tn.edu.esprit.services.ServiceUser;
 import tn.edu.esprit.tools.DataSource;
 
+import javafx.fxml.FXML;
+
+import javafx.scene.control.TextField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
+import sun.net.www.http.HttpClient;
+
+
+import javafx.fxml.FXML;
+
+
+import java.io.IOException;
+import java.net.URI;
+import javafx.scene.Node;
+
+
 /**
  * FXML Controller class
  *
@@ -48,13 +69,20 @@ public class SigninController implements Initializable {
     
     @FXML
     private Button loginButton;
+    
     @FXML
     private Label fxnotfound;
     
     @FXML
     private Button signup;
+    
     @FXML
     private Hyperlink forgetPassword;
+    
+    @FXML
+    private Label fxnotfound1;
+    
+   
     
 
     /**
@@ -62,7 +90,7 @@ public class SigninController implements Initializable {
      */
     
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     } 
   
 
@@ -73,43 +101,75 @@ private void loginAction() {
     String email = emailField.getText();
     String password = passwordField.getText();
 
-    // Utilisez la classe DataSource pour obtenir une connexion à la base de données
     DataSource dataSource = DataSource.getInstance();
     Connection conn = dataSource.getConnection();
 
     if (conn != null) {
-        // Préparez la requête SQL pour vérifier les informations d'authentification
-        String query = "SELECT * FROM users WHERE mail = ? AND motDePasse = ?";
+        // Préparez la requête SQL avec des paramètres pour éviter les injections SQL
+        String query = "SELECT * FROM users WHERE mail = ?";
+
         try {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setString(1, email);
-            statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                // Authentification réussie
-                String role = resultSet.getString("role");
+                // Récupérez le mot de passe haché depuis la base de données
+                String hashedPasswordFromDB = resultSet.getString("motDePasse");
 
-                // Vérifiez si l'utilisateur est un administrateur
-                if (UserRole.ADMIN.toString().equals(role)) {
-                    // L'utilisateur est un administrateur, ouvrez l'interface Ajout_user
-                    openAjoutUserWindow();
-                } else {
-                    // L'utilisateur n'est pas un administrateur, vous pouvez traiter les autres rôles ici
+                // Utilisez la bibliothèque MessageDigest pour hacher le mot de passe entré
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                md.update(password.getBytes());
+                byte[] hashedPassword = md.digest();
+                StringBuilder hexString = new StringBuilder();
+                for (byte b : hashedPassword) {
+                    hexString.append(String.format("%02x", b));
                 }
+                String hashedPasswordString = hexString.toString();
 
-                // Fermez la fenêtre de connexion actuelle
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.close();
+                if (hashedPasswordString.equals(hashedPasswordFromDB)) {
+                    // L'authentification a réussi
+
+                    // Vérifiez le rôle de l'utilisateur
+                    UserRole userRole = UserRole.valueOf(resultSet.getString("role"));
+
+                    if (userRole == UserRole.ADMIN) {
+                        // Redirigez l'administrateur vers l'interface d'administrateur
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin_interface.fxml"));
+                        Parent root = loader.load();
+                        Stage stage = new Stage();
+                        stage.setScene(new Scene(root));
+                        stage.show();
+
+                        // Fermez la fenêtre de connexion actuelle
+                        Stage loginStage = (Stage) loginButton.getScene().getWindow();
+                        loginStage.close();
+
+
+                    } else {
+                        // Redirigez les autres utilisateurs vers une interface par défaut
+                        // Exemple : Ouvrir une nouvelle fenêtre
+                    }
+                } else {
+                    AlertHelper.showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Email ou mot de passe incorrect.");
+                }
             } else {
-                // Informez l'utilisateur que l'authentification a échoué
                 AlertHelper.showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Email ou mot de passe incorrect.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            AlertHelper.showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Erreur de base de données.");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            AlertHelper.showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Erreur lors du hachage du mot de passe.");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
+
+ 
+
 
 // Méthode pour ouvrir l'interface Ajout_user
 private void openAjoutUserWindow() {

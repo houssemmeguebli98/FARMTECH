@@ -21,19 +21,38 @@ import tn.edu.esprit.entities.User;
 import tn.edu.esprit.entities.UserRole;
 import tn.edu.esprit.services.ServiceUser;
 import tn.edu.esprit.services.IService;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class FARMTECH {
-    public static void main(String[] args) {
-        /*System.out.println("hello");
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+        System.out.println("hello");
 
        // Créez une instance de DataSource pour établir la connexion à la base de données
     DataSource dataSource = DataSource.getInstance();
 
     // Créez une instance de ServiceUser
     ServiceUser service = new ServiceUser();
+    String email = "email@admin.com";
+    String password = "aqw"; // Mot de passe non crypté
+
+    // Hachez le mot de passe avec SHA-256
+    MessageDigest md = MessageDigest.getInstance("SHA-256");
+    md.update(password.getBytes());
+    byte[] hashedPassword = md.digest();
+
+    // Convertissez le tableau de bytes haché en une chaîne hexadécimale
+    StringBuilder hexString = new StringBuilder();
+    for (byte b : hashedPassword) {
+        hexString.append(String.format("%02x", b));
+    }
+    String hashedPasswordString = hexString.toString();
+
+    // Maintenant, insérez l'utilisateur dans la base de données avec le mot de passe haché
+
 
     // Créez un nouvel administrateur
-    Admin admin = new Admin("Ben Mahmoud", "Ala", "email@admin.com", "0123456789", "aqwzsxedc");
+    Admin admin = new Admin("Ben Mahmoud", "Ala", "email@admin.com", "0123456789", hashedPasswordString);
 
     // Ajoutez l'administrateur à la base de données
     User createdUser = service.create(admin);
@@ -79,7 +98,7 @@ public class FARMTECH {
         System.out.println("enjazczk");*/
         System.out.println("hello");
 
-    // Créez une instance de DataSource pour établir la connexion à la base de données
+    /*Créez une instance de DataSource pour établir la connexion à la base de données
     DataSource dataSource = DataSource.getInstance();
 
     // Créez une instance de ServiceUser
@@ -97,7 +116,7 @@ public class FARMTECH {
     } else {
         // Si l'utilisateur n'est pas trouvé, affichez un message d'erreur
         System.out.println("User not found with ID: " + userId);
-    }
+    }*/
     }  
 }
     

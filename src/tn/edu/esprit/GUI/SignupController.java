@@ -37,6 +37,9 @@ import tn.edu.esprit.entities.UserRole;
 import tn.edu.esprit.services.ServiceUser;
 import tn.edu.esprit.tools.DataSource;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 /**
  * FXML Controller class
@@ -105,6 +108,7 @@ public class SignupController implements Initializable {
 
    @FXML
 private void register(ActionEvent event) {
+    // Récupérez les informations de l'utilisateur depuis les champs de texte
     String nom = NomTextField1.getText();
     String prenom = partNameTextField.getText();
     String email = partLnvField.getText();
@@ -125,40 +129,55 @@ private void register(ActionEvent event) {
 
     if (isValidInput(nom) && isValidInput(prenom) && isValidEmail(email) && isValidPhoneNumber(telephone) && role != null && !password.isEmpty() && !confirmPassword.isEmpty()) {
         if (password.equals(confirmPassword)) {
-            // Use the UserService method to check the uniqueness of the email
-            ServiceUser userService = new ServiceUser();
-            if (userService.isEmailUnique(email)) {
-                Connection con = DataSource.getInstance().getConnection();
+            try {
+                // Utilisez SHA-256 pour hacher le mot de passe
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                md.update(password.getBytes());
+                byte[] hashedPassword = md.digest();
 
-                try {
-                    String query = "INSERT INTO users (nom, prenom, mail, numeroTelephone, role, motDePasse, ville, sexe) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-                    PreparedStatement ps = con.prepareStatement(query);
-                    ps.setString(1, nom);
-                    ps.setString(2, prenom);
-                    ps.setString(3, email);
-                    ps.setString(4, telephone);
-                    ps.setString(5, role.toString());
-                    ps.setString(6, password);
-                    ps.setString(7, ville);
-                    ps.setString(8, sexe);
+                // Convertissez le tableau de bytes en une chaîne hexadécimale
+                StringBuilder hexString = new StringBuilder();
+                for (byte b : hashedPassword) {
+                    hexString.append(String.format("%02x", b));
+                }
 
-                    int rowsAffected = ps.executeUpdate();
-                    if (rowsAffected > 0) {
-                        passwordidentique.setText("Mot de passe identique");
-                        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-                        successAlert.setTitle("Inscription réussie");
-                        successAlert.setHeaderText("Félicitations, votre inscription a été effectuée avec succès.");
-                        successAlert.showAndWait();
-                        resetFields();
-                    } else {
+                // Utilisez la chaîne hexadécimale comme mot de passe haché
+                String hashedPasswordString = hexString.toString();
+
+                // Vérifiez si l'e-mail est unique
+                ServiceUser userService = new ServiceUser();
+                if (userService.isEmailUnique(email)) {
+                    Connection con = DataSource.getInstance().getConnection();
+
+                    try {
+                        String query = "INSERT INTO users (nom, prenom, mail, numeroTelephone, role, motDePasse, ville, sexe) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                        PreparedStatement ps = con.prepareStatement(query);
+                        ps.setString(1, nom);
+                        ps.setString(2, prenom);
+                        ps.setString(3, email);
+                        ps.setString(4, telephone);
+                        ps.setString(5, role.toString());
+                        ps.setString(6, hashedPasswordString); // Insérez le mot de passe haché
+                        ps.setString(7, ville);
+                        ps.setString(8, sexe);
+
+                        int rowsAffected = ps.executeUpdate();
+                        if (rowsAffected > 0) {
+                            showAlert(Alert.AlertType.INFORMATION, "Inscription réussie", "Félicitations, votre inscription a été effectuée avec succès.");
+                            resetFields();
+                        } else {
+                            showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
                         showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
                     }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Cet email est déjà utilisé.");
                 }
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Cet email est déjà utilisé.");
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+                showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
             }
         } else {
             showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Les mots de passe ne correspondent pas.");

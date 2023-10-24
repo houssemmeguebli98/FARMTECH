@@ -25,7 +25,7 @@ public class Login extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("signin.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LandingPage.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
