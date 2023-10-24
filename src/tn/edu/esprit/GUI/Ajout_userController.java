@@ -202,7 +202,7 @@ private void SaveButtonAction(ActionEvent event) {
 private void closeButtonAction(ActionEvent event) {
     try {
         // Charger la scène ala.fxml
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("face.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("signin.fxml"));
         Parent root = loader.load();
 
         // Créer une nouvelle scène

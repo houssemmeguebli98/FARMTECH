@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/ForgetPassword3Controller.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/entities/User.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/entities/Admin.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/ForgetPassword2Controller.java</file>
+            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Ajout_userController.java</file>
             <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Agriculteur1Controller.java</file>
             <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Login.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/ForgetPassword1Controller.java</file>
             <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/SigninController.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Agriculteur1.fxml</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/LandingPageController.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/entities/Agriculteur.java</file>
+            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/ForgetPassword1Controller.java</file>
+            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Admin_interfaceController.java</file>
         </group>
     </open-files>
 </project-private>

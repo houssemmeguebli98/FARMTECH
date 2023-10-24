@@ -25,23 +25,23 @@
             <Image url="@../../../../images/background_image1.png" />
          </image>
       </ImageView>
-      <PasswordField fx:id="passwordField" layoutX="425.0" layoutY="202.0" prefHeight="26.0" prefWidth="122.0" promptText="Password" style="-fx-background-color: transparent;" />
-      <TextField fx:id="emailField" layoutX="425.0" layoutY="153.0" prefHeight="19.0" prefWidth="110.0" promptText="Email" style="-fx-background-color: transparent;" />
-      <FontAwesomeIcon fill="#5c4033" glyphName="USER" layoutX="388.0" layoutY="174.0" size="20" text="" />
-      <FontAwesomeIcon fill="#5c4033" glyphName="KEY" layoutX="386.0" layoutY="223.0" size="20" text="" />
-      <Button fx:id="loginButton" layoutX="435.0" layoutY="265.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="34.0" prefWidth="102.0" style="-fx-background-color: #5C4033;" text="Login" textFill="WHITE">
+      <PasswordField fx:id="passwordField" layoutX="502.0" layoutY="202.0" prefHeight="26.0" prefWidth="156.0" promptText="Password" style="-fx-background-color: transparent;" />
+      <TextField fx:id="emailField" layoutX="508.0" layoutY="153.0" prefHeight="27.0" prefWidth="156.0" promptText="Email" style="-fx-background-color: transparent;" />
+      <FontAwesomeIcon fill="#5c4033" glyphName="USER" layoutX="467.0" layoutY="173.0" size="20" text="" />
+      <FontAwesomeIcon fill="#5c4033" glyphName="KEY" layoutX="466.0" layoutY="222.0" size="20" text="" />
+      <Button fx:id="loginButton" layoutX="525.0" layoutY="265.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="34.0" prefWidth="102.0" style="-fx-background-color: #5C4033;" text="Login" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Hyperlink fx:id="forgetPassword" layoutX="417.0" layoutY="323.0" onAction="#forgotPasswordAction" text="Mot de Passe oublié ?" textFill="#5c4033" />
-      <FontAwesomeIcon fill="#5c4033" glyphName="USERS" layoutX="431.0" layoutY="119.0" size="30" text="" />
+      <Hyperlink fx:id="forgetPassword" layoutX="507.0" layoutY="321.0" onAction="#forgotPasswordAction" text="Mot de Passe oublié ?" textFill="#5c4033" />
+      <FontAwesomeIcon fill="#5c4033" glyphName="USERS" layoutX="531.0" layoutY="119.0" size="30" text="" />
       <Text fill="#5c4033" layoutX="437.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <AnchorPane layoutX="135.0" layoutY="50.0" prefHeight="430.0" prefWidth="222.0" style="-fx-background-color: #5C4033;">
+      <AnchorPane layoutX="184.0" layoutY="50.0" prefHeight="430.0" prefWidth="232.0" style="-fx-background-color: #5C4033;">
          <children>
             <Text fill="WHITE" fontSmoothingType="LCD" layoutX="18.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To " textAlignment="CENTER" wrappingWidth="171.20000000000005">
                <font>

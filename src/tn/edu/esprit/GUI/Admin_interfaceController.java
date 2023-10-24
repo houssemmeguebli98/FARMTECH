@@ -70,6 +70,8 @@ public class Admin_interfaceController implements Initializable {
     private JFXButton delete;
     @FXML
     private JFXButton search;
+    @FXML
+    private JFXButton deconnexion;
 
     /**
      * Initializes the controller class.
@@ -255,6 +257,27 @@ private void modifierButtonAction(ActionEvent event) {
    
   
 }
+
+    @FXML
+    private void deconnexionAction(ActionEvent event) {
+        
+        try {
+        // Charger la vue FXML de l'interface Ajout_user
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("signin.fxml"));
+        Parent root = loader.load();
+
+        // Créer une nouvelle scène
+        Scene scene = new Scene(root);
+
+        // Obtenir la scène actuelle (à partir du bouton cliqué)
+        Stage currentStage = (Stage) addPartsButton.getScene().getWindow();
+
+        // Remplacer la scène actuelle par la nouvelle scène (Ajout_user)
+        currentStage.setScene(scene);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
 
 
 
