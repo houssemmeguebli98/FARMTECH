@@ -46,5 +46,10 @@
             <Font name="Times New Roman" size="23.0" />
          </font>
       </Label>
+      <Label fx:id="fxmail" layoutX="368.0" layoutY="495.0" text="Un mail de rappel a envoyé à votre courriel courriel" textFill="RED" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -71,5 +71,6 @@
             <FontAwesomeIcon fill="#1919d0" iconName="DOWNLOAD" />
          </graphic>
       </Button>
+      <Label fx:id="fxmail" layoutX="402.0" layoutY="509.0" text="Un mail de rappel a envoyé à votre courriel courriel" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

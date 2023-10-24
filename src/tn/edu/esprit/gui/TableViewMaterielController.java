@@ -38,6 +38,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
+import javax.mail.MessagingException;
 import tn.edu.esprit.entities.Materiel;
 import tn.edu.esprit.entities.Parc;
 import tn.edu.esprit.services.ExporterPDFMateriel;
@@ -72,6 +73,8 @@ GetAllFXMLController tableparc;
     private Button fxdelete;
     @FXML
     private Label fxnomdeparc;
+    @FXML
+    private Label fxmail;
     /**
      * Initializes the controller class.
      */
@@ -123,14 +126,20 @@ private void editData() {
         smateriel.modifierMateriel(materiel);
     });
 
-      // Éditer l'adresse du parc
+      
    fxEtat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
-fxEtat.setOnEditCommit(event -> {
+   fxEtat.setOnEditCommit(event -> {
     String newValue = event.getNewValue();
     if (newValue.equals("On marche") || newValue.equals("On panne")) {
         Materiel materiel = event.getRowValue();
         materiel.setEtatMat(newValue);
         ServiceMateriel smateriel = new ServiceMateriel();
+        try {        fxmail.setVisible(true);
+
+            smateriel.verifierEtatModifier(materiel);
+        } catch (MessagingException ex) {
+            Logger.getLogger(TableViewMaterielController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         smateriel.modifierMateriel(materiel);
     } else {
         Alert alert = new Alert(AlertType.ERROR);

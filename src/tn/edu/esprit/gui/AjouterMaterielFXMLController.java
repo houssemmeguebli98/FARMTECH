@@ -50,6 +50,8 @@ public class AjouterMaterielFXMLController implements Initializable {
     private Parc selectedParc ;
     @FXML
     private Label fxnomparc;
+    @FXML
+    private Label fxmail;
 
     /**  
      * Initializes the controller class.
@@ -108,11 +110,15 @@ private void fxSaveMateriel(ActionEvent event) throws MessagingException {
             nouveauMateriel.setNomParc(parcSelectionne.getNomParc());
             String etatmateriel = "";
             if(fxON.isSelected()){etatmateriel= "On marche" ;
-            }else{etatmateriel= "On panne ";  } 
+            }else{etatmateriel= "On panne "; 
+                        fxmail.setVisible(true);
+                    } 
               nouveauMateriel.setEtatMat(etatmateriel);
               
             
             serviceMateriel.ajouterMateriel(nouveauMateriel);
+           
+     
             serviceMateriel.verifierEtat(nouveauMateriel);
             
             // Si l'ajout réussit, afficher une alerte de confirmation

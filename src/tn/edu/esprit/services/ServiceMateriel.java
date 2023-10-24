@@ -20,6 +20,7 @@ import javax.mail.MessagingException;
 import tn.edu.esprit.entities.Materiel;
 import tn.edu.esprit.tools.DataSource;
 
+
 /**
  *
  * @author megbl
@@ -210,8 +211,8 @@ private String getNomParcForId(int idParc) {
     };
 
     int delaiInitial = 0; // Démarrer immédiatement
-    int intervalle = 1; // Tous les 3 jours
-    scheduler.scheduleAtFixedRate(envoyeurMail, delaiInitial, intervalle, TimeUnit.MINUTES);
+    int intervalle = 20; // Tous les 3 jours
+    scheduler.scheduleAtFixedRate(envoyeurMail, delaiInitial, intervalle, TimeUnit.SECONDS);
 }
 
 }

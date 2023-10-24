@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -63,6 +65,8 @@ public class TableAllMaterielController implements Initializable {
 
     @FXML
     private TextField fxChercheField;
+    @FXML
+    private Label fxmail;
     
     
 
@@ -165,7 +169,7 @@ private void fxAfficherAll(ActionEvent event) {
 
     
 private void editData() {
-    // Éditer le nom du parc
+    
     fxNomMat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
     fxNomMat.setOnEditCommit(event -> {
         Materiel materiel= event.getRowValue(); 
@@ -175,7 +179,6 @@ private void editData() {
         smateriel.modifierMateriel(materiel);
     });
 
-    // Éditer la superficie du parc
     fxQuantMat.setCellFactory(TextFieldTableCell.<Materiel, Float>forTableColumn(new FloatStringConverter()));
     fxQuantMat.setOnEditCommit(event -> {
         Materiel materiel = event.getRowValue();
@@ -185,20 +188,39 @@ private void editData() {
         smateriel.modifierMateriel(materiel);
     });
     
-    // Éditer l'adresse du parc
     fxEtatMat.setCellFactory(TextFieldTableCell.<Materiel>forTableColumn());
     fxEtatMat.setOnEditCommit(event -> {
-        try {
-            Materiel materiel = event.getRowValue();
-            materiel.setEtatMat(event.getNewValue());
-            ServiceMateriel smateriel = new ServiceMateriel();
-            smateriel.verifierEtatModifier(materiel);
-            smateriel.modifierMateriel(materiel);
-        } catch (MessagingException ex) {
-            Logger.getLogger(TableAllMaterielController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    String newValue = event.getNewValue();
+    if (newValue.equals("On marche") || newValue.equals("On panne")) {
+        Materiel materiel = event.getRowValue();
+        Alert confirmation = new Alert(AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirmation de la modification");
+        confirmation.setHeaderText(null);
+        confirmation.setContentText("Êtes-vous sûr de vouloir changer l'état du matériel ?");
         
-    });
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            materiel.setEtatMat(newValue);
+            ServiceMateriel smateriel = new ServiceMateriel();
+            try {
+                fxmail.setVisible(true);
+                smateriel.verifierEtatModifier(materiel);
+            } catch (MessagingException ex) {
+                Logger.getLogger(TableAllMaterielController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            smateriel.modifierMateriel(materiel);
+        }
+    } else {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Erreur de saisie");
+        alert.setHeaderText(null);
+        alert.setContentText("Veuillez saisir soit 'On marche' ou 'On panne'.");
+        alert.showAndWait();
+        // Rafraîchir la table pour annuler la saisie incorrecte
+        fxEtatMat.getTableView().refresh();
+    }
+});
+    
 
 }
 
