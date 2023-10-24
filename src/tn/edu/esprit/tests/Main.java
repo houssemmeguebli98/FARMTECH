@@ -21,6 +21,7 @@ import tn.edu.esprit.gui.AjouterMessageController;
 import tn.edu.esprit.services.MessageService;
 import tn.edu.esprit.services.ReclamationService;
 import tn.edu.esprit.tools.DataSource;
+<<<<<<< HEAD
 /*
 public class Main extends Application {
 
@@ -177,6 +178,15 @@ public class Main extends Application {
         launch(args);
     }
 }
+=======
+import tn.edu.esprit.entities.Admin;
+
+import tn.edu.esprit.entities.UserRole;
+
+import java.util.ArrayList;
+import java.util.List;
+
+>>>>>>> origin/gestion_users
 
 /**
  *
@@ -185,6 +195,7 @@ public class Main extends Application {
 
 /*
 public class Main {
+<<<<<<< HEAD
       public static void main(String[] args) throws MessagingException {
         DataSource.getInstance();
  
@@ -336,3 +347,10 @@ Parc parc = new Parc();
        
 
 
+=======
+      public static void main(String[] args) {
+            
+}
+
+}
+>>>>>>> origin/gestion_users
