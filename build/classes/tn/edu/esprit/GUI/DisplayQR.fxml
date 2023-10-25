@@ -5,8 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="tn.edu.esprit.GUI.DisplayQRController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.GUI.DisplayQRController">
    <children>
       <ImageView fitHeight="566.0" fitWidth="948.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -14,6 +13,7 @@
          </image>
       </ImageView>
       <ImageView fx:id="qrImageView" fitHeight="248.0" fitWidth="426.0" layoutX="280.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="424.0" layoutY="315.0" mnemonicParsing="false" onAction="#telechargerAction" prefHeight="44.0" prefWidth="118.0" text="Telecharger" />
+      <Button layoutX="355.0" layoutY="315.0" mnemonicParsing="false" onAction="#telechargerAction" prefHeight="44.0" prefWidth="118.0" style="-fx-background-color: #000000;" styleClass="B" text="Telecharger" textFill="WHITE" />
+      <Button fx:id="loginButton" layoutX="500.0" layoutY="315.0" mnemonicParsing="false" onAction="#LoginAction" prefHeight="44.0" prefWidth="118.0" style="-fx-background-color: #000000;" text="Longin" textFill="WHITE" />
    </children>
 </AnchorPane>

@@ -13,10 +13,15 @@ import java.util.ResourceBundle;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 
 /**
@@ -30,6 +35,8 @@ public class DisplayQRController implements Initializable {
     private ImageView qrImageView;
     
     private Image qrImage; // Stocker l'image du code QR
+    @FXML
+    private Button loginButton;
     
 
     /**
@@ -65,6 +72,24 @@ public class DisplayQRController implements Initializable {
                 }
             }
         }
+    }
+
+    @FXML
+    private void LoginAction(ActionEvent event) {
+        
+        
+        try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("signin.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        // Fermez la fenêtre actuelle si nécessaire
+        ((Stage) loginButton.getScene().getWindow()).close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
     
 }
