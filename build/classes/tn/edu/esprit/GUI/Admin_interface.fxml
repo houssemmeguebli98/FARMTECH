@@ -42,7 +42,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="Filter" focusColor="#2196f3" labelFloat="true" layoutX="626.0" layoutY="90.0" prefHeight="26.0" prefWidth="115.0" text="Nom" />
+      <JFXTextField fx:id="Filter" focusColor="#2196f3" labelFloat="true" layoutX="626.0" layoutY="90.0" prefHeight="26.0" prefWidth="115.0" />
       <JFXButton fx:id="addPartsButton" buttonType="RAISED" layoutX="555.0" layoutY="387.0" onAction="#partAddButtonAction" prefHeight="26.0" prefWidth="90.0" ripplerFill="#2196f3" style="-fx-background-color: FAFAFA;" text="Ajouter" />
       <JFXButton fx:id="delete" buttonType="RAISED" layoutX="676.0" layoutY="387.0" onAction="#deleteUserAction" prefHeight="26.0" prefWidth="90.0" ripplerFill="#2196f3" style="-fx-background-color: FAFAFA;" text="Supprimer" />
       <JFXButton fx:id="deconnexion" buttonType="RAISED" layoutX="799.0" layoutY="14.0" onAction="#deconnexionAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#2196f3" style="-fx-background-color: #000000;" text="Deconnexion" textFill="WHITE" />

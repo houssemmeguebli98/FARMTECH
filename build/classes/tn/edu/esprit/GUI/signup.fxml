@@ -19,7 +19,7 @@
         <URL value="@signup.css" />
     </stylesheets>
    <children>
-      <ImageView fx:id="MotDePasse" cache="true" fitHeight="500.0" fitWidth="1000.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="MotDePasse" cache="true" fitHeight="533.0" fitWidth="923.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../images/background_image1.png" />
          </image>
@@ -50,11 +50,6 @@
          </font>
       </Label>
       <Label layoutX="181.0" layoutY="233.0" text="Telephone">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="56.0" layoutY="310.0" text="Ville">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

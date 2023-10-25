@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.GUI.Vet1Controller">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="tn.edu.esprit.GUI.Vet1Controller">
+   <children>
+      <Text layoutX="193.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espace VET " wrappingWidth="280.53668212890625">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+   </children>
 </AnchorPane>

@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import static helper.AlertHelper.showAlert;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -39,6 +40,11 @@ import tn.edu.esprit.tools.DataSource;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javafx.scene.Node;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import tn.edu.esprit.services.QRCodeGenerator;
 
 
 /**
@@ -107,7 +113,7 @@ public class SignupController implements Initializable {
    
 
    @FXML
-private void register(ActionEvent event) {
+private void register(ActionEvent event) throws IOException {
     // Récupérez les informations de l'utilisateur depuis les champs de texte
     String nom = NomTextField1.getText();
     String prenom = partNameTextField.getText();
@@ -165,6 +171,25 @@ private void register(ActionEvent event) {
                         if (rowsAffected > 0) {
                             showAlert(Alert.AlertType.INFORMATION, "Inscription réussie", "Félicitations, votre inscription a été effectuée avec succès.");
                             resetFields();
+
+                            // Générez le code QR
+                            
+                            String qrData =  email +" "+ password;
+                            String qrImagePath = "C:/Users/aladi/Downloads/qrcode.png"; // Spécifiez un chemin absolu complet
+
+                            QRCodeGenerator.generateQRCode(qrData, qrImagePath);
+
+                             // Charger l'interface DisplayQR.fxml
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("DisplayQR.fxml"));
+                            Parent root = loader.load();
+                            DisplayQRController displayQRController = loader.getController();
+                            displayQRController.displayQRImage(new Image(new File(qrImagePath).toURI().toString()));
+
+                            // Créer une nouvelle scène et afficher l'interface DisplayQR.fxml
+                            Scene scene = new Scene(root);
+                            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                            stage.setScene(scene);
+    
                         } else {
                             showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
                         }
@@ -185,6 +210,8 @@ private void register(ActionEvent event) {
     } else {
         showAlert(Alert.AlertType.ERROR, "Erreur d'inscription", "Veuillez remplir correctement tous les champs obligatoires.");
     }
+     
+    
 }
 
 private void handlePasswordChange() {
@@ -263,5 +290,7 @@ private void handlePasswordChange() {
     @FXML
     private void veterinaireButtonAction(ActionEvent event) {
     }
+   
+
     
 }

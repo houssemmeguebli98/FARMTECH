@@ -172,44 +172,39 @@ private void deleteUserAction(ActionEvent event) {
 
     @FXML
     private void searchUserAction(ActionEvent event) {
-    }
+        
+       
+    // Récupérez le texte entré dans le champ Filter
+    String searchName = Filter.getText().trim();
 
-   /* @FXML
-private void modifierButtonAction(ActionEvent event) {
-    // Récupérer l'index de la ligne sélectionnée dans le TableView
-    int selectedIndex = UsersTable.getSelectionModel().getSelectedIndex();
+    // Si le champ de recherche n'est pas vide, effectuez la recherche
+    if (!searchName.isEmpty()) {
+        // Créez une liste observable pour stocker les utilisateurs filtrés
+        ObservableList<User> filteredUsers = FXCollections.observableArrayList();
 
-    if (selectedIndex >= 0) {
-        // Récupérer l'utilisateur sélectionné
-        User selectedUser = UsersTable.getItems().get(selectedIndex);
+        // Obtenez la liste actuelle des utilisateurs
+        ObservableList<User> userObservableList = UsersTable.getItems();
 
-        // Récupérer l'ID de l'utilisateur sélectionné
-        int userId = selectedUser.getId();
-
-        try {
-            // Charger la vue FXML de l'interface Ajout_user
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ajout_user.fxml"));
-
-            // Créer une nouvelle instance du contrôleur AjoutUserController en passant l'ID de l'utilisateur
-            Ajout_userController controller = new Ajout_userController(userId);
-            loader.setController(controller);
-
-            Parent root = loader.load();
-
-            // Créer une nouvelle scène
-            Scene scene = new Scene(root);
-
-            // Obtenir la scène actuelle (à partir du bouton cliqué)
-            Stage currentStage = (Stage) modifier.getScene().getWindow();
-
-            // Remplacer la scène actuelle par la nouvelle scène (Ajout_user)
-            currentStage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Parcourez la liste actuelle des utilisateurs
+        for (User user : userObservableList) {
+            // Vérifiez si le nom de l'utilisateur contient la chaîne de recherche (insensible à la casse)
+            if (user.getNom().toLowerCase().contains(searchName.toLowerCase())) {
+                filteredUsers.add(user);
+            }
         }
+
+        // Mettez à jour le TableView avec les résultats de la recherche
+        UsersTable.setItems(filteredUsers);
+    } else {
+        // Si le champ de recherche est vide, rechargez tous les utilisateurs
+        loadUsers();
+    }
+}
+
+
+   
     
 
-*/
     
     private void editData() {
     // Éditer le nom du parc

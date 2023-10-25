@@ -5,7 +5,18 @@
  */
 package tn.edu.esprit.GUI;
 
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.ChecksumException;
+import com.google.zxing.FormatException;
+import com.google.zxing.LuminanceSource;
+import com.google.zxing.MultiFormatReader;
+import com.google.zxing.NotFoundException;
+import com.google.zxing.Reader;
+import com.google.zxing.Result;
+import com.google.zxing.common.HybridBinarizer;
 import helper.AlertHelper;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
@@ -53,6 +64,21 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URI;
 import javafx.scene.Node;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
+
+import com.google.zxing.LuminanceSource;
+import static helper.AlertHelper.showAlert;
+
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import tn.edu.esprit.services.QRCodeDecoder;
+
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+
 
 
 /**
@@ -81,6 +107,8 @@ public class SigninController implements Initializable {
     
     @FXML
     private Label fxnotfound1;
+    @FXML
+    private Button QRcode;
     
    
     
@@ -248,6 +276,58 @@ private void forgotPasswordAction(ActionEvent event) {
         e.printStackTrace();
     }
 }
+
+ @FXML
+private void importqrcodeActtion(ActionEvent event) {
+    FileChooser fileChooser = new FileChooser(); // Initialisez l'objet FileChooser
+
+    // Définissez les filtres de fichiers si nécessaire
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"));
+
+    // Affichez la boîte de dialogue de sélection de fichiers
+    File file = fileChooser.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
+
+    if (file != null) {
+        try {
+            BufferedImage qrCodeImage = ImageIO.read(file);
+
+            QRCodeDecoder qrCodeDecoder = new QRCodeDecoder();
+            String qrCodeData = qrCodeDecoder.readQRCode(qrCodeImage);
+            insererContenuQR(qrCodeData);
+
+            if (qrCodeData != null) {
+                // Utilisez qrCodeData comme vous le souhaitez, par exemple, pour le traitement du mot de passe et de l'e-mail.
+                System.out.println("Données du code QR : " + qrCodeData);
+            } else {
+                System.out.println("Aucun code QR valide trouvé dans l'image.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+public void insererContenuQR(String qrData) {
+    // Diviser la chaîne en email et mot de passe en utilisant l'espace comme séparateur
+    String[] parties = qrData.split(" ");
+    
+    if (parties.length == 2) {
+        // La première partie est l'email, la deuxième partie est le mot de passe
+        String email = parties[0];
+        String motDePasse = parties[1];
+
+        // Insérer l'email et le mot de passe dans les champs correspondants
+        emailField.setText(email);
+        passwordField.setText(motDePasse);
+    } else {
+        // Gérer le cas où la chaîne ne peut pas être divisée en deux parties
+        System.out.println("QR Code non valide : " + qrData);
+    }
+}
+
+
+
+
+
 
 
     
