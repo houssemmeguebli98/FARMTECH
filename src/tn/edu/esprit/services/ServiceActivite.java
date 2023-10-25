@@ -171,6 +171,7 @@ public List<Activite> getAllByEmail(String email) {
     return activiteList;
 }
 
+<<<<<<< HEAD
 
 public int sommeActivitesEnAttente() {
     int somme = 0;
@@ -268,3 +269,6 @@ public int sommeActivitesTerminees() {
 
 
 }
+=======
+}
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807

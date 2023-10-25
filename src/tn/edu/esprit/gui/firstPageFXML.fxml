@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< HEAD
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+=======
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -15,26 +18,42 @@
             <Image url="@../../../../image/Capture%20d'écran%202023-10-18%20201634.png" />
          </image>
       </ImageView>
+<<<<<<< HEAD
       <Button fx:id="btnGestionTerrain" layoutX="309.0" layoutY="181.0" mnemonicParsing="false" onAction="#gestionTerrain" prefHeight="78.0" prefWidth="206.0" style="-fx-background-color: #722f2f;" text="Gestion de terrain" textFill="WHITE">
+=======
+      <Button fx:id="btnGestionTerrain" layoutX="309.0" layoutY="181.0" mnemonicParsing="false" onAction="#gestionTerrain" prefHeight="78.0" prefWidth="206.0" text="Gestion de terrain" textFill="#e80404">
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
          <font>
             <Font size="16.0" />
          </font>
       </Button>
+<<<<<<< HEAD
       <Button fx:id="btnGestionActivité" layoutX="310.0" layoutY="285.0" mnemonicParsing="false" onAction="#gestionActivité" prefHeight="78.0" prefWidth="206.0" style="-fx-background-color: #722f2f;" text="Gestion d'Activité" textFill="WHITE">
+=======
+      <Button fx:id="btnGestionActivité" layoutX="310.0" layoutY="285.0" mnemonicParsing="false" onAction="#gestionActivité" prefHeight="78.0" prefWidth="206.0" text="Gestion d'Activité" textFill="#eb0909">
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
          <font>
             <Font size="16.0" />
          </font>
       </Button>
+<<<<<<< HEAD
       <Label layoutX="254.0" layoutY="85.0" text="Bienvenue dans votre espace " textFill="#722f2f">
+=======
+      <Label layoutX="254.0" layoutY="85.0" text="Bienvenue dans FARMTECH" textFill="#e10c0c">
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
          <font>
             <Font size="26.0" />
          </font>
       </Label>
+<<<<<<< HEAD
       <Button layoutX="310.0" layoutY="393.0" mnemonicParsing="false" onAction="#afficherStat" prefHeight="78.0" prefWidth="206.0" style="-fx-background-color: #722f2f;" text="Statistique" textFill="WHITE" />
       <Button layoutX="7.0" layoutY="14.0" mnemonicParsing="false" onAction="#GoToWelcome" prefHeight="31.0" prefWidth="35.0">
          <graphic>
             <FontAwesomeIcon fill="#6b1818" iconName="ARROW_LEFT" />
          </graphic>
       </Button>
+=======
+      <Button layoutX="310.0" layoutY="393.0" mnemonicParsing="false" onAction="#afficherStat" prefHeight="78.0" prefWidth="206.0" text="Statistique" textFill="#da0b0b" />
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
    </children>
 </AnchorPane>

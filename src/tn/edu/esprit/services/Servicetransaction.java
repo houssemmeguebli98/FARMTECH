@@ -235,6 +235,7 @@ Connection cnx ;
     public String chatGPT(String message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+<<<<<<< HEAD
 
     @Override
     public Transaction create(Transaction t) {
@@ -265,6 +266,8 @@ Connection cnx ;
     public List<Transaction> getAll(Transaction t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+=======
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 }
 
     

@@ -5,12 +5,16 @@
  */
 package tn.edu.esprit.gui;
 
+<<<<<<< HEAD
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
+=======
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+<<<<<<< HEAD
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,11 +22,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+=======
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+<<<<<<< HEAD
 import javafx.stage.Stage;
+=======
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 import tn.edu.esprit.entities.Activite;
 import tn.edu.esprit.services.ServiceActivite;
 
@@ -44,8 +55,11 @@ public class AfficherOuvrierActiviterController implements Initializable {
     @FXML
     private TableView<Activite> viewActOuvrier;
 private List<Activite> data;
+<<<<<<< HEAD
     @FXML
     private JFXButton deconnexion;
+=======
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
     /**
      * Initializes the controller class.
      */
@@ -55,6 +69,7 @@ private List<Activite> data;
         editdata();
     }   
     private void AfficheActivite() {
+<<<<<<< HEAD
     SigninController signinController = new SigninController();
     String emailOuvrier = signinController.Getemail();
 
@@ -73,6 +88,19 @@ private List<Activite> data;
     }
 }
 
+=======
+        
+
+        ServiceActivite sa = new ServiceActivite();
+        String email = "hassanjlassi23@gmail.com";
+        data = sa.getAllByEmail(email);
+        objetA.setCellValueFactory(new PropertyValueFactory<Activite, String>("objetAct"));
+        descriptionA.setCellValueFactory(new PropertyValueFactory<Activite, String>("descriptionAct"));
+       speciesAct.setCellValueFactory(new PropertyValueFactory<Activite, String>("speciesRES"));
+        etatAct.setCellValueFactory(new PropertyValueFactory<Activite, String>("etatAct"));
+        viewActOuvrier.setItems(FXCollections.observableArrayList(data));
+    }
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
     
     private void editdata(){
     etatAct.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -84,6 +112,7 @@ etatAct.setOnEditCommit(event -> {
     sa.modifier(activite);
 });
 }
+<<<<<<< HEAD
 
    @FXML
     private void deconnexionAction(ActionEvent event) {
@@ -102,5 +131,7 @@ etatAct.setOnEditCommit(event -> {
     }
     }
 
+=======
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
     
 }

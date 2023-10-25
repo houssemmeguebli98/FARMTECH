@@ -9,8 +9,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -151,6 +154,7 @@ private void afficherStat(ActionEvent event) {
     }
 }
 
+<<<<<<< HEAD
     @FXML
     private void GoToWelcome(ActionEvent event) {
         try {
@@ -167,4 +171,6 @@ private void afficherStat(ActionEvent event) {
         }
     }
 
+=======
+>>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 }
