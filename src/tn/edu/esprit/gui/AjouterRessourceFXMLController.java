@@ -85,13 +85,7 @@ private void AjouterRessource(ActionEvent event) {
         afficherAlerte("Erreur de saisie", "Le champ species ne peut pas être vide.");
         return;
     }
-    
-    Ressource existingRessource = sr.getOneBySpecies(species);
-    if (existingRessource != null) {
-        afficherAlerte("Erreur d'ajout", "L'espèce de ressource existe déjà.");
-        return;
-    }
-    
+   
     int idterrain = TerrainSelectionne.getIdTerrain();
     sr.ajouter(new Ressource(type, species, quantite, idterrain));
     afficherConfirmation("Succès", "La ressource a été ajoutée avec succès.");

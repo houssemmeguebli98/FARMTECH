@@ -190,7 +190,7 @@ public class ServiceRessource implements IService<Ressource> {
     Map<String, Integer> nombreRessourcesParTerrain = new HashMap<>();
 
     try {
-        String req = "SELECT t.nomterrain, SUM(r.quantiteRes) as totalRessources " +
+        String req = "SELECT t.nomterrain, count(r.quantiteRes) as totalRessources " +
                      "FROM terrain t " +
                      "LEFT JOIN ressource r ON t.idterrain = r.idterrain " +
                      "WHERE r.quantiteRes IS NOT NULL " +

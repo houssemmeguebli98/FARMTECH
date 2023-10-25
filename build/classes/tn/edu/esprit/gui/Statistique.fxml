@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="642.0" prefWidth="1109.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.StatistiqueController">
    <children>
@@ -12,8 +15,20 @@
             <Image url="@../../../../image/Capture%20d'écran%202023-10-13%20111510.png" />
          </image>
       </ImageView>
-      <Label fx:id="nombreTerrain" layoutX="281.0" layoutY="113.0" prefHeight="22.0" prefWidth="601.0" />
-      <Label fx:id="totalSuperficie" layoutX="281.0" layoutY="185.0" prefHeight="21.0" prefWidth="601.0" />
-      <Label fx:id="statistiquesTerrains" layoutX="263.0" layoutY="222.0" prefHeight="228.0" prefWidth="601.0" />
+      <Label fx:id="nombreTerrain" layoutX="281.0" layoutY="154.0" prefHeight="22.0" prefWidth="601.0" text="a" />
+      <Label fx:id="totalSuperficie" layoutX="281.0" layoutY="186.0" prefHeight="21.0" prefWidth="601.0" text="a" />
+      <Label fx:id="statistiquesTerrains" layoutX="281.0" layoutY="216.0" prefHeight="185.0" prefWidth="601.0" text="a" />
+      <Button layoutX="235.0" layoutY="98.0" mnemonicParsing="false" onAction="#retourStat">
+         <graphic>
+            <FontAwesomeIcon iconName="ARROW_LEFT" />
+         </graphic>
+      </Button>
+      <Label fx:id="sommeActAttent" layoutX="281.0" layoutY="421.0" prefHeight="21.0" prefWidth="601.0" text="Label" />
+      <Label fx:id="sommeActTermine" layoutX="281.0" layoutY="452.0" prefHeight="21.0" prefWidth="601.0" text="Label" />
+      <Label layoutX="361.0" layoutY="93.0" text="Des statistiques pour la gestion de terrain" textFill="#d00d0d">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

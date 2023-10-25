@@ -171,4 +171,39 @@ public List<Activite> getAllByEmail(String email) {
     return activiteList;
 }
 
+
+public int sommeActivitesEnAttente() {
+    int somme = 0;
+    try {
+        String req = "SELECT COUNT(*) FROM `activite` WHERE `etatAct` = 'en_attente'";
+        Statement stm = cnx.createStatement();
+        ResultSet rs = stm.executeQuery(req);
+
+        if (rs.next()) {
+            somme = rs.getInt(1);
+        }
+
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return somme;
+}
+
+public int sommeActivitesTerminees() {
+    int somme = 0;
+    try {
+        String req = "SELECT COUNT(*) FROM `activite` WHERE `etatAct` = 'Termine'";
+        Statement stm = cnx.createStatement();
+        ResultSet rs = stm.executeQuery(req);
+
+        if (rs.next()) {
+            somme = rs.getInt(1);
+        }
+
+    } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+    }
+    return somme;
+}
+
 }
