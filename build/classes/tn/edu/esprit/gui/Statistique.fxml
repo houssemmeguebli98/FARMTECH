@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="642.0" prefWidth="1109.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.edu.esprit.gui.StatistiqueController">
+   <children>
+      <ImageView fitHeight="642.0" fitWidth="1109.0">
+         <image>
+            <Image url="@../../../../image/Capture%20d'écran%202023-10-13%20111510.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="nombreTerrain" layoutX="281.0" layoutY="113.0" prefHeight="22.0" prefWidth="601.0" />
+      <Label fx:id="totalSuperficie" layoutX="281.0" layoutY="185.0" prefHeight="21.0" prefWidth="601.0" />
+      <Label fx:id="statistiquesTerrains" layoutX="263.0" layoutY="222.0" prefHeight="228.0" prefWidth="601.0" />
+   </children>
+</AnchorPane>
