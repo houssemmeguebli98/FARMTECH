@@ -14,6 +14,8 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 import tn.edu.esprit.entities.Materiel;
+import tn.edu.esprit.entities.User;
+import tn.edu.esprit.gui.UserSession;
 /**
  *
  * @author megbl
@@ -38,9 +40,10 @@ public class SendMail {
     });
 
     try {
+        User connectedUser = UserSession.getConnectedUser();
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress("houssemmeguebli@outlook.com"));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("megbli.houssam@gmail.com")); // Remplacez par l'adresse du destinataire
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(connectedUser.getMail())); // Remplacez par l'adresse du destinataire
         message.setSubject("Matériel en panne - Rappel");
         String contenuHTML = "<html><body>"
                 + "<h2 style='color: #FF5733;'>Details du materiel en panne :</h2>"
@@ -93,9 +96,10 @@ public class SendMail {
     });
 
     try {
+        User connectedUser = UserSession.getConnectedUser();
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress("houssemmeguebli@outlook.com"));
-        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("megbli.houssam@gmail.com"));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(connectedUser.getMail()));
         message.setSubject("Confirmation de l'état du matériel");
 
         // Contenu de l'e-mail

@@ -5,16 +5,12 @@
  */
 package tn.edu.esprit.gui;
 
-<<<<<<< HEAD
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-<<<<<<< HEAD
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,19 +18,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-=======
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-<<<<<<< HEAD
 import javafx.stage.Stage;
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
+import org.controlsfx.control.Notifications;
 import tn.edu.esprit.entities.Activite;
+import tn.edu.esprit.entities.User;
 import tn.edu.esprit.services.ServiceActivite;
 
 /**
@@ -55,11 +46,8 @@ public class AfficherOuvrierActiviterController implements Initializable {
     @FXML
     private TableView<Activite> viewActOuvrier;
 private List<Activite> data;
-<<<<<<< HEAD
     @FXML
     private JFXButton deconnexion;
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
     /**
      * Initializes the controller class.
      */
@@ -67,20 +55,21 @@ private List<Activite> data;
     public void initialize(URL url, ResourceBundle rb) {
         AfficheActivite();
         editdata();
-    }   
+    }  
+    
     private void AfficheActivite() {
-<<<<<<< HEAD
-    SigninController signinController = new SigninController();
-    String emailOuvrier = signinController.Getemail();
-
-    if (emailOuvrier != null && !emailOuvrier.isEmpty()) {
+            
+        User connectedUser = UserSession.getConnectedUser();
+    if (connectedUser.getMail() != null && !connectedUser.getMail().isEmpty()) {
         // Continuez avec le reste de votre code pour afficher les activités
         ServiceActivite sa = new ServiceActivite();
-        data = sa.getAllByEmail(emailOuvrier);
+        data = sa.getAllByEmail(connectedUser.getMail());
         objetA.setCellValueFactory(new PropertyValueFactory<Activite, String>("objetAct"));
         descriptionA.setCellValueFactory(new PropertyValueFactory<Activite, String>("descriptionAct"));
         speciesAct.setCellValueFactory(new PropertyValueFactory<Activite, String>("speciesRES"));
         etatAct.setCellValueFactory(new PropertyValueFactory<Activite, String>("etatAct"));
+                System.out.println(connectedUser.getMail());
+
         viewActOuvrier.setItems(FXCollections.observableArrayList(data));
     } else {
         // Gérez le cas où l'adresse e-mail n'a pas pu être récupérée.
@@ -88,31 +77,20 @@ private List<Activite> data;
     }
 }
 
-=======
-        
 
-        ServiceActivite sa = new ServiceActivite();
-        String email = "hassanjlassi23@gmail.com";
-        data = sa.getAllByEmail(email);
-        objetA.setCellValueFactory(new PropertyValueFactory<Activite, String>("objetAct"));
-        descriptionA.setCellValueFactory(new PropertyValueFactory<Activite, String>("descriptionAct"));
-       speciesAct.setCellValueFactory(new PropertyValueFactory<Activite, String>("speciesRES"));
-        etatAct.setCellValueFactory(new PropertyValueFactory<Activite, String>("etatAct"));
-        viewActOuvrier.setItems(FXCollections.observableArrayList(data));
-    }
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
     
     private void editdata(){
     etatAct.setCellFactory(TextFieldTableCell.forTableColumn());
 etatAct.setOnEditCommit(event -> {
     Activite activite = event.getTableView().getItems().get(event.getTablePosition().getRow());
-    activite.setEtatAct(event.getNewValue());
+    String newEtat = event.getNewValue();
+    activite.setEtatAct(newEtat);
     // Appel à la méthode de mise à jour pour sauvegarder l'état modifié dans la base de données
     ServiceActivite sa = new ServiceActivite();
     sa.modifier(activite);
+    showNotification("une modification effectuée", "Nouvel etat : " +newEtat );
 });
 }
-<<<<<<< HEAD
 
    @FXML
     private void deconnexionAction(ActionEvent event) {
@@ -131,7 +109,11 @@ etatAct.setOnEditCommit(event -> {
     }
     }
 
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
+    private void showNotification(String title, String text) {
+    Notifications.create()
+        .title(title)
+        .text(text)
+        .showInformation();
+}
     
 }

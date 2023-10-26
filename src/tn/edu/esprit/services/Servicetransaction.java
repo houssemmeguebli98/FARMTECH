@@ -22,6 +22,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -180,7 +181,7 @@ Connection cnx ;
     }
 
     @Override
-    public int caisse() {
+public int caisse() {
     int dep = 0; // Initialize dep to 0 for Dépense
     int rev = 0; // Initialize rev to 0 for Revenu
 
@@ -209,6 +210,17 @@ Connection cnx ;
     // Calculate the net balance (Revenu - Dépense)
     int x = rev - dep;
 
+    if (x < 0) {
+        System.out.println("Caisse négative");
+        SendMailTrasnc mail = new SendMailTrasnc();
+        
+        try {
+            mail.envoyerEmailCaisseNegative();
+        } catch (MessagingException ex) {
+            Logger.getLogger(Servicetransaction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     return x;
 }
      @Override
@@ -235,7 +247,6 @@ Connection cnx ;
     public String chatGPT(String message) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-<<<<<<< HEAD
 
     @Override
     public Transaction create(Transaction t) {
@@ -266,8 +277,6 @@ Connection cnx ;
     public List<Transaction> getAll(Transaction t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 }
 
     

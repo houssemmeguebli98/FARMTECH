@@ -15,10 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-<<<<<<< HEAD
 import tn.edu.esprit.tools.DataSource;
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 
 /**
  *
@@ -28,15 +25,10 @@ public class FXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-<<<<<<< HEAD
                         DataSource dataSource = DataSource.getInstance();
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("../gui/LandingPage.fxml"));
-=======
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("../gui/firstPageFXML.fxml"));
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("/*******FARMTECH /******");

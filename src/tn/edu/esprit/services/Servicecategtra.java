@@ -199,7 +199,6 @@ try{
         System.out.println(ex.getMessage());
     }
      return nb;    }
-<<<<<<< HEAD
 
     @Override
     public Categtra create(Categtra t) {
@@ -230,6 +229,4 @@ try{
     public List<Categtra> getAll(Categtra t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 }

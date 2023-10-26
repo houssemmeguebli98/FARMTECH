@@ -41,6 +41,8 @@ public class User {
     public User() {
        
     }
+    
+    
 
     public User(String nom, String prenom, String email, String telephone, UserRole role, String sexe, String ville, String motDePasse) {
     this.id = ++lastId; // Incrémentation de l'ID automatiquement
@@ -53,6 +55,12 @@ public class User {
      this.sexe= sexe;
     this.ville= ville;
    }
+
+    public User(String mail, UserRole role) {
+        this.mail = mail;
+        this.role = role;
+    }
+
       
      // Getter pour l'ID
     public int getId() {

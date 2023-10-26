@@ -3,106 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/AfficherOuvrierActiviterController.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/vet1.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/ala.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/TresorerieFXMLController.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/signup.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/entities/Activite.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/entities/User.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/ForgetPassword1.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/TableViewMaterielController.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/firstPageFXML.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/GetAllMessage.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/AfficherActiviteFXML.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/LandingPageController.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/image/Capture%20d'écran%202023-10-13%20111510.png</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/face.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/Agriculteur1Controller.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/Statistique.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/ForgetPassword2.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/services/ServiceActivite.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/dashboard.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/tests/FXMain.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/ajout_user.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/tests/Main.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/AjouterActiviteFXMLController.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/images/Capture%20d’écran%20(387).png</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/ajoutercatFXML.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/signin.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/tools/DataSource.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/GetAllFXML.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/LandingPage.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/image/Capture%20d'écran%202023-10-18%20201634.png</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/Admin_interface.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/ForgetPassword3.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/AjouterTerrainFXML.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/Admin_interfaceController.java</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/ajouterFXML.fxml</file>
-            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/SigninController.java</file>
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/services/MessageService.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/tests/NewFXMain.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/gui/AjouterReclamationController.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/entities/Message.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/tools/DataSource.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/gui/AjouterMessageController.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/tests/Main.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/gui/AjouterReclamation.fxml</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/gui/GetAllMessage.fxml</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/services/ReclamationService.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/gui/GetAllMessageController.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/gui/AjouterMessage.fxml</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/gui/ModifierMessageController.java</file>
-            <file>file:/C:/Users/Houssem%20HENCHIR/OneDrive/Bureau/hos/FARMTECH_Reclamation_Message_last/src/tn/edu/esprit/entities/Reclamations.java</file>
-=======
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/ForgetPassword3Controller.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/entities/User.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/entities/Admin.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/ForgetPassword2Controller.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Agriculteur1Controller.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Login.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/ForgetPassword1Controller.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/SigninController.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/Agriculteur1.fxml</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/GUI/LandingPageController.java</file>
-            <file>file:/C:/Users/aladi/Documents/NetBeansProjects/FARMTECH_s7i7/src/tn/edu/esprit/entities/Agriculteur.java</file>
->>>>>>> origin/gestion_users
-=======
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/tests/Main.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/entities/Terrain.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/services/ServiceTerrain.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AjouterRessourceFXMLController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/MapFXMLController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/FirstPageFXMLController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AjouterTerrainFXMLController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/farmtech/FARMTECH.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/tools/DataSource.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AfficherRessourceFXMLController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/services/ServiceActivite.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/Statistique.fxml</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/SelectedTerrainManager.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/services/ServiceRessource.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AfficherTerrainFXMLController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/entities/Activite.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AfficherOuvrierActiviterController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/StatistiqueController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AfficherActiviteFXMLController.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/tests/FXMain.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/entities/Ressource.java</file>
-            <file>file:/C:/Users/rihab/OneDrive/Bureau/FARMTECH-main/src/tn/edu/esprit/gui/AjouterActiviteFXMLController.java</file>
->>>>>>> origin/gestion-terrain
-=======
-            <file>file:/C:/Users/jouin/Downloads/FARMTECH-main/FARMTECH-main/src/tn/edu/esprit/gui/TablecatFXMLController.java</file>
-            <file>file:/C:/Users/jouin/Downloads/FARMTECH-main/FARMTECH-main/src/tn/edu/esprit/gui/TabletransFXMLController.java</file>
-            <file>file:/C:/Users/jouin/Downloads/FARMTECH-main/FARMTECH-main/src/tn/edu/esprit/services/Servicecategtra.java</file>
-            <file>file:/C:/Users/jouin/Downloads/FARMTECH-main/FARMTECH-main/src/tn/edu/esprit/services/Servicetransaction.java</file>
->>>>>>> origin/gestion_treso
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
+            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/services/smsSender2.java</file>
+            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/services/SmsSender.java</file>
+            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/services/Servicechatgpt.java</file>
+            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/ReclamationController.java</file>
+            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/GetAllReclamationController.java</file>
+            <file>file:/C:/Users/megbl/Desktop/FARMTECH-main/src/tn/edu/esprit/gui/GetAllMessageController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -9,11 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
-<<<<<<< HEAD
 import java.util.logging.Level;
 import java.util.logging.Logger;
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -26,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import tn.edu.esprit.services.ServiceActivite;
 import tn.edu.esprit.services.ServiceRessource;
 import tn.edu.esprit.services.ServiceTerrain;
 
@@ -119,10 +117,13 @@ public class FirstPageFXMLController implements Initializable {
 private void afficherStat(ActionEvent event) {
     ServiceTerrain st = new ServiceTerrain();
     ServiceRessource sr = new ServiceRessource();
+    ServiceActivite sa = new ServiceActivite();
     // Logique de calcul des statistiques
     int nombreTerrains = st.getNombreTotalTerrains();// Calcul du nombre de terrains depuis votre service
     double superficieTotale = st.getSuperficieTotale();// Calcul de la superficie totale depuis votre service
-
+    int sommeActiviteEnAttente = sa.sommeActivitesEnAttente(); // Obtenez la somme des activités en attente
+    int sommeActiviteTerminees = sa.sommeActivitesTerminees();
+    
     // Obtenez une référence à la scène actuelle à partir du bouton
     Scene currentScene = btnGestionTerrain.getScene();
 
@@ -137,6 +138,9 @@ private void afficherStat(ActionEvent event) {
         // Appelez les méthodes pour définir les statistiques
         statistiqueController.setNombreTerrain(Integer.toString(nombreTerrains));
         statistiqueController.setTotalSuperficie(Double.toString(superficieTotale));
+        
+        statistiqueController.setSommeActivitesEnAttente(Integer.toString(sommeActiviteEnAttente));
+        statistiqueController.setSommeActivitesTerminees(Integer.toString(sommeActiviteTerminees));
 
         // Obtenez le nombre total de ressources pour chaque terrain
        Map<String, Integer> statistiquesTerrains = sr.getNombreTotalRessourcesPourTousTerrains();
@@ -154,7 +158,6 @@ private void afficherStat(ActionEvent event) {
     }
 }
 
-<<<<<<< HEAD
     @FXML
     private void GoToWelcome(ActionEvent event) {
         try {
@@ -171,6 +174,4 @@ private void afficherStat(ActionEvent event) {
         }
     }
 
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 }

@@ -212,7 +212,6 @@ public class ServiceRessource implements IService<Ressource> {
     return nombreRessourcesParTerrain;
 }
 
-<<<<<<< HEAD
     @Override
     public Ressource create(Ressource t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -273,8 +272,6 @@ public class ServiceRessource implements IService<Ressource> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 
     }
     

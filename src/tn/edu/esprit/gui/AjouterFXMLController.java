@@ -67,7 +67,6 @@ public class AjouterFXMLController implements Initializable {
         // TODO
         fxCategtra.getItems().addAll(list);
      }
-<<<<<<< HEAD
      @FXML
 private void AjouterAction(ActionEvent event) throws IOException {
     if (fxMontant.getText().isEmpty() || fxCategtra.getSelectionModel().getSelectedItem() == null || fxDatetra.getValue() == null) {
@@ -111,41 +110,6 @@ private void AjouterAction(ActionEvent event) throws IOException {
     stage.setScene(scene);
     stage.show();
 }
-=======
-    @FXML
-    private void AjouterAction(ActionEvent event) throws IOException {
-        if (fxMontant.getText().isEmpty() || fxCategtra.getSelectionModel().getSelectedItem() == null || fxDatetra.getValue() == null) {
-        tranotadd.setText("veuillez remplir tous les champs");
-        return;
-        }
-        boolean isSelected = fxDepense.isSelected();
-        String typetrans = isSelected ? "Dépense" : "Revenu";
-        Servicetransaction sp = new Servicetransaction();
-        //String montantText = fxMontant.getText();
-        int Montant = (int) Float.parseFloat(fxMontant.getText());
-        Transaction trans=new Transaction();
-        Servicetransaction Servicetransaction = new Servicetransaction();
-         
-        String selectedText = fxCategtra.getSelectionModel().getSelectedItem();
-        LocalDate localDate = fxDatetra.getValue();
-        trans.setCateg_tra(selectedText);
-        trans.setType_tra(typetrans);
-        Date date = Date.valueOf(localDate);
-        trans.setDate_tra((date));
-        trans.setMontant(Montant);
-        tranotadd.setText("veuillez remplir tous les champs");
-        Servicetransaction.ajouter(trans);
-        
-        
-        root = FXMLLoader.load(getClass().getResource("../gui/tabletransFXML.fxml"));
-        stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-       
-        }
-    
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
  @FXML
     private void retourAction(ActionEvent event) throws IOException {
             root = FXMLLoader.load(getClass().getResource("../gui/tabletransFXML.fxml"));

@@ -12,6 +12,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -189,9 +191,35 @@ public void showErrorMessage(String title, String message) {
 */
 
 public String generateResetCode() {
-    return UUID.randomUUID().toString();
-}
+    // Générer un UUID
+    UUID uuid = UUID.randomUUID();
+    String uuidStr = uuid.toString();
 
+    try {
+        // Obtenir un hachage MD5 de l'UUID (32 caractères)
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(uuidStr.getBytes());
+        byte[] byteData = md.digest();
+
+        // Convertir le hachage MD5 en une chaîne hexadécimale (32 caractères)
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : byteData) {
+            String hex = Integer.toHexString(0xFF & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+
+        // Prendre les 6 premiers caractères de la chaîne hexadécimale
+        String code = hexString.toString().substring(0, 6);
+
+        return code;
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 
 
 public void saveResetCodeInDatabase(String phoneNumber, String resetCode) {

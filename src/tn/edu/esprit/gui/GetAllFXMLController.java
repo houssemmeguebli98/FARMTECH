@@ -25,8 +25,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import tn.edu.esprit.entities.Materiel;
 import tn.edu.esprit.entities.Parc;
 import tn.edu.esprit.services.ExporterPDF;
+import tn.edu.esprit.services.MaterielGraph;
+import tn.edu.esprit.services.ServiceMateriel;
 import tn.edu.esprit.services.ServiceParc;
 
 public class GetAllFXMLController implements Initializable {
@@ -329,6 +334,25 @@ private void fxexportToPDF(ActionEvent event) {
         }
     });
 
+    }
+
+    @FXML
+    private void AfficherCourbe(ActionEvent event) {
+        
+          ServiceMateriel serviceMateriel = new ServiceMateriel();
+          // Obtenez tous les matériaux
+          List<Materiel> materiels = serviceMateriel.getAllMateriels();
+          // Créez le graphique pour le nombre de matériaux par parc
+          MaterielGraph graph = new MaterielGraph();
+          JFreeChart chart = graph.createParcMaterielChart(materiels);
+          // Créez le panneau de graphique
+          ChartPanel chartPanel = graph.createChartPanel(chart);
+          // Affichez le graphique dans une fenêtre
+          javax.swing.JFrame frame = new javax.swing.JFrame("Nombre de Matériaux par Parc");
+          frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+          frame.getContentPane().add(chartPanel);
+          frame.pack();
+          frame.setVisible(true);
     }
 }
 

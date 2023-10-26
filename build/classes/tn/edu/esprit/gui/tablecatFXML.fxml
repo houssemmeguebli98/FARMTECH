@@ -48,11 +48,7 @@
          </graphic></Button>
       <Button fx:id="buttonvoircat" layoutX="674.0" layoutY="284.0" mnemonicParsing="false" onAction="#voircat" prefHeight="48.0" prefWidth="47.0" textFill="#607a0c">
          <graphic>
-<<<<<<< HEAD
             <FontAwesomeIcon fill="#518006" iconName="QUESTION" wrappingWidth="12.571428298950195" />
-=======
-            <FontAwesomeIcon fill="#518006" iconName="LIST" text="" />
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
          </graphic></Button>
       <Button fx:id="buttonretourcat" layoutX="674.0" layoutY="347.0" mnemonicParsing="false" onAction="#retourcat" prefHeight="48.0" prefWidth="47.0" textFill="#607a0c">
          <graphic>

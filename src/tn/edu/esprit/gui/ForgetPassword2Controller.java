@@ -71,7 +71,7 @@ public class ForgetPassword2Controller implements Initializable {
    private boolean verifyResetCode(String code) {
     try {
         Connection connection = DataSource.getInstance().getConnection();
-        String query = "SELECT reset_code FROM password_reset1 ORDER BY reset_date DESC LIMIT 1";
+        String query = "SELECT reset_code FROM password_reset1 ORDER BY date DESC LIMIT 1";
         PreparedStatement statement = connection.prepareStatement(query);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()) {
@@ -83,6 +83,7 @@ public class ForgetPassword2Controller implements Initializable {
     }
     return false;
 }
+
 
 
 

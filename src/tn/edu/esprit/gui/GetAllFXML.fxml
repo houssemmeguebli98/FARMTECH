@@ -87,5 +87,10 @@
             <FontAwesomeIcon fill="#1919d0" iconName="DOWNLOAD" />
          </graphic>
       </Button>
+      <Button layoutX="682.0" layoutY="179.0" mnemonicParsing="false" onAction="#AfficherCourbe" prefHeight="37.0" prefWidth="37.0">
+         <graphic>
+            <FontAwesomeIcon fill="#b2793b" iconName="LINE_CHART" wrappingWidth="17.14285659790039" />
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

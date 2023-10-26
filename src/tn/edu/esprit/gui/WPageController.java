@@ -36,6 +36,19 @@ public class WPageController implements Initializable {
 
     @FXML
     private void goToALLMateriels(ActionEvent event) {
+          try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/GetAllReclamation.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Liste de reclamation");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(GetAllFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
        
     }
 
@@ -49,7 +62,7 @@ public class WPageController implements Initializable {
             
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Liste de materiels");
+            stage.setTitle("Liste de reclamation");
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(GetAllFXMLController.class.getName()).log(Level.SEVERE, null, ex);

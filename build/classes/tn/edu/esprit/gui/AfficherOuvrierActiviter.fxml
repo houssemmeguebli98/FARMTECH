@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<<<<<<< HEAD
 <?import com.jfoenix.controls.JFXButton?>
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -32,9 +29,6 @@
             <TableColumn fx:id="etatAct" prefWidth="91.0" text="etat" />
         </columns>
       </TableView>
-<<<<<<< HEAD
       <JFXButton fx:id="deconnexion" buttonType="RAISED" layoutX="781.0" layoutY="14.0" onAction="#deconnexionAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#2196f3" style="-fx-background-color: #000000;" text="Deconnexion" textFill="WHITE" />
-=======
->>>>>>> ad4816ef4b1a5675c53fd9cfa3d34b73cccef807
    </children>
 </AnchorPane>
