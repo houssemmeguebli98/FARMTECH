@@ -103,6 +103,22 @@ try {
             Logger.getLogger(GetAllFXMLController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    @FXML
+    private void exit(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/signin.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Liste de materiels");
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(GetAllFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
 
     

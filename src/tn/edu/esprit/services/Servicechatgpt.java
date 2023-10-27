@@ -26,7 +26,7 @@ public class Servicechatgpt implements IService {
           @Override
     public String chatGPT(String message) {
     String url = "https://api.openai.com/v1/chat/completions";
-    String apiKey = "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";
+    String apiKey = "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";
     String model = "gpt-3.5-turbo";
 
     try {

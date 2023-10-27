@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -38,13 +39,13 @@ public class ForgetPassword3Controller implements Initializable {
 
     
     @FXML
-    private JFXTextField passwordField1;
+    private JFXPasswordField passwordField1;
     @FXML
     private JFXButton enregistrerButton;
     @FXML
     private JFXButton annulerButton;
     @FXML
-    private JFXTextField passwordField;
+    private JFXPasswordField passwordField;
    
     
    

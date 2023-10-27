@@ -26,5 +26,6 @@
             <Font size="36.0" />
          </font>
       </Label>
+      <Button layoutX="957.0" layoutY="25.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #6e4409;" text="Déconnecter" textFill="#fcfcfc" />
    </children>
 </AnchorPane>
